@@ -7,12 +7,12 @@ import ProductByID from "../themes/ProductByID";
 const Routers = () => {
   return (
     <BrowserRouter>
-      <div>
-        <Header />
-      </div>
+      <Header />
+
       <Routes>
         <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/product/:id" element={<ProductByID />} />
       </Routes>
     </BrowserRouter>
