@@ -49,7 +49,7 @@ const Header = () => {
         {/* menu */}
         <div className="items-center justify-center md:col-span-3  md:flex ">
           <div
-            className="py-2 -ml-3 cursor-pointer inline-block md:hidden  "
+            className="py-2 -ml-3 cursor-pointer inline-block relative md:hidden  "
             onClick={() => handleDropdown()}
           >
             <i class="fa-solid fa-bars"></i>
@@ -88,7 +88,7 @@ const Header = () => {
       </div>
       {/* dropdown menu */}
       <div
-        className={`z-10 block md:hidden w-full h-full bg-black-rgba-03 
+        className={`z-10 block md:hidden w-full h-screen bg-black-rgba-03 
         absolute top-10 transition-transform origin-left cursor-pointer
         ${dropdown ? "translate-x-[100rem] " : ""}
         -left-[100rem]`}
