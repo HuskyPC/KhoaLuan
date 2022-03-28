@@ -1,0 +1,14 @@
+.menuactive,
+header.menu a:hover,
+.menu-dropdown a:hover,
+.item-header a:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.dropdownItem {
+  display: flex !important;
+}
+.dropdownIyemPosion {
+  position: absolute;
+}
