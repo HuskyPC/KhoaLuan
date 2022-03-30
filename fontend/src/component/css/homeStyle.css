@@ -12,3 +12,10 @@ header.menu a:hover,
 .dropdownIyemPosion {
   position: absolute;
 }
+.brand-item img {
+  transition: all 1s;
+}
+.brand-item:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
