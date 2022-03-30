@@ -8,7 +8,7 @@ const BannerItem = (props) => {
     >
       <img
         className="hidden lg:block  h-screen w-full"
-        src={props.imgDesktop}
+        src={` ${props.urlImgDesktop}${props.imgDesktop}`}
         alt="hinh ảnh"
       />
       <img
@@ -28,11 +28,15 @@ const BannerItem = (props) => {
           props.id % 2 === 0 ? "text-left" : "text-right"
         } max-w-sm`}
       >
-        <span className="hidden md:block ">{props.detail1}</span>
+        <span className="hidden md:block first-letter:uppercase">
+          {props.detail1}
+        </span>
         <br />
-        <h2 className=" text-5xl pt-6 leading-tight">{props.detail2}</h2>
+        <h2 className=" text-5xl pt-6 leading-tight uppercase">
+          {props.detail2}
+        </h2>
         {/* xử lí khi click vào chuyển url */}
-        <button className="mt-10 px-4 py-3 text-xs bg-black">
+        <button className="mt-10 px-4 py-3 text-xs bg-black normal-case first-letter:uppercase">
           {props.contentUrrl}
         </button>
       </div>

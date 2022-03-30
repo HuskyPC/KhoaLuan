@@ -32,7 +32,7 @@ const Header = () => {
     <div className="headered">
       {/* header */}
       <div
-        className={`${stickyHeader} top-0 z-10 w-full grid grid-cols-6 md:grid-cols-5  gap-4 bg-black-rgba text-white px-5"`}
+        className={`${stickyHeader} top-0 z-10 w-full grid grid-cols-6 md:grid-cols-5  gap-4 bg-black-rgba text-white px-5 "`}
       >
         {/* logo and ten shop */}
         <div className="flex items-center justify-center ">
@@ -44,7 +44,7 @@ const Header = () => {
             />
           </Link>
 
-          <span className="md:inline-block hidden ">logo</span>
+          <span className="md:inline-block hidden uppercase">logo</span>
         </div>
         {/* menu */}
         <div className="items-center justify-center md:col-span-3  md:flex ">
@@ -52,19 +52,19 @@ const Header = () => {
             className="py-2 -ml-3 cursor-pointer inline-block relative md:hidden  "
             onClick={() => handleDropdown()}
           >
-            <i class="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </div>
-          <header className="menu hidden md:flex items-center justify-center text-base font-light">
-            <Link to="/" className="py-2 px-3">
+          <header className="menu hidden md:flex items-center justify-center text-base font-light ">
+            <Link to="/" className="py-2 px-3 uppercase">
               Home
             </Link>
-            <Link to="/product" className="py-2 px-3">
+            <Link to="/product" className="py-2 px-3 uppercase">
               Sản phẩm
             </Link>
-            <Link to="/cart" className="py-2 px-3">
+            <Link to="/cart" className="py-2 px-3 uppercase">
               Cart
             </Link>
-            <Link to="/contact" className="py-2 px-3">
+            <Link to="/contact" className="py-2 px-3 uppercase">
               Contact
             </Link>
           </header>
@@ -97,18 +97,18 @@ const Header = () => {
         {/* thay đổi grid row dể menu có dạng block */}
         <div
           className="menu-dropdown w-1/2 text-[14px] grid grid-cols-1 grid-rows-4 bg-slate-700 text-white 
-        font-light rounded-br pb-2 "
+        font-light rounded-br pb-2 first-letter:uppercase "
         >
-          <Link to="/" className="py-2 px-3 ">
+          <Link to="/" className="py-2 px-3 uppercase">
             Home
           </Link>
-          <Link to="/product" className="py-2 px-3">
+          <Link to="/product" className="py-2 px-3 uppercase">
             Sản phẩm
           </Link>
-          <Link to="/cart" className="py-2 px-3">
+          <Link to="/cart" className="py-2 px-3 uppercase">
             Cart
           </Link>
-          <Link to="/contact" className="py-2 px-3">
+          <Link to="/contact" className="py-2 px-3 uppercase">
             Contact
           </Link>
         </div>
