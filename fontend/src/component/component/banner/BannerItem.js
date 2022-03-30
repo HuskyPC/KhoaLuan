@@ -13,12 +13,12 @@ const BannerItem = (props) => {
       />
       <img
         className="hidden md:block lg:hidden h-screen w-full"
-        src={props.imgTablet}
+        src={` ${props.urlImgTablet}${props.imgTablet}`}
         alt="hinh ảnh"
       />
       <img
         className="block md:hidden h-screen w-full"
-        src={props.imgMobile}
+        src={` ${props.urlImgMobile}${props.imgMobile}`}
         alt="hinh ảnh"
       />
       <div
