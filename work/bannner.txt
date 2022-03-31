@@ -1,0 +1,2 @@
+{/* xử lí khi click vào chuyển url */} ở More laptops
+xử lí khi đường dẫn ảnh bị sai ở productItam
