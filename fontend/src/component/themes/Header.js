@@ -55,6 +55,33 @@ const Header = () => {
           >
             <i className="fa-solid fa-bars"></i>
           </div>
+          {/* dropdown menu */}
+          <div
+            className={`z-10 block md:hidden w-full h-screen bg-black-rgba-03 
+        absolute top-10 transition-transform origin-left cursor-pointer
+        ${dropdown ? "translate-x-[100rem] " : ""}
+        -left-[100rem]`}
+            onClick={() => handleDropdown()}
+          >
+            {/* thay đổi grid row dể menu có dạng block */}
+            <div
+              className="menu-dropdown w-1/2 text-[14px] grid grid-cols-1 grid-rows-4 bg-slate-700 text-white 
+        font-light rounded-br pb-2 first-letter:uppercase "
+            >
+              <Link to="/" className="py-2 px-3 uppercase">
+                Home
+              </Link>
+              <Link to="/product" className="py-2 px-3 uppercase">
+                Sản phẩm
+              </Link>
+              <Link to="/cart" className="py-2 px-3 uppercase">
+                Cart
+              </Link>
+              <Link to="/contact" className="py-2 px-3 uppercase">
+                Contact
+              </Link>
+            </div>
+          </div>
           <header className="menu hidden md:flex items-center justify-center text-base font-light ">
             <Link to="/" className="py-2 px-3 uppercase">
               Home
@@ -84,33 +111,6 @@ const Header = () => {
           </Link>
           <Link className="py-2 px-2" to="/">
             <i className="fa-solid fa-user-lock"></i>
-          </Link>
-        </div>
-      </div>
-      {/* dropdown menu */}
-      <div
-        className={`z-10 block md:hidden w-full h-screen bg-black-rgba-03 
-        absolute top-10 transition-transform origin-left cursor-pointer
-        ${dropdown ? "translate-x-[100rem] " : ""}
-        -left-[100rem]`}
-        onClick={() => handleDropdown()}
-      >
-        {/* thay đổi grid row dể menu có dạng block */}
-        <div
-          className="menu-dropdown w-1/2 text-[14px] grid grid-cols-1 grid-rows-4 bg-slate-700 text-white 
-        font-light rounded-br pb-2 first-letter:uppercase "
-        >
-          <Link to="/" className="py-2 px-3 uppercase">
-            Home
-          </Link>
-          <Link to="/product" className="py-2 px-3 uppercase">
-            Sản phẩm
-          </Link>
-          <Link to="/cart" className="py-2 px-3 uppercase">
-            Cart
-          </Link>
-          <Link to="/contact" className="py-2 px-3 uppercase">
-            Contact
           </Link>
         </div>
       </div>
