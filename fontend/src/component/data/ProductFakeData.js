@@ -22,7 +22,7 @@ const ProductFakeData = [
     name: "product 3",
     price: "200000",
     priceSale: "1900000",
-    url: "/product/:id",
+    url: "/product/",
     img: "product1.jpg",
     urlImage: "asset/img/product/",
   },
