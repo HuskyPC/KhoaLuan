@@ -4,10 +4,10 @@ import BrandSuggestionFakeData from "../../data/BrandSuggestionFakeData";
 
 const BrandSuggestion = () => {
   const [...dataFake] = BrandSuggestionFakeData;
-  console.log(
-    "🚀 ~ file: BrandSuggestion.js ~ line 7 ~ BrandSuggestion ~ dataFake",
-    dataFake
-  );
+  // console.log(
+  //   "🚀 ~ file: BrandSuggestion.js ~ line 7 ~ BrandSuggestion ~ dataFake",
+  //   dataFake
+  // );
 
   return (
     <>

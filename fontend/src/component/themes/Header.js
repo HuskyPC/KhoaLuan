@@ -43,8 +43,9 @@ const Header = () => {
               alt="logo"
             />
           </Link>
-
-          <span className="md:inline-block hidden uppercase">logo</span>
+          <Link to="/">
+            <span className="md:inline-block hidden uppercase">logo</span>
+          </Link>
         </div>
         {/* menu */}
         <div className="items-center justify-center md:col-span-3  md:flex ">
