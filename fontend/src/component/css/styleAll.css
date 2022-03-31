@@ -5,7 +5,7 @@ html {
   /* hover:transition-all hover:delay-150 hover:duration-300 hover:-translate-y-1 */
   transition: all;
   transition-delay: 2000;
-  transform: translateY(-0.15rem);
+  transform: translateY(-0.2rem);
   transition-duration: 700ms;
   box-shadow: 0px 4px 10px rgb(31 31 31 / 15%);
   -webkit-box-shadow: 0px 4px 10px rgb(31 31 31 / 20%);
@@ -23,4 +23,7 @@ html {
   overflow: hidden;
   white-space: normal;
   -webkit-line-clamp: 2;
+}
+.product-list .swiper-slide {
+  width: 220px;
 }
