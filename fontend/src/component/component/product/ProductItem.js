@@ -18,7 +18,6 @@ const ProductItem = (props) => {
           }`}
           alt="hinh anh"
         />
-        {console.log(props.urlImg + props.img)}
         <Link
           to="/"
           className="heart text-center hidden top-[60px] left-0 right-0 absolute"

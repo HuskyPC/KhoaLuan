@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ProductFakeData from "../../data/ProductFakeData";
 import ProductItem from "../product/ProductItem";
 // Import Swiper styles
@@ -7,7 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
-import { Pagination, Navigation } from "swiper";
 
 const NewProduct = () => {
   const [...dataFake] = ProductFakeData;
