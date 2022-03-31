@@ -7,21 +7,21 @@ const Header = () => {
   const [dropdown, setDropDown] = useState(false);
   //
   const [stickyHeader, setStickyHeader] = useState("relative");
-  useEffect(() => {
-    window.addEventListener("scroll", stickNavbar);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", stickNavbar);
 
-    return () => {
-      window.removeEventListener("scroll", stickNavbar);
-    };
-  }, []);
-  const stickNavbar = () => {
-    if (window !== undefined) {
-      let windowHeight = window.scrollY;
-      windowHeight > 25
-        ? setStickyHeader("fixed")
-        : setStickyHeader("absolute");
-    }
-  };
+  //   return () => {
+  //     window.removeEventListener("scroll", stickNavbar);
+  //   };
+  // }, []);
+  // const stickNavbar = () => {
+  //   if (window !== undefined) {
+  //     let windowHeight = window.scrollY;
+  //     windowHeight > 25
+  //       ? setStickyHeader("fixed")
+  //       : setStickyHeader("absolute");
+  //   }
+  // };
   // console.log(window.location.pathname);
   // let pathURL = window.location.pathname;
 
@@ -32,7 +32,7 @@ const Header = () => {
     <div className="headered">
       {/* header */}
       <div
-        className={`${stickyHeader} top-0 z-10 w-full grid grid-cols-6 md:grid-cols-5  gap-4 bg-black-rgba text-white px-5 "`}
+        className={`fixed top-0 z-10 w-full grid grid-cols-6 md:grid-cols-5  gap-4 bg-black-rgba text-white px-5 "`}
       >
         {/* logo and ten shop */}
         <div className="flex items-center justify-center ">
