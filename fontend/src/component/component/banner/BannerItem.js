@@ -7,17 +7,17 @@ const BannerItem = (props) => {
       key={props.id}
     >
       <img
-        className="hidden lg:block  h-screen w-full"
+        className="hidden lg:block  h-full w-full"
         src={` ${props.urlImgDesktop}${props.imgDesktop}`}
         alt="hinh ảnh"
       />
       <img
-        className="hidden md:block lg:hidden h-screen w-full"
+        className="hidden md:block lg:hidden h-full w-full"
         src={` ${props.urlImgTablet}${props.imgTablet}`}
         alt="hinh ảnh"
       />
       <img
-        className="block md:hidden h-screen w-full"
+        className="block md:hidden h-full w-full"
         src={` ${props.urlImgMobile}${props.imgMobile}`}
         alt="hinh ảnh"
       />
