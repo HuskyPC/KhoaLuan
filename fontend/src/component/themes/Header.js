@@ -1,33 +1,20 @@
-import React, { useEffect } from "react";
+import React, { createContext, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
+import Login from "../component/user/Login";
 
 const Header = () => {
   const [dropdown, setDropDown] = useState(false);
-  //
-  const [stickyHeader, setStickyHeader] = useState("relative");
-  // useEffect(() => {
-  //   window.addEventListener("scroll", stickNavbar);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", stickNavbar);
-  //   };
-  // }, []);
-  // const stickNavbar = () => {
-  //   if (window !== undefined) {
-  //     let windowHeight = window.scrollY;
-  //     windowHeight > 25
-  //       ? setStickyHeader("fixed")
-  //       : setStickyHeader("absolute");
-  //   }
-  // };
-  // console.log(window.location.pathname);
-  // let pathURL = window.location.pathname;
+  const [dropdownUser, setDropDownUser] = useState(false);
 
   const handleDropdown = () => {
-    dropdown ? setDropDown(false) : setDropDown(true);
+    setDropDown(!dropdown);
   };
+  const handeleDropdownUser = () => {
+    setDropDownUser(!dropdownUser);
+  };
+
   return (
     <div className="headered">
       {/* header */}
@@ -100,18 +87,26 @@ const Header = () => {
 
         {/* cart, account */}
         <div className="item-header flex items-center justify-center  col-end-7 col-span-2 ">
-          <Link className="py-2 px-2" to="/">
+          <Link className="py-2 px-2" to="/search">
             <i className="fa-solid fa-magnifying-glass"></i>
           </Link>
           <Link className="py-2 px-2" to="/">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <Link className="py-2 px-2" to="/">
+          <Link className="py-2 px-2" to="">
             <i className="fa-solid fa-heart"></i>
           </Link>
-          <Link className="py-2 px-2" to="/">
+          <div
+            className="py-2 px-2 relative hover:bg-white hover:text-black"
+            onClick={handeleDropdownUser}
+          >
             <i className="fa-solid fa-user-lock"></i>
-          </Link>
+          </div>
+          {dropdownUser ? (
+            <Login abc={dropdownUser} onClick={handeleDropdownUser} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

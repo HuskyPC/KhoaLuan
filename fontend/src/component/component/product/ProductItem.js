@@ -8,9 +8,9 @@ const ProductItem = (props) => {
     }).format(value);
   return (
     <>
-      <div className="product-body h-[300px] bg-white  p-3 relative text-center">
+      <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
         <img
-          className="w-full h-[130px] "
+          className="w-full h-1/2 "
           src={`${
             props.img === null || props.urlImg === null
               ? "asset/img/error/img/placeholder.png"
