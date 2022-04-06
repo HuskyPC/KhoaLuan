@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 const Cart = () => {
+  const [sl, setSL] = useState(1);
+  const tangSL = () => {
+    if (sl >= 1 && sl < 10) {
+      setSL(sl + 1);
+    }
+  };
+  const giamSL = () => {
+    if (sl > 1 && sl <= 10) {
+      setSL(sl - 1);
+    }
+  };
+  console.log("🚀 ~ file: Cart.js ~ line 5 ~ Cart ~ sl", sl);
   return (
     <>
       <div className="header-cart mt-10  px-20 w-full bg-white p-2">
@@ -31,7 +43,7 @@ const Cart = () => {
               <i className="fa-solid fa-trash"></i>
             </div>
           </div>
-          <div className="cart-item-content mt-4 bg-white p-2 text-center">
+          <div className="cart-item-content mt-2 bg-white p-2 text-center">
             <div className="card-item grid grid-cols-12">
               <div className="col-span-5 grid grid-cols-10 gap-2 text-left">
                 <input
@@ -62,6 +74,37 @@ const Cart = () => {
               </div>
               <div className="col-span-2 flex items-center justify-center">
                 2000000
+              </div>
+              <div className="col-span-2 flex items-center justify-center">
+                <div className="buttons_added">
+                  <input
+                    className="minus is-form"
+                    type="button"
+                    defaultValue="-"
+                    onClick={giamSL}
+                  />
+                  <input
+                    aria-label="quantity"
+                    className="input-qty"
+                    max="10"
+                    min="1"
+                    name="soLuong"
+                    type="number"
+                    value={sl}
+                  />
+                  <input
+                    className="plus is-form"
+                    type="button"
+                    defaultValue="+"
+                    onClick={tangSL}
+                  />
+                </div>
+              </div>
+              <div className="col-span-2 flex items-center justify-center">
+                2000000
+              </div>
+              <div className="flex items-center justify-center text-sm ">
+                <i className="fa-solid fa-trash-can"></i>
               </div>
             </div>
           </div>

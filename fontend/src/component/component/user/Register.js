@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Register = () => {
+  const [closeRegister, setCloseRegister] = useState(true);
+  const handleCloseRegister = () => {
+    setCloseRegister(!closeRegister);
+  };
   return (
-    <>
-      <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
-        <form>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-group mb-6">
+    <div
+      className={`${
+        closeRegister ? "flex" : "hidden"
+      }  items-center justify-center absolute top-10 left-0 right-0 bg-black-rgba-03 h-screen  `}
+      onClick={handleCloseRegister}
+    >
+      <div className=" p-6 rounded-lg shadow-lg bg-white max-w-md -mt-40">
+        <form className="">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="form-group mb-6">
               <input
                 type="text"
-                class="form-control
+                className="form-control
           block
           w-full
           px-3
@@ -29,34 +38,34 @@ const Register = () => {
                 placeholder="First name"
               />
             </div>
-            <div class="form-group mb-6">
+            <div className="form-group mb-6">
               <input
                 type="text"
-                class="form-control
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="form-control
+                        block
+                        w-full
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleInput124"
                 aria-describedby="emailHelp124"
                 placeholder="Last name"
               />
             </div>
           </div>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="email"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -74,10 +83,10 @@ const Register = () => {
               placeholder="Email address"
             />
           </div>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="password"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -95,23 +104,10 @@ const Register = () => {
               placeholder="Password"
             />
           </div>
-          <div class="form-group form-check text-center mb-6">
-            <input
-              type="checkbox"
-              class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-              id="exampleCheck25"
-              checked
-            />
-            <label
-              class="form-check-label inline-block text-gray-800"
-              for="exampleCheck25"
-            >
-              Subscribe to our newsletter
-            </label>
-          </div>
+
           <button
             type="submit"
-            class="
+            className="
       w-full
       px-6
       py-2.5
@@ -134,7 +130,7 @@ const Register = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
