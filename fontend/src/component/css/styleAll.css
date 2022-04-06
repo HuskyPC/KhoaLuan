@@ -44,3 +44,29 @@ html {
     background-position-x: -200%;
   }
 }
+.tag-content div label {
+  padding: 0.35rem 1rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+.tag-content div label:hover,
+.activeProductTag {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.nameProductNoBreak {
+  display: -webkit-box;
+  max-height: 3.2rem;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  line-height: 1.3rem;
+  font-size: 0.9rem;
+}
+.nameProductNoBreak::first-letter {
+  text-transform: uppercase !important;
+}
