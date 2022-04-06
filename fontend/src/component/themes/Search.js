@@ -3,20 +3,19 @@ import axios from "axios";
 import ProductItem from "../component/product/ProductItem";
 import ProductFakeData from "../data/ProductFakeData";
 import useDebounce from "../hook/useDebounce";
-import LoadingSkeleton from "../component/loading/LoadingSkeleton";
 import ProductLoading from "../component/product/ProductLoading";
 const Search = () => {
   const [product, setProduct] = useState("");
   const [...dataFake] = ProductFakeData;
   const [query, setQuery] = useState("");
-  const queryBebounce = useDebounce(query, 750);
+  const queryBebounce = useDebounce(query, 1000);
   const [loading, setLoading] = useState(true);
   //   https://localhost:44379/Home/getProduct?SL=`${query}`
   useEffect(() => {
     async function fechData() {
       setLoading(true);
       const reposeData = await axios.get(
-        `https://localhost:44379/Home/getProduct?SL=${queryBebounce}2`
+        `https://localhost:44379/Home/getProduct?SL=${queryBebounce}`
       );
       if (reposeData.data) {
         setProduct(reposeData.data);
@@ -47,7 +46,7 @@ const Search = () => {
         ) : (
           <>
             {loading && (
-              <div className="grid grid-cols-4 gap-3 px-20 py-6 mt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 px-20 py-6 mt-10">
                 <ProductLoading />
                 <ProductLoading />
                 <ProductLoading />
