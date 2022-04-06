@@ -3,16 +3,27 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
 import Login from "../component/user/Login";
+import Register from "../component/user/Register";
 
 const Header = () => {
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(false);
+  const [dropdownLogin, setDropdownLogin] = useState(false);
+  const [dropdownRegister, setDropdownRegister] = useState(false);
 
   const handleDropdown = () => {
     setDropDown(!dropdown);
   };
   const handeleDropdownUser = () => {
     setDropDownUser(!dropdownUser);
+  };
+  const handleDropdownLogin = () => {
+    setDropdownLogin(!dropdownLogin);
+    // setDropDownUser(!dropdownUser);
+  };
+  const handleDropdownRegister = () => {
+    setDropdownRegister(!dropdownRegister);
+    // setDropDownUser(!dropdownUser);
   };
 
   return (
@@ -103,10 +114,29 @@ const Header = () => {
             <i className="fa-solid fa-user-lock"></i>
           </div>
           {dropdownUser ? (
-            <Login abc={dropdownUser} onClick={handeleDropdownUser} />
+            <div>
+              <div className="dropdownAccount absolute top-10 left-[85%]  gap-2 w-full bg-slate-700 ">
+                <span
+                  className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                  onClick={handleDropdownLogin}
+                >
+                  Đăng nhập
+                </span>
+                <span
+                  className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                  onClick={handleDropdownRegister}
+                >
+                  Đăng ký
+                </span>
+              </div>
+            </div>
           ) : (
             ""
           )}
+
+          {dropdownLogin ? <Login abc={dropdownLogin}></Login> : ""}
+
+          {dropdownRegister ? <Register abc={dropdownRegister} /> : ""}
         </div>
       </div>
     </div>

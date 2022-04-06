@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import Register from "./Register";
-const Login = (props) => {
+const Login = () => {
+  const [closeLogin, setCloseLogin] = useState(true);
+  // const [email, setEmail] = useState("");
+  // const [passwords, setPassWord] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
       rememberMe: false,
     },
-    onSubmit: (valuesForm) => {},
+    onSubmit: (valuesForm) => {
+      // setEmail(valuesForm.email);
+      // setPassWord(valuesForm.password);
+    },
   });
 
-  const [dropdownRegister, setdropdownRegister] = useState(false);
-  // const handle = () => {
-  //   setDropDownUser(!dropdownUser);
-  // };
-
+  const handleCloseLogin = () => {
+    setCloseLogin(!closeLogin);
+  };
   return (
     <>
       <div
         className={`${
-          props.abc ? "" : "hidden"
+          closeLogin ? "" : "hidden"
         } h-screen bg-black-rgba-03 top-10 left-0 right-0  z-0 absolute`}
+        onClick={handleCloseLogin}
       >
         <div
           className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm m-auto mt-20   z-20`}
@@ -97,12 +101,6 @@ const Login = (props) => {
             >
               Đăng nhập
             </button>
-            <p className="text-gray-800 mt-6 text-center">
-              Không phải tôi!
-              <div className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out inline">
-                Đăng kí
-              </div>
-            </p>
           </form>
         </div>
       </div>
