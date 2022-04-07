@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../component/user/Login";
 import Cart from "../themes/Cart";
+import Favorite from "../themes/Favorite";
 import Header from "../themes/Header";
 
 import Home from "../themes/Home";
@@ -12,7 +13,7 @@ const Routers = () => {
   return (
     <BrowserRouter>
       <Header />
-
+      <Login></Login>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
@@ -24,6 +25,8 @@ const Routers = () => {
         <Route path="/product/" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/" element={<Cart />} />
+        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/favorite/" element={<Favorite />} />
       </Routes>
     </BrowserRouter>
   );

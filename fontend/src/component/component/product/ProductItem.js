@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContextWEB } from "../../context/ContextComponent";
 const ProductItem = (props) => {
   const numberFormat = (value) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(value);
+  const { ToggleFavorite } = useContextWEB();
+  const [favoritClick, setFavoritClick] = useState(true);
+  const handleRemoveFavorite = () => {};
   return (
     <>
       <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
@@ -18,13 +22,16 @@ const ProductItem = (props) => {
           }`}
           alt="hinh anh"
         />
-        <Link
-          to="/"
+        <span
           className="heart text-center hidden top-[60px] left-0 right-0 absolute"
+          onClick={handleRemoveFavorite}
         >
-          <i className="far fa-heart text-blue-500 text-3xl"></i>
-        </Link>
-        {/* <i className="fas fa-heart text-blue-700"></i> */}
+          {props.favo === 1 ? (
+            <i className="fas fa-heart text-blue-700 text-3xl"></i>
+          ) : (
+            <i className="far fa-heart text-blue-500 text-3xl"></i>
+          )}
+        </span>
         <div className="mt-8"></div>
         <span className="price text-blue-500">
           {numberFormat(

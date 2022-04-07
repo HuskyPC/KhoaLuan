@@ -1,8 +1,14 @@
+// import ContextComponent from "./component/context.js/ContextComponent";
+
+import { ContextProvider } from "./component/context/ContextComponent";
 import Routers from "./component/router/Router";
+
 function App() {
   return (
     <div className="App">
-      <Routers />
+      <ContextProvider>
+        <Routers />
+      </ContextProvider>
     </div>
   );
 }

@@ -1,11 +1,14 @@
-import React, { createContext, useCallback, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
 import Login from "../component/user/Login";
 import Register from "../component/user/Register";
+import { useContextWEB } from "../context/ContextComponent";
 
 const Header = () => {
+  const { users } = useContextWEB();
+
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(false);
   const [dropdownLogin, setDropdownLogin] = useState(false);
@@ -104,7 +107,7 @@ const Header = () => {
           <Link className="py-2 px-2" to="/">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <Link className="py-2 px-2" to="">
+          <Link className="py-2 px-2" to="/favorite">
             <i className="fa-solid fa-heart"></i>
           </Link>
           <div
@@ -134,9 +137,18 @@ const Header = () => {
             ""
           )}
 
-          {dropdownLogin ? <Login abc={dropdownLogin}></Login> : ""}
-
-          {dropdownRegister ? <Register abc={dropdownRegister} /> : ""}
+          <Login
+            open={dropdownLogin}
+            hadleClose={() => {
+              setDropdownLogin(false);
+            }}
+          ></Login>
+          <Register
+            open={dropdownRegister}
+            handleClose={() => {
+              setDropdownRegister(false);
+            }}
+          ></Register>
         </div>
       </div>
     </div>
