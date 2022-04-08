@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import ReactDOM from "react-dom";
 import * as Yup from "yup";
 const Login = ({ open = false, hadleClose = () => {} }) => {
+  const dropdownUserRef = useRef(null);
+  const [dropdownState, setDropDownState] = useState(true);
+  useEffect(() => {
+    function handlecloseLogin(e) {
+      if (dropdownUserRef && dropdownUserRef.current.contains(e.target)) {
+        setDropDownState(false);
+      }
+      // else {
+      //   console.log(e.target);
+      //   console.log("click outsite");
+      // }
+    }
+    document.addEventListener("click", handlecloseLogin);
+    return () => {
+      document.removeEventListener("click", handlecloseLogin);
+    };
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,12 +50,13 @@ const Login = ({ open = false, hadleClose = () => {} }) => {
     <>
       <div
         className={`${
-          open ? "" : "hidden"
+          (open === dropdownState) === true ? "" : "hidden"
         } h-screen bg-black-rgba-03 top-10 left-0 right-0  z-10 absolute`}
-        onClick={hadleClose}
+        onClick={() => setDropDownState(!dropdownState) && hadleClose}
+        ref={dropdownUserRef}
       >
         <div
-          className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm m-auto mt-20   z-20`}
+          className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm m-auto mt-20   z-50`}
         >
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group mb-6">

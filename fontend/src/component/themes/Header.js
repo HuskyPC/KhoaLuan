@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
@@ -140,13 +140,13 @@ const Header = () => {
           <Login
             open={dropdownLogin}
             hadleClose={() => {
-              setDropdownLogin(false);
+              setDropdownLogin();
             }}
           ></Login>
           <Register
             open={dropdownRegister}
             handleClose={() => {
-              setDropdownRegister(false);
+              setDropdownRegister();
             }}
           ></Register>
         </div>

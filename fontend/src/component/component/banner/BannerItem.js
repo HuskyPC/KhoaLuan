@@ -24,7 +24,7 @@ const BannerItem = (props) => {
       <div
         className={` absolute  ${
           props.id % 2 === 0 ? "left-24" : "right-24"
-        } top-32 w-9/12 text-white ${
+        } top-40 w-9/12 text-white ${
           props.id % 2 === 0 ? "text-left" : "text-right"
         } max-w-sm`}
       >
