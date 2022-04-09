@@ -48,5 +48,13 @@ where status=1
 
 exec BannerAll
 
+-- proc seclect brand top x 
+create proc BrandHomeTopX
+@x int 
+as 
+select top(@x) brandID, avatar, urlImage
+from Brand
+where status=1
 
+exec BrandHomeTopX @x=1
 

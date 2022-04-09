@@ -1,4 +1,6 @@
-﻿using BLL.Product;
+﻿using BLL.Brand;
+using BLL.Product;
+using BO.Brand;
 using BO.Product;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +30,16 @@ namespace BackendWebsiteLaptop.Controllers
         {
             ProductBLL objproduct = new ProductBLL();
             List<ProductBO> listPro = objproduct.loadXProduct(4);
+            return listPro.ToArray();
+
+
+        }
+        [HttpGet]
+        [Route("/Home/getLoadBrandTopX")]
+        public IEnumerable<BrandBO> loadBrandTopX(int sl)
+        {
+            BrandBLL objBrand = new BrandBLL();
+            List<BrandBO> listPro = objBrand.loadBrandTopX(sl);
             return listPro.ToArray();
 
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l6pQKfc5uVeGHgKIO3KiCVrIY7xx3CCVTjcupwrfPu2iOF22Xbt22BWQbiSuJRLiOhpsw9nMa9u3kQ0+KnUh4A==",
+  "dgSpecHash": "h9aR4kNOB66uVqgH3yIMUJJfHMMmK+5TTqOZ9EbRtLyp272kcdXxCJuHOyt+JKdcnlTIcT5bF09+TfBN/cw/jQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
