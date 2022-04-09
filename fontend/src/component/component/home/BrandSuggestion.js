@@ -57,8 +57,7 @@ const BrandSuggestion = () => {
                   </Link>
                 </div>
               ))
-            : dataFake.length > 0 &&
-              dataFake.map((item, index) => (
+            : dataFake.map((item, index) => (
                 <div
                   className="brand-item w-24 drop-shadow-2xl overflow-hidden"
                   key={item.id}
