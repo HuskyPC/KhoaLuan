@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BrandSuggestionFakeData from "../../data/BrandSuggestionFakeData";
+import useHomeAPI from "../../api/HomeAPI";
+// import BrandSuggestionFakeData from "../../data/BrandSuggestionFakeData";
 
 const BrandSuggestion = () => {
-  const [...dataFake] = BrandSuggestionFakeData;
+  // const [...dataFake] = BrandSuggestionFakeData;
+  const [...dataFake] = useHomeAPI("loadBrandTopX", 4);
   // console.log(
   //   "🚀 ~ file: BrandSuggestion.js ~ line 7 ~ BrandSuggestion ~ dataFake",
   //   dataFake

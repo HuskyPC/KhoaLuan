@@ -47,7 +47,7 @@ const ProductItem = (props) => {
         >
           {numberFormat(props.price)}
         </span>
-        <Link to={props.url + props.id} className="hover:text-blue-500">
+        <Link to={`/detail/${props.id} `} className="hover:text-blue-500">
           <p className="capitalize  name-product-body mt-3 font-light ">
             {props.name}
           </p>

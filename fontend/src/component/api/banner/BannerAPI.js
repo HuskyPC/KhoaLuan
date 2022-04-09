@@ -17,10 +17,7 @@ const BannerAPI = () => {
     }
     fechData();
   }, []);
-  console.log(
-    "🚀 ~ file: BannerAPI.js ~ line 6 ~ BannerAPI ~ product",
-    product
-  );
+
   return product;
 };
 
