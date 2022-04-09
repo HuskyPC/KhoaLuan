@@ -824,11 +824,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+      "projectUniqueName": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
       "projectName": "BackendWebsiteLaptop",
-      "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+      "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
       "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\obj\\",
+      "outputPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -845,11 +845,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj"
+            "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj"
             },
-            "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
-              "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
+            "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+              "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
             }
           }
         }

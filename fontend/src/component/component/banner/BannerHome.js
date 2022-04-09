@@ -1,28 +1,18 @@
 import React from "react";
 import { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import BannerFakeData from "../../data/BannerFakeData";
+// import BannerFakeData from "../../data/BannerFakeData";
 import BannerItem from "./BannerItem";
 // Import Swiper styles
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
 import { Autoplay, Pagination, Navigation } from "swiper";
-// import { Link } from "react-router-dom";
-// import useSWR from "swr";
-// import { fetcher } from "../../../config/Config";
+import BannerAPI from "../../api/banner/BannerAPI";
 
 const BannerHome = () => {
-  const [...dataTestBanner] = BannerFakeData;
-  // const [dt, setdt] = useState();
-  // const { data, error } = useSWR(
-  //   "https://localhost:44379/Banner/getBannerAll",
-  //   fetcher
-  // );
-  // console.log("🚀 ~ file: BannerHome.js ~ line 19 ~ BannerHome ~ data", data);
-  // useEffect(()=>{
-  //   setdt)
-  // },[])
+  // const [...dataTestBanner] = BannerFakeData;
+  const [...dataTestBanner] = BannerAPI();
   return (
     <Fragment>
       {/* <BannerAPI></BannerAPI> */}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO.Brand
 {
-    public class Brand
+    public class BrandBO
     {
         public int id { get; set; }
         public String brandID { get; set; }

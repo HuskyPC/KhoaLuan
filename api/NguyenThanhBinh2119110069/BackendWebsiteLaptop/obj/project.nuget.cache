@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HYJD2+SVu9elR5noMrlTfXsC88gNB5bf44tZ9BBpCEK9S+3gbXvGJ/DVEYmN3wfNUdIDyU51+bLkCSMdaQXe9Q==",
+  "dgSpecHash": "PVdidXtf2YAW/Gg837j9GmRQzAhruztD7ejjP5pWKSz3AhJ+eQnXWjjbjxuJlZnC1DyXO9mR0inpntplaATpTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\backend\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
