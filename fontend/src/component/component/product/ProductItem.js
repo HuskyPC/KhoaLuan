@@ -54,7 +54,7 @@ const ProductItem = (props) => {
         </Link>
         <div className="grid grid-cols-2 gap-3 mt-5 px-2 font-light">
           <Link
-            to={props.url + props.id}
+            to={`/detail/${props.id} `}
             className="text-xs mt-1 hover:text-blue-500"
           >
             <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>

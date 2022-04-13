@@ -1,6 +1,6 @@
 const { default: axiosClient } = require("./axiosClient");
 
-const BrandApi = {
+const ProductApi = {
   // async getAll(params) {
   //   var qs = require("qs");
   //   const response = await axiosClient.get("products/", {
@@ -15,14 +15,13 @@ const BrandApi = {
   //   return response;
   // },
   getLoadBrandTopX(sl) {
-    const url = `/Home/getLoadBrandTopX?sl=${sl}`;
+    const url = `Home/getProductNewTopX?sl=${sl}`;
     return axiosClient.get(url);
   },
-  getNameBrandAll() {
-    const url = "https://localhost:44379/Home/getNameBrandAll";
+  getLoadProductByBrandTopX(sl, brandName) {
+    const url = `https://localhost:44379/Home/getLoadProductByBrandTopX?sl=${sl}&Brand=${brandName}`;
     return axiosClient.get(url);
   },
-
   // get(id) {
   //   const url = `/products/${id}/`;
   //   return axiosClient.get(url);
@@ -44,4 +43,4 @@ const BrandApi = {
   // },
 };
 
-export default BrandApi;
+export default ProductApi;

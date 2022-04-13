@@ -5,13 +5,7 @@ import BrandSuggestionFakeData from "../../data/BrandSuggestionFakeData";
 
 const BrandSuggestion = () => {
   const [...dataFake] = BrandSuggestionFakeData;
-  const [branndData, setBranndData] = useState([
-    {
-      brandID: "",
-      urlImage: "",
-      avatar: "",
-    },
-  ]);
+  const [branndData, setBranndData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState(5);
 
