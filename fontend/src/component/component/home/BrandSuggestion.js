@@ -5,13 +5,7 @@ import BrandSuggestionFakeData from "../../data/BrandSuggestionFakeData";
 
 const BrandSuggestion = () => {
   const [...dataFake] = BrandSuggestionFakeData;
-  const [branndData, setBranndData] = useState([
-    {
-      brandID: "",
-      urlImage: "",
-      avatar: "",
-    },
-  ]);
+  const [branndData, setBranndData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState(5);
 
@@ -57,8 +51,7 @@ const BrandSuggestion = () => {
                   </Link>
                 </div>
               ))
-            : dataFake.length > 0 &&
-              dataFake.map((item, index) => (
+            : dataFake.map((item, index) => (
                 <div
                   className="brand-item w-24 drop-shadow-2xl overflow-hidden"
                   key={item.id}
