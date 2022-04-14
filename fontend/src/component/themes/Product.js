@@ -1,5 +1,6 @@
 import React from "react";
 import BrandFakeData from "../data/BrandFakeData";
+import { useParams } from "react-router-dom";
 function ItemTag(props) {
   return (
     <label htmlFor={props.id} className="first-letter:uppercase">
@@ -14,9 +15,12 @@ function ItemTag(props) {
     </label>
   );
 }
+
 const Product = () => {
+  let { id } = useParams();
   const [...dataFake] = BrandFakeData;
   const col = dataFake.length;
+  console.log("🚀 ~ file: Product.js ~ line 21 ~ Product ~ id", id);
   return (
     <>
       <div className="product-tag h-40 bg-white grid grid-rows-2 ">
