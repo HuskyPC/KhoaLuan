@@ -72,7 +72,7 @@ const Header = () => {
               <Link to="/" className="py-2 px-3 uppercase">
                 Home
               </Link>
-              <Link to="/product" className="py-2 px-3 uppercase">
+              <Link to="/product/all" className="py-2 px-3 uppercase">
                 Sản phẩm
               </Link>
               <Link to="/cart" className="py-2 px-3 uppercase">
@@ -87,7 +87,7 @@ const Header = () => {
             <Link to="/" className="py-2 px-3 uppercase">
               Home
             </Link>
-            <Link to="/product" className="py-2 px-3 uppercase">
+            <Link to="/product/all" className="py-2 px-3 uppercase">
               Sản phẩm
             </Link>
             <Link to="/cart" className="py-2 px-3 uppercase">

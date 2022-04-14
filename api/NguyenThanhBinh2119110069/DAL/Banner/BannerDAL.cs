@@ -16,16 +16,16 @@ namespace DAL.Banner
         {
             DB = new DBConnection();
         }
-        public List<BannerBO> loadBannerAll()
+        public List<BannerBO> getBrandLoadTopX(int sl )
         {
-            string procedure = "BannerAll";
+            string procedure = "getBrandLoadTopX";
             List<BannerBO> productList = new List<BannerBO>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
 
-            //var Category = new SqlParameter("@x",); // Tạo tham số
-            //com.Parameters.Add();
+            var Category = new SqlParameter("@x",sl); // Tạo tham số
+            com.Parameters.Add(Category);
 
             SqlDataAdapter da = new SqlDataAdapter(com);
 

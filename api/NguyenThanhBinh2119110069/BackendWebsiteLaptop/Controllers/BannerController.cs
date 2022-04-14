@@ -14,10 +14,10 @@ namespace BackendWebsiteLaptop.Controllers
     {
         [HttpGet]
         [Route("/Banner/getBannerAll")]
-        public IEnumerable<BannerBO> loadBannerAll()
+        public IEnumerable<BannerBO> getBannerLoadTopX(int sl)
         {
             BannerBLL objproduct = new BannerBLL();
-            List<BannerBO> listBanner = objproduct.loadBannerAll();
+            List<BannerBO> listBanner = objproduct.getBannerLoadTopX(sl);
             return listBanner.ToArray();
         }
     }

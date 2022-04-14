@@ -50,5 +50,37 @@ namespace DAL.Brand
 
             return brandList;
         }
+        public List<BrandBO> getNameBrandAll()
+        {
+            string procedure = "getNameBrandAll";
+            List<BrandBO> brandList = new List<BrandBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+
+
+            DataTable dt = new DataTable();
+
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            BrandBO BrandDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                BrandDTO = new BrandBO();//doc 1 dong khoi tao ProductDTO
+                //gan tung truong du lieu
+                BrandDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
+                BrandDTO.brandID = Convert.ToString(dt.Rows[i]["brandID"].ToString());
+                
+                brandList.Add(BrandDTO);
+            }
+
+            return brandList;
+        }
     }
 }
