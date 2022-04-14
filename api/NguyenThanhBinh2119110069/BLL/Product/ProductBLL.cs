@@ -16,5 +16,17 @@ namespace BLL.Product
             List<ProductBO> listProduct = objProduct.loadXProduct(SL);
             return listProduct;
         }
+        public List<ProductBO> getProductNewTopX(int SL)
+        {
+            ProductDAL objProduct = new ProductDAL();
+            List<ProductBO> listProduct = objProduct.getProductNewTopX(SL);
+            return listProduct;
+        }
+        public List<ProductBO> getLoadProductByBrandTopX(int SL, string Brand)
+        {
+            ProductDAL objProduct = new ProductDAL();
+            List<ProductBO> listProduct = objProduct.getLoadProductByBrandTopX(SL, Brand);
+            return listProduct;
+        }
     }
 }

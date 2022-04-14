@@ -16,5 +16,11 @@ namespace BLL.Brand
             List<BrandBO> listProduct = objProduct.loadBrandTopX(sl);
             return listProduct;
         }
+        public List<BrandBO> getNameBrandAll()
+        {
+            BrandDAL objProduct = new BrandDAL();
+            List<BrandBO> listProduct = objProduct.getNameBrandAll();
+            return listProduct;
+        }
     }
 }

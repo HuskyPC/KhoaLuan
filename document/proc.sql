@@ -58,3 +58,51 @@ where status=1
 
 exec BrandHomeTopX @x=1
 
+
+--proc select top new product 
+create proc getProductNewTop
+@x int
+as
+select top(@x) ProductID, name, price, priceSale, avatar, urlImage
+from product 
+order by name desc 
+
+exec getProductNewTop @x=8
+
+
+--proc select load top x banner
+--drop proc getBrandLoadTopX
+create proc getBrandLoadTopX
+@x int
+as
+select top(@x) id, name, imgDesktop, urlImgDesktop, imgTablet, urlImgTablet, imgMobile, urlImgMobile, url, contentUrrl, detail1, detail2
+ from Banner
+where status =1
+
+exec getBrandLoadTopX  @x=3
+
+
+--drop proc getLoadProductByBrandTopX
+create proc getLoadProductByBrandTopX
+@x int,
+@nameBrand  nvarchar(200)
+as
+select top(@x) bra.brandID, pro.ProductID, pro.name, pro.avatar, pro.urlImage, pro.price, pro.priceSale
+from product pro, Category cate, Brand bra, mapping_Category_to_Brand map
+where pro.CategoryID=cate.categoryID and  cate.categoryID= map.categoryID and map.brandID=bra.brandID 
+		and pro.status=1 and cate.status=1 and bra.status=1 and map.status=1 and  bra.name like N'%'+@nameBrand+'%'
+
+
+
+
+exec getLoadProductByBrandTopX @x=3, @nameBrand='asus'
+
+
+--proc get name brand 
+--drop proc getNameBrandAll
+create proc getNameBrandAll
+as
+select name, brandID
+from Brand
+
+exec getNameBrandAll
