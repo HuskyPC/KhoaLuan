@@ -17,7 +17,7 @@ const NewProduct = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await ProductApi.getLoadBrandTopX(filters);
+        const response = await ProductApi.getTopNewProduct(filters);
         setProductData(response.data);
       } catch (error) {
         console.log(error.message);

@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await BrandApi.getNameBrandAll();
+        const response = await BrandApi.getBrandIDandParentID();
         setBrandData(response.data);
       } catch (error) {
         console.log(error.message);
@@ -26,9 +26,10 @@ const Home = () => {
       {brandData.length > 0 &&
         brandData.map((item, index) => (
           <LoadProductByBrand
-            key={index}
+            key={item.brandID}
             nameBrand={item.name}
             brandID={item.brandID}
+            objProduct={item.productBo}
           ></LoadProductByBrand>
         ))}
     </Fragment>

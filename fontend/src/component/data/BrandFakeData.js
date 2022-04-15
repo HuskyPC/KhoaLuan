@@ -1,9 +1,5 @@
 const BrandFakeData = [
   {
-    brandID: "all",
-    name: "tất cả sản phẩm",
-  },
-  {
     brandID: "ap5",
     name: "apple",
   },
