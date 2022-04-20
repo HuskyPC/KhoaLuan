@@ -161,11 +161,13 @@ exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last nam
  --delete  from users 
  
  --user login 
+
+ --drop proc postLoginUser
  create proc postLoginUser
  @email nvarchar(200),
  @password nvarchar(100)
  as
- select us.userID,  us.lastName, us.fristName, us.avatar, us.access
+ select us.userID,  us.lastName, us.fristName, us.avatar, us.access, us.urlImage
  from users us
  where us.status=1 and us.email=@email and us.password= @password
  
