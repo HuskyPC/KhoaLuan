@@ -1,6 +1,9 @@
 import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Login from "../component/user/Login";
+import LoginTab from "../component/user/LoginTab";
+import RegisterTab from "../component/user/RegisterTab";
 import Cart from "../themes/Cart";
 import Favorite from "../themes/Favorite";
 import Header from "../themes/Header";
@@ -13,7 +16,6 @@ const Routers = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Login></Login>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
@@ -30,6 +32,8 @@ const Routers = () => {
         <Route path="/cart/" element={<Cart />} />
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/favorite/" element={<Favorite />} />
+        <Route path="/login" element={<LoginTab />} />
+        <Route path="/register" element={<RegisterTab />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,7 +22,7 @@ const Home = () => {
     <Fragment>
       <BannerHome />
       <BrandSuggestion />
-      <NewProduct />
+      <NewProduct name="sản phẩm mới"></NewProduct>
       {brandData.length > 0 &&
         brandData.map((item, index) => (
           <LoadProductByBrand

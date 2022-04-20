@@ -10,10 +10,10 @@ namespace BLL.Banner
 {
     public class BannerBLL
     {
-        public List<BannerBO> getBannerLoadTopX(int sl)
+        public List<BannerBO> getBrandAll()
         {
             BannerDAL objProduct = new BannerDAL();
-            List<BannerBO> listProduct = objProduct.getBrandLoadTopX(sl);
+            List<BannerBO> listProduct = objProduct.getBrandAll();
             return listProduct;
         }
     }

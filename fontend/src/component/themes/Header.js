@@ -2,17 +2,19 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
-import Login from "../component/user/Login";
-import Register from "../component/user/Register";
+// import Login from "../component/user/Login";
+// import Register from "../component/user/Register";
 import { useContextWEB } from "../context/ContextComponent";
 
 const Header = () => {
   const { users } = useContextWEB();
+  let isUser = JSON.parse(localStorage.getItem("user"));
+  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ isUser", isUser);
 
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(false);
-  const [dropdownLogin, setDropdownLogin] = useState(false);
-  const [dropdownRegister, setDropdownRegister] = useState(false);
+  // const [dropdownLogin, setDropdownLogin] = useState(false);
+  // const [dropdownRegister, setDropdownRegister] = useState(false);
 
   const handleDropdown = () => {
     setDropDown(!dropdown);
@@ -20,14 +22,14 @@ const Header = () => {
   const handeleDropdownUser = () => {
     setDropDownUser(!dropdownUser);
   };
-  const handleDropdownLogin = () => {
-    setDropdownLogin(!dropdownLogin);
-    // setDropDownUser(!dropdownUser);
-  };
-  const handleDropdownRegister = () => {
-    setDropdownRegister(!dropdownRegister);
-    // setDropDownUser(!dropdownUser);
-  };
+  // const handleDropdownLogin = () => {
+  //   setDropdownLogin(!dropdownLogin);
+  //   // setDropDownUser(!dropdownUser);
+  // };
+  // const handleDropdownRegister = () => {
+  //   setDropdownRegister(!dropdownRegister);
+  //   // setDropDownUser(!dropdownUser);
+  // };
 
   return (
     <div className="headered">
@@ -119,7 +121,7 @@ const Header = () => {
           {dropdownUser ? (
             <div>
               <div className="dropdownAccount absolute top-10 left-[85%]  gap-2 w-full bg-slate-700 ">
-                <span
+                {/* <span
                   className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
                   onClick={handleDropdownLogin}
                 >
@@ -130,14 +132,50 @@ const Header = () => {
                   onClick={handleDropdownRegister}
                 >
                   Đăng ký
-                </span>
+                </span> */}
+                {isUser !== null ? (
+                  <>
+                    <Link
+                      to="/"
+                      className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                      onClick={handeleDropdownUser}
+                    >
+                      Tài khoảng của tôi
+                    </Link>
+                    <Link
+                      to="/"
+                      type="submit"
+                      className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                      onClick={handeleDropdownUser}
+                    >
+                      Đăng xuất
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                      onClick={handeleDropdownUser}
+                    >
+                      Đăng nhập
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
+                      onClick={handeleDropdownUser}
+                    >
+                      Đăng ký
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           ) : (
             ""
           )}
 
-          <Login
+          {/* <Login
             open={dropdownLogin}
             hadleClose={() => {
               setDropdownLogin();
@@ -148,7 +186,7 @@ const Header = () => {
             handleClose={() => {
               setDropdownRegister();
             }}
-          ></Register>
+          ></Register> */}
         </div>
       </div>
     </div>

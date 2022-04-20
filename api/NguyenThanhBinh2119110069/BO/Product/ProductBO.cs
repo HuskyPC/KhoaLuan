@@ -13,7 +13,7 @@ namespace BO.Product
         [Display(Name = "Tên sản phẩm")]
         [DataType(DataType.Text)]
         public String name { get; set; }
-        public String CategoryID { get; set; }
+        public String brandID { get; set; }
         public Double price { get; set; }
         public Double priceSale { get; set; }
         public String avatar { get; set; }

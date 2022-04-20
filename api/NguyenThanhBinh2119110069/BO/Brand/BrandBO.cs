@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace BO.Brand
         public String brandID { get; set; }
         public String name { get; set; }
         public String avatar { get; set; }
+        public string parentID { get; set; }
         public String urlImage { get; set; }
         public String slug { get; set; }
         public int status { get; set; }
@@ -19,6 +21,11 @@ namespace BO.Brand
         public int createdBy { get; set; }
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
+        public List<ProductBO> productBo { get; set; }
+        //public BrandBO()
+        //{
+        //    productBo = new List<ProductBO>();
+        //}
 
     }
 }

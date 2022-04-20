@@ -49,14 +49,15 @@ where status=1
 exec BannerAll
 
 -- proc seclect brand top x 
+--drop proc BrandHomeTopX
 create proc BrandHomeTopX
 @x int 
 as 
 select top(@x) brandID, avatar, urlImage
 from Brand
-where status=1
+where status=1 and parentID ='0'
 
-exec BrandHomeTopX @x=1
+exec BrandHomeTopX @x=6
 
 
 --proc select top new product 
@@ -90,7 +91,7 @@ as
 select top(@x) bra.brandID, pro.ProductID, pro.name, pro.avatar, pro.urlImage, pro.price, pro.priceSale
 from product pro, Category cate, Brand bra, mapping_Category_to_Brand map
 where pro.CategoryID=cate.categoryID and  cate.categoryID= map.categoryID and map.brandID=bra.brandID 
-		and pro.status=1 and cate.status=1 and bra.status=1 and map.status=1 and  bra.name like N'%'+@nameBrand+'%'
+		and pro.status=1 and cate.status=1 and bra.status=1 and map.status=1 and bra.parentID='0'and  bra.name like N'%'+@nameBrand+'%'
 
 
 
