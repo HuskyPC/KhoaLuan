@@ -1,0 +1,12 @@
+các bước chạy dự án 
+b1: vào document chạy file scrpit sql 
+b2: mở flie api\NguyenThanhBinh2119110069\NguyenThanhBinh2119110069.sln bằng visual 2019 hoặc cao hơn
+b3: vào lớp DAL 
+	-mở file DBConnection.cs 
+	-ở dòng số 12 sửa conStr = @"Data Source=tenmaychu;Initial Catalog=WebsiteLaptop;Persist Security Info=True;User ID=tentruycap;Password=mật khẩu của bạn";
+b4: chọn project BackendWebsiteLaptop chuột phải chọn "Set as Startup Project"
+b5: chạy dự án dự án api 
+
+b6: ở folder fontend vào file fontend\src\component\api\axiosClient.js
+	-thay đổi dòng thứ 4: baseURL: "https://localhost:44379/api/",
+	sửa baseURL: "https://localhost:localhost đang chạy ở project api /api/",
