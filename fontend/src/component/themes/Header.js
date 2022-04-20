@@ -8,8 +8,13 @@ import { useContextWEB } from "../context/ContextComponent";
 
 const Header = () => {
   const { users } = useContextWEB();
-  let isUser = JSON.parse(localStorage.getItem("user"));
-  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ isUser", isUser);
+  let isUserLocal = JSON.parse(localStorage.getItem("user"));
+  console.log(
+    "🚀 ~ file: Header.js ~ line 12 ~ Header ~ isUserLocal",
+    isUserLocal
+  );
+  let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
+  console.log("🚀 ~ file: Header.js ~ line 14 ~ Header ~ isUserSEC", isUserSEC);
 
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(false);
@@ -30,7 +35,10 @@ const Header = () => {
   //   setDropdownRegister(!dropdownRegister);
   //   // setDropDownUser(!dropdownUser);
   // };
-
+  const handleLoginOut = () => {
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+  };
   return (
     <div className="headered">
       {/* header */}
@@ -133,7 +141,7 @@ const Header = () => {
                 >
                   Đăng ký
                 </span> */}
-                {isUser !== null ? (
+                {isUserLocal !== null || isUserSEC !== null ? (
                   <>
                     <Link
                       to="/"
@@ -146,7 +154,7 @@ const Header = () => {
                       to="/"
                       type="submit"
                       className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
-                      onClick={handeleDropdownUser}
+                      onClick={handeleDropdownUser && handleLoginOut}
                     >
                       Đăng xuất
                     </Link>

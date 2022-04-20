@@ -44,6 +44,41 @@ namespace DAL.User
             }
             return false;
         }
+        public List<UserBO> postLoginUser(UserBO user)
+        {
+
+            string procedure = "postLoginUser";
+            List<UserBO> UserList = new List<UserBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+            com.Parameters.AddWithValue("@email", user.email);
+            com.Parameters.AddWithValue("@password", user.password);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            UserBO userDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                userDTO = new UserBO();//doc 1 dong khoi tao ProductDTO
+                //gan tung truong du lieu
+                userDTO.userID = Convert.ToInt32(dt.Rows[i]["userID"].ToString());
+                userDTO.lastName = Convert.ToString(dt.Rows[i]["lastName"].ToString());
+                userDTO.fristName = Convert.ToString(dt.Rows[i]["fristName"].ToString());
+                userDTO.avatar = Convert.ToString(dt.Rows[i]["avatar"].ToString());
+                userDTO.urlImage = Convert.ToString(dt.Rows[i]["urlImage"].ToString());
+                userDTO.access = Convert.ToInt32(dt.Rows[i]["access"].ToString());
+                UserList.Add(userDTO);
+            }
+
+            return UserList;
+
+        }
     }
 
 }

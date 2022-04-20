@@ -26,5 +26,10 @@ namespace BLL.User
             }
             return "fail";
         }
+        public List<UserBO> postLoginUser(UserBO objUser)
+        {
+            List<UserBO> listUser = userDAL.postLoginUser(objUser);
+            return listUser;
+        }
     }
 }

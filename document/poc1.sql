@@ -139,8 +139,9 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 --	  and cate.categoryID in (select categoryID from mapping_Product_to_Category  group by categoryID)
 --group by map.productID , cate.categoryID, cate.name 
 
---user
-create proc createUsser
+--user register
+-- drop proc createUsser
+create proc postCreateUsser
 @email nvarchar(200),
 @password nvarchar(100),
 @lastName nvarchar(50),
@@ -154,7 +155,19 @@ INSERT INTO users( email, password,lastName,fristName,status,access,createdDate,
 values( @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
 
 SET DATEFORMAT DMY
-exec createUsser @email='bin@gmail.om', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
+exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
 @access =0, @createdDate='20/04/2022', @createdBy=1
-
-					
+ 
+ --delete  from users 
+ 
+ --user login 
+ create proc postLoginUser
+ @email nvarchar(200),
+ @password nvarchar(100)
+ as
+ select us.userID,  us.lastName, us.fristName, us.avatar, us.access
+ from users us
+ where us.status=1 and us.email=@email and us.password= @password
+ 
+ exec postLoginUser @email='bin@gmail.com', @password='123456'
+   				

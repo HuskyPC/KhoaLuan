@@ -14,6 +14,8 @@ namespace BO.User
         public string password { get; set; }
         public string lastName { get; set; }
         public string fristName { get; set; }
+        public string avatar { get; set; }
+        public string urlImage { get; set; }
         public int status { get; set; }
         public int access { get; set; }
         public DateTime createdDate { get; set; }
