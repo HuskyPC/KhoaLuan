@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import ProductItem from "../component/product/ProductItem";
 import ProductFakeData from "../data/ProductFakeData";
 import useDebounce from "../hook/useDebounce";
 import ProductLoading from "../component/product/ProductLoading";
+import SearchAPI from "../api/SearchAPI";
+import axios from "axios";
+import NewProduct from "../component/home/NewProduct";
 const Search = () => {
   const [product, setProduct] = useState("");
   const [...dataFake] = ProductFakeData;
   const [query, setQuery] = useState("");
-  const queryBebounce = useDebounce(query, 1000);
+  const queryDebounce = useDebounce(query, 1000);
   const [loading, setLoading] = useState(true);
-  //   https://localhost:44379/Home/getProduct?SL=`${query}`
+  //   https://localhost:44379/api/Search/getBrandAll?keySreach=${queryDebounce}
   useEffect(() => {
     async function fechData() {
       setLoading(true);
-      const reposeData = await axios.get(
-        `https://localhost:44379/Home/getProduct?SL=${queryBebounce}`
-      );
+      const reposeData = await SearchAPI.getSearchProduct(queryDebounce);
+      // const reposeData = await axios.get(
+      //   `https://localhost:44379/api/Search/getBrandAll?keySreach=${queryDebounce}`
+      // );
       if (reposeData.data) {
         setProduct(reposeData.data);
         setLoading(false);
       }
     }
+
     fechData();
-  }, [queryBebounce]);
+  }, [queryDebounce]);
+
+  console.log("🚀 ~ file: Search.js ~ line 11 ~ Search ~ product", product);
   // kêt nôi csdl
   //   cơ sở dữ liệu giả
 
@@ -33,13 +39,14 @@ const Search = () => {
         <div className="w-full max-w-[500px] mx-auto">
           <input
             type="text"
-            name="srearch"
+            name="search"
+            id="search"
             className="w-full p-2 rounded-lg outline-none border-[1px] border-blue-200 shadow-[0_0_0_3px_rgba(104,_123,_255,_0.1)]"
             placeholder="Tìm kiếm..."
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value) && setProduct("")}
           />
         </div>
-        {queryBebounce === "" ? (
+        {queryDebounce === "" ? (
           <div className="w-full mt-10 text-gray-600 text-center text-2xl">
             Nhập nội dung để tìm kiếm...
           </div>
@@ -57,24 +64,32 @@ const Search = () => {
                 <ProductLoading />
               </div>
             )}
-            <div className="w-full px-20 mt-10 grid  grid-cols-4 gap-3">
-              {product.length > 0
-                ? product.map((item, index) => (
-                    <ProductItem key={item.productID} />
-                  ))
-                : dataFake.map((item, index) => (
-                    <ProductItem
-                      key={item.id}
-                      id={item.id}
-                      name={item.name}
-                      price={item.price}
-                      priceSale={item.priceSale}
-                      url={item.url}
-                      img={item.img}
-                      urlImg={item.urlImage}
-                    ></ProductItem>
-                  ))}
-            </div>
+            {product.length <= 0 && loading !== true ? (
+              <>
+                <div className="w-full mt-10 text-gray-600 text-center text-2xl">
+                  Không tìm thấy sản phẩm nào tên là: <strong>{query}</strong>
+                </div>
+                <NewProduct name="sản phẩm gợi ý"></NewProduct>
+              </>
+            ) : (
+              <div className="w-full px-20 mt-10 grid  grid-cols-4 gap-3">
+                {product.length > 0
+                  ? product.map((item, index) => (
+                      <ProductItem
+                        key={item.productID}
+                        id={item.productID}
+                        name={item.name}
+                        price={item.price}
+                        priceSale={item.priceSale}
+                        url={`/detail/${item.productID}`}
+                        img={item.avatar}
+                        urlImg={item.urlImage}
+                      ></ProductItem>
+                    ))
+                  : ""}
+              </div>
+            )}
+            <NewProduct name="sản phẩm gợi ý" />
           </>
         )}
       </div>

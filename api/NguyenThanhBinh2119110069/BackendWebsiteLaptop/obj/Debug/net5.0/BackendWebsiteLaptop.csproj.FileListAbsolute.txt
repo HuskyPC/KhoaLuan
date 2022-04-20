@@ -78,3 +78,7 @@ C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebs
 C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\ref\BackendWebsiteLaptop.dll
 C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.pdb
 C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.genruntimeconfig.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

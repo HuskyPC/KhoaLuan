@@ -14,8 +14,8 @@ const ProductApi = {
   //   });
   //   return response;
   // },
-  getLoadBrandTopX(sl) {
-    const url = `Home/getProductNewTopX?sl=${sl}`;
+  getTopNewProduct(top) {
+    const url = `Home/getTopNewProduct?top=${top}`;
     return axiosClient.get(url);
   },
   getLoadProductByBrandTopX(sl, brandName) {

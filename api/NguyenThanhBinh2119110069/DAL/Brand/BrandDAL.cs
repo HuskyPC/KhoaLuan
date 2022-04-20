@@ -16,16 +16,15 @@ namespace DAL.Brand
         {
             DB = new DBConnection();
         }
-        public List<BrandBO> loadBrandTopX(int sl)
+        public List<BrandBO> getBrandSuggestion()
         {
-            string procedure = "BrandHomeTopX";
+            string procedure = "getBrandSuggestion";
             List<BrandBO> brandList = new List<BrandBO>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
 
-            var x = new SqlParameter("@x",sl ); // Tạo tham số
-            com.Parameters.Add(x);
+            
 
             SqlDataAdapter da = new SqlDataAdapter(com);
 
@@ -50,13 +49,14 @@ namespace DAL.Brand
 
             return brandList;
         }
-        public List<BrandBO> getNameBrandAll()
+        public List<BrandBO> getBrandIDandParentID()
         {
-            string procedure = "getNameBrandAll";
+            string procedure = "getBrandIDandParentID";
             List<BrandBO> brandList = new List<BrandBO>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
+
 
 
             SqlDataAdapter da = new SqlDataAdapter(com);
@@ -74,13 +74,47 @@ namespace DAL.Brand
             {
                 BrandDTO = new BrandBO();//doc 1 dong khoi tao ProductDTO
                 //gan tung truong du lieu
-                BrandDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
                 BrandDTO.brandID = Convert.ToString(dt.Rows[i]["brandID"].ToString());
-                
+                BrandDTO.parentID = Convert.ToString(dt.Rows[i]["parentID"].ToString());
+                BrandDTO.name= Convert.ToString(dt.Rows[i]["name"].ToString());
                 brandList.Add(BrandDTO);
             }
 
             return brandList;
         }
+        public List<BrandBO> getParentByBrandId(string parentId)
+        {
+            string procedure = "getParentByBrandId";
+            List<BrandBO> brandList = new List<BrandBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+            com.Parameters.AddWithValue("@parentId", parentId);
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+
+
+            DataTable dt = new DataTable();
+
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            BrandBO BrandDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                BrandDTO = new BrandBO();//doc 1 dong khoi tao ProductDTO
+                //gan tung truong du lieu
+                BrandDTO.brandID = Convert.ToString(dt.Rows[i]["brandID"].ToString());
+                BrandDTO.parentID = Convert.ToString(dt.Rows[i]["parentID"].ToString());
+                BrandDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
+                brandList.Add(BrandDTO);
+            }
+
+            return brandList;
+        }
+
     }
 }

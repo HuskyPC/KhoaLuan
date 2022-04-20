@@ -12,7 +12,7 @@ const BrandSuggestion = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await BrandApi.getLoadBrandTopX(filters);
+        const response = await BrandApi.getBrandSuggestion();
         setBranndData(response.data);
       } catch (error) {
         console.log(error.message);

@@ -21,7 +21,7 @@ const BannerHome = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await BannerApi.getLoadBrandTopX(filters);
+        const response = await BannerApi.getBanerAll();
         setBannerData(response.data);
       } catch (error) {
         console.log(error.message);
@@ -35,6 +35,7 @@ const BannerHome = () => {
     setLoading(true);
     setFilters(newFilters);
   };
+
   return (
     <Fragment>
       {/* <BannerAPI></BannerAPI> */}

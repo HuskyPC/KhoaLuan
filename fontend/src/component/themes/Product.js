@@ -1,26 +1,30 @@
 import React from "react";
 import BrandFakeData from "../data/BrandFakeData";
-import { useParams } from "react-router-dom";
-function ItemTag(props) {
+import { Link, useParams } from "react-router-dom";
+const ItemTag = (props) => {
+  let { id } = useParams();
+  console.log("🚀 ~ file: Product.js ~ line 6 ~ ItemTag ~ id", id);
   return (
-    <label htmlFor={props.id} className="first-letter:uppercase">
+    <Link
+      to={`/product/${props.id}`}
+      className={`border-[1px]  px-2 py-1 ${
+        id === props.id ? "bg-gray-200 border-gray-300" : "border-gray-200"
+      } 
+       hover:bg-gray-200 hover:border-gray-300`}
+    >
       {props.name}
-      <input
-        name="tagProduct"
-        type="radio"
-        id={props.id}
-        value={props.id}
-        className="hidden"
-      />
-    </label>
+    </Link>
   );
-}
+};
 
 const Product = () => {
-  let { id } = useParams();
+  // let paramss = useParams();
+  // console.log(
+  //   "🚀 ~ file: Product.js ~ line 17 ~ Product ~ paramss",
+  //   paramss.id
+  // );
   const [...dataFake] = BrandFakeData;
   const col = dataFake.length;
-  console.log("🚀 ~ file: Product.js ~ line 21 ~ Product ~ id", id);
   return (
     <>
       <div className="product-tag h-40 bg-white grid grid-rows-2 ">
@@ -29,6 +33,7 @@ const Product = () => {
           <div className="tag-content">
             <span className=" font-light text-xs">Tìm kiếm theo:</span>
             <div className="grid grid-cols-9  text-center font-light text-xs">
+              <ItemTag id={"all"} name={"Tất cả thương hiệu"}></ItemTag>
               {dataFake.length > 0 &&
                 dataFake.map((item, index) => (
                   <ItemTag

@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css";
 import ProductApi from "../../api/ProductAPI";
 
-const NewProduct = () => {
+const NewProduct = (props) => {
   const [...dataFake] = ProductFakeData;
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const NewProduct = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await ProductApi.getLoadBrandTopX(filters);
+        const response = await ProductApi.getTopNewProduct(filters);
         setProductData(response.data);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +34,7 @@ const NewProduct = () => {
   return (
     <div className="new-product pt-8 ">
       <span className="uppercase block p-4 text-xl tracking-widest text-center">
-        Sản phẩm mới
+        {props.name}
       </span>
 
       <div className="product-list px-20 mt-10">

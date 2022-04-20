@@ -11,23 +11,8 @@ import { Link } from "react-router-dom";
 
 const LoadProductByBrand = (props) => {
   const [...dataFake] = ProductFakeData;
-  const [productData, setProductData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [...productData] = props.objProduct;
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await ProductApi.getLoadProductByBrandTopX(
-          5,
-          props.nameBrand
-        );
-        setProductData(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-      setLoading(false);
-    })();
-  }, [props.nameBrand]);
   return (
     <div>
       <div className="new-product pt-8 ">
