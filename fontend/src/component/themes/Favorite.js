@@ -6,6 +6,10 @@ import ProductFakeData from "../data/ProductFakeData";
 const Favorite = () => {
   const [...dataProductFake] = ProductFakeData;
   const { favoriteContext } = useContextWEB();
+  console.log(
+    "🚀 ~ file: Favorite.js ~ line 9 ~ Favorite ~ favoriteContext",
+    favoriteContext
+  );
   return (
     <div className=" mt-20">
       <div className="grid grid-cols-4 gap-3 px-20">

@@ -15,14 +15,16 @@ const Search = () => {
   //   https://localhost:44379/api/Search/getBrandAll?keySreach=${queryDebounce}
   useEffect(() => {
     async function fechData() {
-      setLoading(true);
-      const reposeData = await SearchAPI.getSearchProduct(queryDebounce);
-      // const reposeData = await axios.get(
-      //   `https://localhost:44379/api/Search/getBrandAll?keySreach=${queryDebounce}`
-      // );
-      if (reposeData.data) {
-        setProduct(reposeData.data);
-        setLoading(false);
+      if (queryDebounce.length !== 0) {
+        setLoading(true);
+        const reposeData = await SearchAPI.getSearchProduct(queryDebounce);
+        // const reposeData = await axios.get(
+        //   `https://localhost:44379/api/Search/getBrandAll?keySreach=${queryDebounce}`
+        // );
+        if (reposeData.data) {
+          setProduct(reposeData.data);
+          setLoading(false);
+        }
       }
     }
 

@@ -7,7 +7,11 @@ const ProductItem = (props) => {
       style: "currency",
       currency: "VND",
     }).format(value);
-  const { ToggleFavorite } = useContextWEB();
+  const { ToggleFavorite, addtoCart, cartContext } = useContextWEB();
+  console.log(
+    "🚀 ~ file: ProductItem.js ~ line 11 ~ ProductItem ~ cartContext",
+    cartContext
+  );
   const [favoritClick, setFavoritClick] = useState(true);
   const handleRemoveFavorite = () => {};
   return (
@@ -60,12 +64,12 @@ const ProductItem = (props) => {
             <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
             Details
           </Link>
-          <Link
-            to="/"
+          <button
             className="text-[10px] text-white bg-black rounded-full hover:bg-blue-500"
+            onClick={() => addtoCart(props.id)}
           >
             <i className="fa-solid fa-cart-shopping text-xs"></i> Add to cart
-          </Link>
+          </button>
         </div>
       </div>
     </>
