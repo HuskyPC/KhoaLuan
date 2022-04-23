@@ -69,7 +69,7 @@ const LoginTab = () => {
             sessionStorage.setItem("user", JSON.stringify(myObj));
           }
           setLoading(false);
-          navigate("/home");
+          navigate(-1);
         } else if (
           reposeData.status >= 200 &&
           reposeData.status < 500 &&
@@ -202,7 +202,7 @@ const LoginTab = () => {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"

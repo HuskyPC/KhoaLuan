@@ -12,7 +12,6 @@ const Cart = () => {
       setSL(sl - 1);
     }
   };
-  console.log("🚀 ~ file: Cart.js ~ line 5 ~ Cart ~ sl", sl);
   return (
     <>
       <div className="header-cart mt-10  px-20 w-full bg-white p-2">

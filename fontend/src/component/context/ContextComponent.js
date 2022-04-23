@@ -1,8 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 import FavoriteFakeData from "../data/FavoriteFakeData";
 import ProductFakeData from "../data/ProductFakeData";
+import { toast } from "react-toastify";
 const ContextWEB = createContext();
 function ContextProvider(props) {
+  const [...favoriteFake] = FavoriteFakeData;
+  const [cartContext, setCartContext] = useState("");
+  const [...product] = ProductFakeData;
+  const [favoriteContext, setFavoriteContext] = useState(favoriteFake);
+  let isUserLocal = JSON.parse(localStorage.getItem("user"));
+  let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
   function ToggleFavorite(productID) {
     const updateFavorite = product.map((item) => {
       if (item.id === productID) {
@@ -12,24 +19,22 @@ function ContextProvider(props) {
     });
     setFavoriteContext(updateFavorite);
   }
-  const [users, setusers] = useState({
-    user: "abc",
-    name: "abc",
-    avatar: "",
-  });
-  const [...favoriteFake] = FavoriteFakeData;
-  const [cartContext, setCartContext] = useState();
-  const [...product] = ProductFakeData;
-  const [favoriteContext, setFavoriteContext] = useState(favoriteFake);
-
+  function addtoCart(newItem) {
+    if (isUserLocal !== null || isUserSEC !== null) {
+    } else
+      toast.warning("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng", {
+        className: "top-10",
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+  }
   const values = {
-    users,
-    setusers,
     cartContext,
     setCartContext,
     favoriteContext,
     setFavoriteContext,
     ToggleFavorite,
+    addtoCart,
   };
 
   return <ContextWEB.Provider value={values} {...props}></ContextWEB.Provider>;

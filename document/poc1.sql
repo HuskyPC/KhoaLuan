@@ -172,4 +172,60 @@ exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last nam
  where us.status=1 and us.email=@email and us.password= @password
  
  exec postLoginUser @email='bin@gmail.com', @password='123456'
-   				
+
+
+ -- trang cart và truy vấn liên quan đến cart 
+ 
+ --proc count cart
+ --drop proc getCountCart
+ create proc getCountCart
+ @userID int
+ as 
+ select count(productID) as tong
+ from CART 
+ where status= 1 and userID= @userID
+group by userid
+
+exec getCountCart @userID= 3
+
+
+--proc get cart 
+select max(stt)
+from Cart
+where status =1
+
+
+--proc insert cart 
+--drop proc postInsertCart
+create proc postInsertCart 
+@productID varchar(10),
+@userID int, 
+@cartID varchar(15)
+as 
+insert into cart(cartID,productID, userID, status ) values(@cartID,@productID,@userID, 1)
+
+exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA4'
+
+
+--proc delete Cart 
+--drop proc DeleteCart
+create proc DeleteCart 
+@cartID varchar(15)
+as 
+delete from Cart where CartID= @cartID
+
+exec DeleteCart @cartID= 'ca4'
+
+--proc isCart
+create proc isExitsCart
+@userID int ,
+@productID varchar(10)
+ as
+select cartID
+from Cart 
+where status= 1and userID= @userID and productID= @productID
+
+exec isExitsCart @userID= 1, @productID='SP1'
+
+
+
