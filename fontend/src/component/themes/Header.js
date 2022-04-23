@@ -10,10 +10,15 @@ import HeaderApi from "../api/HeaderAPI";
 
 const Header = () => {
   let isUserLocal = JSON.parse(localStorage.getItem("user"));
-
   let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
 
-  const [cartCount, setCartCout] = useState("");
+  const [UserID, setUser] = useState();
+  if (UserID === undefined) {
+    if (isUserLocal !== null) setUser(isUserLocal);
+    else if (isUserSEC !== null) setUser(isUserSEC);
+  }
+
+  const [cartCount, setCartCout] = useState(0);
 
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(true);
@@ -31,8 +36,15 @@ const Header = () => {
   const handleLoginOut = () => {
     localStorage.removeItem("user");
     sessionStorage.removeItem("user");
+    localStorage.removeItem("avatar");
+    sessionStorage.removeItem("avatar");
+    localStorage.removeItem("userName");
+    sessionStorage.removeItem("userName");
+
     setDropDownUser(!dropdownUser);
-    if (isUserLocal === null || isUserSEC === null) {
+    setCartCout(0);
+    setUser();
+    if (UserID !== undefined) {
       toast.success("Đăng xuất thành công", {
         className: "top-10",
         position: toast.POSITION.TOP_RIGHT,
@@ -52,22 +64,22 @@ const Header = () => {
   const handeleDropdownUser = () => {
     setDropDownUser(!dropdownUser);
   };
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response = await HeaderApi.getCountCart(isUserSEC);
-  //       setCartCout(response.data);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      if (UserID !== undefined) {
+        try {
+          const response = await HeaderApi.getCountCart(UserID);
+          setCartCout(response.data);
+        } catch (error) {
+          console.log(error.message);
+        }
+      } else setCartCout(0);
+    })();
+  }, [UserID, cartCount]);
 
   return (
     <div className="headered">
       {/* header */}
-
       <div
         className={`fixed top-0 z-10 w-full grid grid-cols-6 md:grid-cols-5  gap-4 bg-black-rgba text-white px-5 "`}
       >
@@ -95,8 +107,8 @@ const Header = () => {
           {/* dropdown menu */}
           <div
             className={`z-10 block md:hidden w-full h-screen bg-black-rgba-03 
-        absolute top-10 transition-transform origin-left cursor-pointer
-        ${dropdown ? "translate-x-[100rem] " : ""}
+        absolute top-12 transition-transform origin-left cursor-pointer
+        ${dropdown ? "translate-x-[100rem]" : ""}
         -left-[100rem]`}
             onClick={() => handleDropdown()}
           >
@@ -120,16 +132,16 @@ const Header = () => {
             </div>
           </div>
           <header className="menu hidden md:flex items-center justify-center text-base font-light ">
-            <Link to="/" className="py-2 px-3 uppercase">
+            <Link to="/" className="p-3 uppercase">
               Home
             </Link>
-            <Link to="/product/all" className="py-2 px-3 uppercase">
+            <Link to="/product/all" className="p-3 uppercase">
               Sản phẩm
             </Link>
-            <Link to="/cart" className="py-2 px-3 uppercase">
+            <Link to="/cart" className="p-3 uppercase ">
               Cart
             </Link>
-            <Link to="/contact" className="py-2 px-3 uppercase">
+            <Link to="/contact" className="p-3 uppercase">
               Contact
             </Link>
           </header>
@@ -137,24 +149,40 @@ const Header = () => {
 
         {/* cart, account */}
         <div className="item-header flex items-center justify-center  col-end-7 col-span-2 ">
-          <Link className="py-2 px-2" to="/search">
+          <Link className="p-3" to="/search">
             <i className="fa-solid fa-magnifying-glass"></i>
           </Link>
-          <Link className="py-2 px-2" to="/">
-            <i className="fa-solid fa-cart-shopping"></i>
+
+          <Link className="p-3 relative" to="/cart">
+            <i className="fa-solid fa-cart-shopping "></i>
+            <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
+              {cartCount}
+            </span>
           </Link>
-          <Link className="py-2 px-2" to="/favorite">
+
+          <Link className="p-3" to="/favorite">
             <i className="fa-solid fa-heart"></i>
           </Link>
           <div
-            className="py-2 px-2 relative hover:bg-white hover:text-black"
+            className={`${
+              UserID ? "cursor-pointer " : "hover:bg-white hover:text-black p-3"
+            } relative  `}
             onClick={handeleDropdownUser}
           >
-            <i className="fa-solid fa-user-lock"></i>
+            {UserID ? (
+              <img
+                src="asset/img/account/defaultAccountImg.png"
+                alt="hinh anh"
+                className=" w-10 rounded-full  "
+              />
+            ) : (
+              <i className="fa-solid fa-user-lock"></i>
+            )}
+            {/*  */}
           </div>
 
           <div className={`${dropdownUser ? "hidden" : ""}`}>
-            <div className="dropdownAccount absolute top-10 left-[85%]  gap-2 w-full bg-slate-700 ">
+            <div className="dropdownAccount absolute top-12 right-0  gap-2 max-w-[200px] min-w-[150px] bg-slate-700 ">
               {/* <span
                   className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
                   onClick={handleDropdownLogin}
@@ -167,7 +195,7 @@ const Header = () => {
                 >
                   Đăng ký
                 </span> */}
-              {isUserLocal !== null || isUserSEC !== null ? (
+              {UserID !== undefined ? (
                 <>
                   <Link
                     to="/"

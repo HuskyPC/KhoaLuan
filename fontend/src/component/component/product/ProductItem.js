@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import CartApi from "../../api/CartAPI";
 import { useContextWEB } from "../../context/ContextComponent";
 const ProductItem = (props) => {
+  let isUserLocal = JSON.parse(localStorage.getItem("user"));
+
+  let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
+
+  const [UserID, setUser] = useState();
+  if (UserID === undefined) {
+    if (isUserLocal !== null) setUser(isUserLocal);
+    else if (isUserSEC !== null) setUser(isUserSEC);
+  }
   const numberFormat = (value) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -12,8 +23,44 @@ const ProductItem = (props) => {
     "🚀 ~ file: ProductItem.js ~ line 11 ~ ProductItem ~ cartContext",
     cartContext
   );
+  const handleAddToCart = (props) => {
+    addtoCart(props.id);
+  };
   const [favoritClick, setFavoritClick] = useState(true);
   const handleRemoveFavorite = () => {};
+  useEffect(() => {
+    const addtoCart = (props) => {
+      (async () => {
+        if (UserID !== undefined) {
+          try {
+            const response = await CartApi.getCountCart(UserID);
+            if (response.status === 201) {
+              toast.success("Thêm giỏ hàng thành công", {
+                className: "top-10",
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+              });
+            } else if (response.status >= 300 && response.status < 600) {
+              toast.error("Thêm giỏ hàng không thành công", {
+                className: "top-10",
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+              });
+            }
+          } catch (error) {
+            console.log(error.message);
+          }
+        } else {
+          toast.warning("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng", {
+            className: "top-10",
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+        }
+      })();
+    };
+    addtoCart(props.id);
+  }, [UserID, props.id]);
   return (
     <>
       <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
@@ -66,7 +113,7 @@ const ProductItem = (props) => {
           </Link>
           <button
             className="text-[10px] text-white bg-black rounded-full hover:bg-blue-500"
-            onClick={() => addtoCart(props.id)}
+            onClick={handleAddToCart(props.id)}
           >
             <i className="fa-solid fa-cart-shopping text-xs"></i> Add to cart
           </button>

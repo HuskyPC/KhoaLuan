@@ -3,7 +3,6 @@ import BrandFakeData from "../data/BrandFakeData";
 import { Link, useParams } from "react-router-dom";
 const ItemTag = (props) => {
   let { id } = useParams();
-  console.log("🚀 ~ file: Product.js ~ line 6 ~ ItemTag ~ id", id);
   return (
     <Link
       to={`/product/${props.id}`}

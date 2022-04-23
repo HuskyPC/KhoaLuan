@@ -48,25 +48,47 @@ const LoginTab = () => {
             autoClose: 3000,
           });
           if (objUser.rememberMe === true) {
-            let myObj = {
-              userID: reposeData.data.userID,
-              lastName: reposeData.data.lastName,
-              fristName: reposeData.data.fristName,
-              avatar: reposeData.data.avatar,
-              urlImage: reposeData.data.urlImage,
-              access: reposeData.data.access,
-            };
-            localStorage.setItem("user", JSON.stringify(myObj));
+            localStorage.setItem(
+              "user",
+              JSON.stringify(reposeData.data[0].userID)
+            );
+            if (reposeData.data[0].avatar === null) {
+              localStorage.setItem(
+                "avatar",
+                JSON.stringify("asset/img/account/defaultAccountImg.png")
+              );
+            } else
+              localStorage.setItem(
+                "avatar",
+                JSON.stringify(reposeData.data[0].avatar)
+              );
+            localStorage.setItem(
+              "userName",
+              JSON.stringify(
+                reposeData.data[0].fristName + " " + reposeData.data[0].lastName
+              )
+            );
           } else {
-            let myObj = {
-              userID: reposeData.data.userID,
-              lastName: reposeData.data.lastName,
-              fristName: reposeData.data.fristName,
-              avatar: reposeData.data.avatar,
-              urlImage: reposeData.data.urlImage,
-              access: reposeData.data.access,
-            };
-            sessionStorage.setItem("user", JSON.stringify(myObj));
+            if (reposeData.data[0].avatar === null) {
+              sessionStorage.setItem(
+                "avatar",
+                JSON.stringify("asset/img/account/defaultAccountImg.png")
+              );
+            } else
+              sessionStorage.setItem(
+                "avatar",
+                JSON.stringify(reposeData.data[0].avatar)
+              );
+            sessionStorage.setItem(
+              "user",
+              JSON.stringify(reposeData.data[0].userID)
+            );
+            sessionStorage.setItem(
+              "userName",
+              JSON.stringify(
+                reposeData.data[0].fristName + " " + reposeData.data[0].lastName
+              )
+            );
           }
           setLoading(false);
           navigate(-1);
