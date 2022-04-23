@@ -190,9 +190,21 @@ exec getCountCart @userID= 3
 
 
 --proc get cart 
-select max(stt)
+--drop proc getMaxSTT
+create proc getMaxSTT
+as
+select max(stt) as maxs
 from Cart
 where status =1
+exec getMaxSTT
+
+create proc getCartIDBySTT
+@stt int
+as
+select cartID
+from cart 
+where stt =@stt
+
 
 
 --proc insert cart 
@@ -204,7 +216,9 @@ create proc postInsertCart
 as 
 insert into cart(cartID,productID, userID, status ) values(@cartID,@productID,@userID, 1)
 
-exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA4'
+ 
+exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA9'
+
 
 
 --proc delete Cart 

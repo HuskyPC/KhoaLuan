@@ -22,11 +22,8 @@ namespace BackendWebsiteLaptop.Controllers
         [Route("postLoginUser")]
         public IEnumerable<UserBO> postLoginUser(UserBO objUser)
         {
-           
             List<UserBO> listUser = userBLL.postLoginUser(objUser);
             return listUser.ToArray();
-
-
         }
     }
 }
