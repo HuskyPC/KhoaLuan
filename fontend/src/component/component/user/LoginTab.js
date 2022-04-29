@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import LoginClientAPI from "../../api/LoginClientAPI";
@@ -9,6 +9,11 @@ const LoginTab = () => {
   const [objUser, setObjUser] = useState("");
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
+  console.log(
+    "🚀 ~ file: LoginTab.js ~ line 12 ~ LoginTab ~ navigate",
+    navigate
+  );
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -42,11 +47,14 @@ const LoginTab = () => {
           reposeData.status < 300 &&
           reposeData.data.length !== 0
         ) {
+          window.location.reload();
           toast.success("Đăng nhập thành công", {
             className: "top-10",
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
           });
+
+          window.location.reload();
           if (objUser.rememberMe === true) {
             localStorage.setItem(
               "user",
@@ -91,7 +99,7 @@ const LoginTab = () => {
             );
           }
           setLoading(false);
-          navigate(-1);
+          navigate(-2);
         } else if (
           reposeData.status >= 200 &&
           reposeData.status < 500 &&

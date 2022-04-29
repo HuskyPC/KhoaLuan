@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import FavoriteFakeData from "../data/FavoriteFakeData";
 import ProductFakeData from "../data/ProductFakeData";
 import { toast } from "react-toastify";
-import CartApi from "../api/CartAPI";
 const ContextWEB = createContext();
 
 function ContextProvider(props) {
@@ -29,9 +28,14 @@ function ContextProvider(props) {
     });
     setFavoriteContext(updateFavorite);
   }
-
-  function addtoCart({ id = "" }) {
-    if (isUserLocal !== null || isUserSEC !== null) {
+  function addtoCart(newItem) {
+    if (UserID) {
+      setCartContext((prevItems) => [...prevItems, newItem.id]);
+      toast.success("Thâm vào giỏ hàng thành công", {
+        className: "top-10",
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     } else
       toast.warning("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng", {
         className: "top-10",
@@ -39,7 +43,6 @@ function ContextProvider(props) {
         autoClose: 3000,
       });
   }
-
   const values = {
     cartContext,
     setCartContext,

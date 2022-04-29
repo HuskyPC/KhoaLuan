@@ -7,18 +7,47 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const RegisterTab = () => {
+  const [isUserName, setIsUserName] = useState("");
   const [objSubmitData, setObjSubmitData] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userNameApi, setUserNameAPI] = useState([]);
+
+  useEffect(() => {
+    async function fechData() {
+      const reposeData = await RegisterTabAPI.getAllUserName();
+
+      setUserNameAPI(reposeData.data);
+    }
+
+    fechData();
+  }, []);
+
   let navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       fristName: "",
       lastName: "",
+      userName: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema: Yup.object({
+      userName: Yup.string()
+        .required("Vui lòng nhập Username")
+        .test(
+          "Tài khoảng chưa được sử dung",
+          "Tài khoảng đã tồn tại ",
+          function (userName) {
+            console.log(
+              "🚀 ~ file: RegisterTab.js ~ line 45 ~ RegisterTab ~ userName",
+              userName
+            );
+
+            console.log(isUserName);
+            return isUserName;
+          }
+        ),
       fristName: Yup.string()
         .min(2, "Họ và tên đệm ít nhất 2 kí tự")
         .max(25, "Họ và tên không quá 25 kí tự")
@@ -45,12 +74,14 @@ const RegisterTab = () => {
       setObjSubmitData({
         fristName: valuesForm.fristName,
         lastName: valuesForm.lastName,
+        userName: valuesForm.userName,
         password: valuesForm.password,
         email: valuesForm.email,
       });
       formik.resetForm({
         fristName: "",
         lastName: "",
+        userName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -106,7 +137,7 @@ const RegisterTab = () => {
   }, [objSubmitData]);
 
   return (
-    <div className={` h-100%  top-10 left-0 right-0  `}>
+    <div className={` h-100%  top-0 left-0 right-0  `}>
       <div
         className={`block p-6 rounded-lg shadow-lg bg-white max-w-sm m-auto mt-20`}
       >
@@ -153,6 +184,29 @@ const RegisterTab = () => {
             {formik.touched.lastName && formik.errors.lastName ? (
               <div className="text-sm text-red-500">
                 {formik.errors.lastName}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="form-group mb-3">
+            <label
+              htmlFor="userName"
+              className="form-label inline-block mb-2 text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="userName"
+              placeholder="Username để đăng nhập"
+              {...formik.getFieldProps("userName")}
+            />
+            {formik.touched.userName && formik.errors.userName ? (
+              <div className="text-sm text-red-500">
+                {formik.errors.userName}
               </div>
             ) : (
               ""

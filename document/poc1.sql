@@ -140,8 +140,9 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 --group by map.productID , cate.categoryID, cate.name 
 
 --user register
--- drop proc createUsser
+-- drop proc postCreateUsser
 create proc postCreateUsser
+@userName nvarchar(50),
 @email nvarchar(200),
 @password nvarchar(100),
 @lastName nvarchar(50),
@@ -151,13 +152,21 @@ create proc postCreateUsser
 @createdDate datetime,
 @createdBy int
 as 
-INSERT INTO users( email, password,lastName,fristName,status,access,createdDate,createdBy) 
-values( @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
+INSERT INTO users( userName,email, password,lastName,fristName,status,access,createdDate,createdBy) 
+values(@userName, @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
 
 SET DATEFORMAT DMY
-exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
+exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
 @access =0, @createdDate='20/04/2022', @createdBy=1
  
+
+
+ create proc getAllUserName
+ as 
+ select userName from users
+ where status= 1
+
+ exec getAllUser 
  --delete  from users 
  
  --user login 

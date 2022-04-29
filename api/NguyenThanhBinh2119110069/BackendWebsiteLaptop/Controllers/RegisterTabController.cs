@@ -52,5 +52,12 @@ namespace BackendWebsiteLaptop.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet]
+        [Route("getAllUser")]
+        public IEnumerable<GetUserNameBO> getAllUserName()
+        {
+            List<GetUserNameBO> listUserName = userBLL.getAllUserName();
+            return listUserName.ToArray();
+        }
     }
 }

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import HeaderApi from "../api/HeaderAPI";
 
 const Header = () => {
+  const { cartContext, setCartContext } = useContextWEB();
   let isUserLocal = JSON.parse(localStorage.getItem("user"));
   let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
 
@@ -40,7 +41,7 @@ const Header = () => {
     sessionStorage.removeItem("avatar");
     localStorage.removeItem("userName");
     sessionStorage.removeItem("userName");
-
+    setCartContext("");
     setDropDownUser(!dropdownUser);
     setCartCout(0);
     setUser();
@@ -50,6 +51,7 @@ const Header = () => {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
+      window.location.reload();
     } else {
       toast.error("Đăng xuất không thành công", {
         className: "top-10",
@@ -156,7 +158,8 @@ const Header = () => {
           <Link className="p-3 relative" to="/cart">
             <i className="fa-solid fa-cart-shopping "></i>
             <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
-              {cartCount}
+              {/* {cartCount} */}
+              {cartContext.length}
             </span>
           </Link>
 

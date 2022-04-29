@@ -23,44 +23,42 @@ const ProductItem = (props) => {
     "🚀 ~ file: ProductItem.js ~ line 11 ~ ProductItem ~ cartContext",
     cartContext
   );
-  const handleAddToCart = (props) => {
-    addtoCart(props.id);
-  };
+  const handleAddToCart = (props) => {};
   const [favoritClick, setFavoritClick] = useState(true);
-  const handleRemoveFavorite = () => {};
-  useEffect(() => {
-    const addtoCart = (props) => {
-      (async () => {
-        if (UserID !== undefined) {
-          try {
-            const response = await CartApi.getCountCart(UserID);
-            if (response.status === 201) {
-              toast.success("Thêm giỏ hàng thành công", {
-                className: "top-10",
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,
-              });
-            } else if (response.status >= 300 && response.status < 600) {
-              toast.error("Thêm giỏ hàng không thành công", {
-                className: "top-10",
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,
-              });
-            }
-          } catch (error) {
-            console.log(error.message);
-          }
-        } else {
-          toast.warning("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng", {
-            className: "top-10",
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 3000,
-          });
-        }
-      })();
-    };
-    addtoCart(props.id);
-  }, [UserID, props.id]);
+
+  // useEffect(() => {
+  //   const addtoCart = (props) => {
+  //     (async () => {
+  //       if (UserID !== undefined) {
+  //         try {
+  //           const response = await CartApi.getCountCart(UserID);
+  //           if (response.status === 201) {
+  //             toast.success("Thêm giỏ hàng thành công", {
+  //               className: "top-10",
+  //               position: toast.POSITION.TOP_RIGHT,
+  //               autoClose: 3000,
+  //             });
+  //           } else if (response.status >= 300 && response.status < 600) {
+  //             toast.error("Thêm giỏ hàng không thành công", {
+  //               className: "top-10",
+  //               position: toast.POSITION.TOP_RIGHT,
+  //               autoClose: 3000,
+  //             });
+  //           }
+  //         } catch (error) {
+  //           console.log(error.message);
+  //         }
+  //       } else {
+  //         toast.warning("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng", {
+  //           className: "top-10",
+  //           position: toast.POSITION.TOP_RIGHT,
+  //           autoClose: 3000,
+  //         });
+  //       }
+  //     })();
+  //   };
+  //   addtoCart();
+  // }, [UserID, props.id]);
   return (
     <>
       <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
@@ -73,10 +71,7 @@ const ProductItem = (props) => {
           }`}
           alt="hinh anh"
         />
-        <span
-          className="heart text-center hidden top-[60px] left-0 right-0 absolute"
-          onClick={handleRemoveFavorite}
-        >
+        <span className="heart text-center hidden top-[60px] left-0 right-0 absolute">
           {props.favo === 1 ? (
             <i className="fas fa-heart text-blue-700 text-3xl"></i>
           ) : (
@@ -113,7 +108,7 @@ const ProductItem = (props) => {
           </Link>
           <button
             className="text-[10px] text-white bg-black rounded-full hover:bg-blue-500"
-            onClick={handleAddToCart(props.id)}
+            onClick={() => addtoCart(props.id)}
           >
             <i className="fa-solid fa-cart-shopping text-xs"></i> Add to cart
           </button>
