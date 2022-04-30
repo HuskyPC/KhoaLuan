@@ -10,15 +10,3 @@ C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BO\obj\Debug\net5.
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.dll
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\ref\BO.dll
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.pdb
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.deps.json
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.dll
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\ref\BO.dll
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.pdb
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.csproj.AssemblyReference.cache
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.AssemblyInfoInputs.cache
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.AssemblyInfo.cs
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.csproj.CoreCompileInputs.cache
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.dll
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\ref\BO.dll
-C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.pdb

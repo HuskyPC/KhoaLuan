@@ -1,4 +1,4 @@
-﻿---trang home
+﻿---trang home---------------------------------
 -- proc load all banner home
 create proc getBanerAll
 as
@@ -12,7 +12,7 @@ order by orders
 --drop proc getBrandSuggestion
 create proc getBrandSuggestion 
 as 
-select brandID,  avatar, urlImage
+select brandID,  avatar, urlImage, name
 from Brand 
 where status=1 and parentID ='0'
 
@@ -78,7 +78,7 @@ exec getParentByBrandId @parentID= 'AP5'
 
 --proc filter san pham 
 
--- trang search sản phẩm 
+-- trang search sản phẩm --------------------------------------
 --drop proc getSearchProduct
 create proc getSearchProductFREETEXT
 @x nvarchar(300)
@@ -139,7 +139,7 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 --	  and cate.categoryID in (select categoryID from mapping_Product_to_Category  group by categoryID)
 --group by map.productID , cate.categoryID, cate.name 
 
---user register
+--user register----------------------------------------------
 -- drop proc postCreateUsser
 create proc postCreateUsser
 @userName nvarchar(50),
@@ -183,7 +183,7 @@ exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456
  exec postLoginUser @email='bin@gmail.com', @password='123456'
 
 
- -- trang cart và truy vấn liên quan đến cart 
+ -- trang cart và truy vấn liên quan đến cart --------------------
  
  --proc count cart
  --drop proc getCountCart
@@ -250,5 +250,14 @@ where status= 1and userID= @userID and productID= @productID
 
 exec isExitsCart @userID= 1, @productID='SP1'
 
+-------trang Store ---------------------
+--create proc get all category status =1
+--drop proc  getcategory
+create proc getCategory
+as 
+select name, categoryID
+from Category 
+where status =1
 
+exec getcategory
 

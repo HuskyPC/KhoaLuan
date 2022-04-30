@@ -1,15 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
-// import Login from "../component/user/Login";
-// import Register from "../component/user/Register";
-import { useContextWEB } from "../context/ContextComponent";
 import { toast } from "react-toastify";
 import HeaderApi from "../api/HeaderAPI";
 
 const Header = () => {
-  const { cartContext, setCartContext } = useContextWEB();
   let isUserLocal = JSON.parse(localStorage.getItem("user"));
   let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
 
@@ -23,17 +19,7 @@ const Header = () => {
 
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(true);
-  // const [dropdownLogin, setDropdownLogin] = useState(false);
-  // const [dropdownRegister, setDropdownRegister] = useState(false);
 
-  // const handleDropdownLogin = () => {
-  //   setDropdownLogin(!dropdownLogin);
-  //   // setDropDownUser(!dropdownUser);
-  // };
-  // const handleDropdownRegister = () => {
-  //   setDropdownRegister(!dropdownRegister);
-  //   // setDropDownUser(!dropdownUser);
-  // };
   const handleLoginOut = () => {
     localStorage.removeItem("user");
     sessionStorage.removeItem("user");
@@ -41,7 +27,7 @@ const Header = () => {
     sessionStorage.removeItem("avatar");
     localStorage.removeItem("userName");
     sessionStorage.removeItem("userName");
-    setCartContext("");
+
     setDropDownUser(!dropdownUser);
     setCartCout(0);
     setUser();
@@ -159,7 +145,6 @@ const Header = () => {
             <i className="fa-solid fa-cart-shopping "></i>
             <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
               {/* {cartCount} */}
-              {cartContext.length}
             </span>
           </Link>
 

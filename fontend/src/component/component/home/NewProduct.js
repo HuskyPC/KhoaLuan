@@ -18,6 +18,8 @@ const NewProduct = (props) => {
     (async () => {
       try {
         const response = await ProductApi.getTopNewProduct(filters);
+        if (response) {
+        }
         setProductData(response.data);
       } catch (error) {
         console.log(error.message);

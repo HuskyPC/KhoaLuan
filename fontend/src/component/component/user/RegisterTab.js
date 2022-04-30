@@ -33,21 +33,20 @@ const RegisterTab = () => {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      userName: Yup.string()
-        .required("Vui lòng nhập Username")
-        .test(
-          "Tài khoảng chưa được sử dung",
-          "Tài khoảng đã tồn tại ",
-          function (userName) {
-            console.log(
-              "🚀 ~ file: RegisterTab.js ~ line 45 ~ RegisterTab ~ userName",
-              userName
-            );
+      userName: Yup.string().required("Vui lòng nhập Username"),
+      // .test(
+      //   "Tài khoảng chưa được sử dung",
+      //   "Tài khoảng đã tồn tại ",
+      //   function (userName) {
+      //     console.log(
+      //       "🚀 ~ file: RegisterTab.js ~ line 45 ~ RegisterTab ~ userName",
+      //       userName
+      //     );
 
-            console.log(isUserName);
-            return isUserName;
-          }
-        ),
+      //     console.log(isUserName);
+      //     return isUserName;
+      //   }
+      // ),
       fristName: Yup.string()
         .min(2, "Họ và tên đệm ít nhất 2 kí tự")
         .max(25, "Họ và tên không quá 25 kí tự")

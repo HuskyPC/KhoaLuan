@@ -9,10 +9,6 @@ const LoginTab = () => {
   const [objUser, setObjUser] = useState("");
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
-  console.log(
-    "🚀 ~ file: LoginTab.js ~ line 12 ~ LoginTab ~ navigate",
-    navigate
-  );
 
   const formik = useFormik({
     initialValues: {
@@ -127,7 +123,7 @@ const LoginTab = () => {
     fechData().catch(() => {
       setLoading(false);
     });
-  }, [objUser]);
+  }, [navigate, objUser]);
 
   return (
     <div

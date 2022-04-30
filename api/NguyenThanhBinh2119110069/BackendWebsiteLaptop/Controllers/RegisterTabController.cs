@@ -59,5 +59,8 @@ namespace BackendWebsiteLaptop.Controllers
             List<GetUserNameBO> listUserName = userBLL.getAllUserName();
             return listUserName.ToArray();
         }
+        
+       
+        
     }
 }

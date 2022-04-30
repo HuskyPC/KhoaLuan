@@ -138,7 +138,7 @@ namespace DAL.Product
                 DataTable dt = new DataTable();
 
                 con.Open();
-                da.Fill(dt);//do du lieu vao datatable
+                da.Fill(dt);
                 com.Dispose();//huy com
                 con.Close();
 

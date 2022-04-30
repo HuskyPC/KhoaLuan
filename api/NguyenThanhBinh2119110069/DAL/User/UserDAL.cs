@@ -35,9 +35,9 @@ namespace DAL.User
             com.Parameters.AddWithValue("@access", 0);
             com.Parameters.AddWithValue("@createdDate", DateTime.Now.ToString("MM/dd/yyyy"));
             com.Parameters.AddWithValue("@createdBy", 1);
-            con.Open();
+            await con.OpenAsync();
             var result = com.ExecuteNonQuery();
-            con.Close();
+            await con.CloseAsync();
 
             if (result > 0)
             {
@@ -110,6 +110,8 @@ namespace DAL.User
             return UserList;
 
         }
+    
+        
     }
 
 }
