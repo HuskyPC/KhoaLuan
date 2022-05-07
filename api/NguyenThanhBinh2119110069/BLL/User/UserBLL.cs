@@ -17,15 +17,23 @@ namespace BLL.User
         {
             userDAL = new UserDAL();
         }
+        //register
         public async Task<string> postCreateUser(UserBO objuser)
         {
             var result = await userDAL.postCreateUser(objuser);
             if (result)
             {
                 return "done";
+                return "done";
             }
             return "fail";
         }
+        public List<GetUserNameBO> getAllUserName()
+        {
+            List<GetUserNameBO> listUserName = userDAL.getAllUserName();
+            return listUserName;
+        }
+        //login 
         public List<UserBO> postLoginUser(UserBO objUser)
         {
             List<UserBO> listUser = userDAL.postLoginUser(objUser);

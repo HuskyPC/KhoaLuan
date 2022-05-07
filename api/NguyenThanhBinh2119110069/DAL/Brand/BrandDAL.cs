@@ -44,6 +44,7 @@ namespace DAL.Brand
                 BrandDTO.brandID = Convert.ToString(dt.Rows[i]["brandID"].ToString());
                 BrandDTO.avatar = Convert.ToString(dt.Rows[i]["avatar"].ToString());
                 BrandDTO.urlImage = Convert.ToString(dt.Rows[i]["urlImage"].ToString());
+                BrandDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
                 brandList.Add(BrandDTO);
             }
 

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import LoginClientAPI from "../../api/LoginClientAPI";
@@ -9,6 +9,7 @@ const LoginTab = () => {
   const [objUser, setObjUser] = useState("");
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -42,34 +43,59 @@ const LoginTab = () => {
           reposeData.status < 300 &&
           reposeData.data.length !== 0
         ) {
+          window.location.reload();
           toast.success("Đăng nhập thành công", {
             className: "top-10",
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
           });
+
+          window.location.reload();
           if (objUser.rememberMe === true) {
-            let myObj = {
-              userID: reposeData.data.userID,
-              lastName: reposeData.data.lastName,
-              fristName: reposeData.data.fristName,
-              avatar: reposeData.data.avatar,
-              urlImage: reposeData.data.urlImage,
-              access: reposeData.data.access,
-            };
-            localStorage.setItem("user", JSON.stringify(myObj));
+            localStorage.setItem(
+              "user",
+              JSON.stringify(reposeData.data[0].userID)
+            );
+            if (reposeData.data[0].avatar === null) {
+              localStorage.setItem(
+                "avatar",
+                JSON.stringify("asset/img/account/defaultAccountImg.png")
+              );
+            } else
+              localStorage.setItem(
+                "avatar",
+                JSON.stringify(reposeData.data[0].avatar)
+              );
+            localStorage.setItem(
+              "userName",
+              JSON.stringify(
+                reposeData.data[0].fristName + " " + reposeData.data[0].lastName
+              )
+            );
           } else {
-            let myObj = {
-              userID: reposeData.data.userID,
-              lastName: reposeData.data.lastName,
-              fristName: reposeData.data.fristName,
-              avatar: reposeData.data.avatar,
-              urlImage: reposeData.data.urlImage,
-              access: reposeData.data.access,
-            };
-            sessionStorage.setItem("user", JSON.stringify(myObj));
+            if (reposeData.data[0].avatar === null) {
+              sessionStorage.setItem(
+                "avatar",
+                JSON.stringify("asset/img/account/defaultAccountImg.png")
+              );
+            } else
+              sessionStorage.setItem(
+                "avatar",
+                JSON.stringify(reposeData.data[0].avatar)
+              );
+            sessionStorage.setItem(
+              "user",
+              JSON.stringify(reposeData.data[0].userID)
+            );
+            sessionStorage.setItem(
+              "userName",
+              JSON.stringify(
+                reposeData.data[0].fristName + " " + reposeData.data[0].lastName
+              )
+            );
           }
           setLoading(false);
-          navigate(-1);
+          navigate(-2);
         } else if (
           reposeData.status >= 200 &&
           reposeData.status < 500 &&
@@ -97,7 +123,7 @@ const LoginTab = () => {
     fechData().catch(() => {
       setLoading(false);
     });
-  }, [objUser]);
+  }, [navigate, objUser]);
 
   return (
     <div

@@ -19,13 +19,14 @@ namespace DAL.User
         {
             DB = new DBConnection();
         }
+        //register 
         public async Task<bool> postCreateUser(UserBO user)
         {
             string procedure = "postCreateUsser";
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
-
+            com.Parameters.AddWithValue("@userName", user.userName);
             com.Parameters.AddWithValue("@email", user.email);
             com.Parameters.AddWithValue("@password", user.password);
             com.Parameters.AddWithValue("@lastName", user.lastName);
@@ -34,9 +35,9 @@ namespace DAL.User
             com.Parameters.AddWithValue("@access", 0);
             com.Parameters.AddWithValue("@createdDate", DateTime.Now.ToString("MM/dd/yyyy"));
             com.Parameters.AddWithValue("@createdBy", 1);
-            con.Open();
+            await con.OpenAsync();
             var result = com.ExecuteNonQuery();
-            con.Close();
+            await con.CloseAsync();
 
             if (result > 0)
             {
@@ -44,6 +45,36 @@ namespace DAL.User
             }
             return false;
         }
+        public List<GetUserNameBO> getAllUserName()
+        {
+            string procedure = "getAllUserName";
+            List<GetUserNameBO> UserList = new List<GetUserNameBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            GetUserNameBO userDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                userDTO = new GetUserNameBO();//doc 1 dong khoi tao ProductDTO
+                                       //gan tung truong du lieu
+                userDTO.userName = Convert.ToString(dt.Rows[i]["userName"].ToString());
+                UserList.Add(userDTO);
+            }
+
+            return UserList;
+
+
+        }
+
+        //login
         public List<UserBO> postLoginUser(UserBO user)
         {
 
@@ -79,6 +110,8 @@ namespace DAL.User
             return UserList;
 
         }
+    
+        
     }
 
 }

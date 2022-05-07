@@ -87,6 +87,17 @@ namespace BLL.Product
             return listProFre;
         }
 
+        public List<ProductBO> getProductID()
+        {
+            List<ProductBO> listProduct = productDAL.getProductID();
+            return listProduct;
+        }
+        public List<ProductBO> getProductByID(string productID)
+        {
+            List<ProductBO> listProduct = productDAL.getProductByID(productID);
+            return listProduct;
+        }
+
         //public List<ProductBO> getProductNewTopX(int SL)
         //{
         //    ProductDAL objProduct = new ProductDAL();

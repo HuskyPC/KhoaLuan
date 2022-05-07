@@ -1,8 +1,8 @@
 const { default: axiosClient } = require("./axiosClient");
 
 const HeaderApi = {
-  getCountCart(userID) {
-    const url = `Cart/getCountCart?userID=${userID}`;
+  getCountCart(UserID) {
+    const url = `Cart/getCountCart?userID=${UserID}`;
     return axiosClient.get(url);
   },
 };

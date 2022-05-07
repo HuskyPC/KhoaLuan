@@ -12,6 +12,7 @@ const Cart = () => {
       setSL(sl - 1);
     }
   };
+
   return (
     <>
       <div className="header-cart mt-10  px-20 w-full bg-white p-2">

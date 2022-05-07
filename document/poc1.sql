@@ -1,4 +1,4 @@
-﻿---trang home
+﻿---trang home---------------------------------
 -- proc load all banner home
 create proc getBanerAll
 as
@@ -12,7 +12,7 @@ order by orders
 --drop proc getBrandSuggestion
 create proc getBrandSuggestion 
 as 
-select brandID,  avatar, urlImage
+select brandID,  avatar, urlImage, name
 from Brand 
 where status=1 and parentID ='0'
 
@@ -40,7 +40,7 @@ from product
 --drop proc getBrandIDandParentID
 create proc getBrandIDandParentID
 as 
-select brandID, parentID, name
+select brandID, parentID, namee
 from brand
 where status=1
 
@@ -53,6 +53,8 @@ as
 select ProductID, name, brandID,price, priceSale , urlImage, avatar
 from product 
 where status =1
+
+exec getProductAll
 
 --proc get product by brandID 
 create proc getProductByBrandID
@@ -78,7 +80,7 @@ exec getParentByBrandId @parentID= 'AP5'
 
 --proc filter san pham 
 
--- trang search sản phẩm 
+-- trang search sản phẩm --------------------------------------
 --drop proc getSearchProduct
 create proc getSearchProductFREETEXT
 @x nvarchar(300)
@@ -139,9 +141,10 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 --	  and cate.categoryID in (select categoryID from mapping_Product_to_Category  group by categoryID)
 --group by map.productID , cate.categoryID, cate.name 
 
---user register
--- drop proc createUsser
+--user register----------------------------------------------
+-- drop proc postCreateUsser
 create proc postCreateUsser
+@userName nvarchar(50),
 @email nvarchar(200),
 @password nvarchar(100),
 @lastName nvarchar(50),
@@ -151,13 +154,21 @@ create proc postCreateUsser
 @createdDate datetime,
 @createdBy int
 as 
-INSERT INTO users( email, password,lastName,fristName,status,access,createdDate,createdBy) 
-values( @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
+INSERT INTO users( userName,email, password,lastName,fristName,status,access,createdDate,createdBy) 
+values(@userName, @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
 
 SET DATEFORMAT DMY
-exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
+exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
 @access =0, @createdDate='20/04/2022', @createdBy=1
  
+
+
+ create proc getAllUserName
+ as 
+ select userName from users
+ where status= 1
+
+ exec getAllUser 
  --delete  from users 
  
  --user login 
@@ -174,7 +185,7 @@ exec createUsser @email='bin@gmail.com', @password='123456', @lastName='last nam
  exec postLoginUser @email='bin@gmail.com', @password='123456'
 
 
- -- trang cart và truy vấn liên quan đến cart 
+ -- trang cart và truy vấn liên quan đến cart --------------------
  
  --proc count cart
  --drop proc getCountCart
@@ -190,9 +201,21 @@ exec getCountCart @userID= 3
 
 
 --proc get cart 
-select max(stt)
+--drop proc getMaxSTT
+create proc getMaxSTT
+as
+select max(stt) as maxs
 from Cart
 where status =1
+exec getMaxSTT
+
+create proc getCartIDBySTT
+@stt int
+as
+select cartID
+from cart 
+where stt =@stt
+
 
 
 --proc insert cart 
@@ -204,7 +227,9 @@ create proc postInsertCart
 as 
 insert into cart(cartID,productID, userID, status ) values(@cartID,@productID,@userID, 1)
 
-exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA4'
+ 
+exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA9'
+
 
 
 --proc delete Cart 
@@ -227,5 +252,44 @@ where status= 1and userID= @userID and productID= @productID
 
 exec isExitsCart @userID= 1, @productID='SP1'
 
+-------trang Store ---------------------
+--create proc get all category status =1
+--drop proc  getcategory
+create proc getCategory
+as 
+select name, categoryID
+from Category 
+where status =1
+
+exec getcategory
+
+
+--prc delect all mapping_Product_Category
+create proc getAllmappingProductCategory
+as
+select productID, categoryID
+from mapping_Product_to_Category 
+where status =1
+
+exec getAllmappingProductCategory
+
+--drop proc getProductByID
+create proc getProductID
+as
+select ProductID
+from Product 
+where status =1 
+
+exec  getProductID
+
+--drop proc  getProductByID
+create proc getProductByID
+@productID varchar(10)
+as
+select ProductID,name, price, priceSale, avatar, urlImage 
+from Product 
+where status=1 and ProductID= @productID
+
+exec getProductByID @productID='sp1'
 
 
