@@ -40,7 +40,7 @@ from product
 --drop proc getBrandIDandParentID
 create proc getBrandIDandParentID
 as 
-select brandID, parentID, name
+select brandID, parentID, namee
 from brand
 where status=1
 
@@ -53,6 +53,8 @@ as
 select ProductID, name, brandID,price, priceSale , urlImage, avatar
 from product 
 where status =1
+
+exec getProductAll
 
 --proc get product by brandID 
 create proc getProductByBrandID
@@ -260,4 +262,34 @@ from Category
 where status =1
 
 exec getcategory
+
+
+--prc delect all mapping_Product_Category
+create proc getAllmappingProductCategory
+as
+select productID, categoryID
+from mapping_Product_to_Category 
+where status =1
+
+exec getAllmappingProductCategory
+
+--drop proc getProductByID
+create proc getProductID
+as
+select ProductID
+from Product 
+where status =1 
+
+exec  getProductID
+
+--drop proc  getProductByID
+create proc getProductByID
+@productID varchar(10)
+as
+select ProductID,name, price, priceSale, avatar, urlImage 
+from Product 
+where status=1 and ProductID= @productID
+
+exec getProductByID @productID='sp1'
+
 

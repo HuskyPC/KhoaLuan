@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BO.Category
 {
     public class CategoryBO
     {
-       
+
         public string categoryID { get; set; }
         public string name { get; set; }
         public string slug { get; set; }
@@ -17,6 +18,7 @@ namespace BO.Category
         public int createdBy { get; set; }
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
+        public List<ProductBO> productBO { get; set; }
 
     }
 }

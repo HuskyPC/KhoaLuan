@@ -13,3 +13,18 @@ C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\DAL\obj\Debug\net5
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.dll
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\ref\DAL.dll
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\DAL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\BO.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\bin\Debug\net5.0\BO.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.csproj.CopyComplete
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\DAL\obj\Debug\net5.0\DAL.pdb

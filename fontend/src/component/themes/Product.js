@@ -26,11 +26,11 @@ const TypeLaptop = (props) => {
           className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
           type="radio"
           name="loaiLaptop"
-          id="loaiLaptop"
+          id={`${props.id}`}
         />
         <label
           className="form-check-label inline-block text-sm text-[#777] font-light first-letter:uppercase"
-          htmlFor="flexCheckDefault"
+          htmlFor={`${props.id}`}
         >
           {props.name}
         </label>
@@ -102,7 +102,7 @@ const Product = () => {
               </div>
             </div>
             <hr />
-            <div className="item-type-filter mt-6">
+            {/* <div className="item-type-filter mt-6">
               <span className="text-xl font-light">Màng hình</span>
               <span className=" float-right text-xs text-blue-500 mt-2">
                 <i className="fa-solid fa-trash-can "></i> Xóa đã chọn
@@ -165,7 +165,7 @@ const Product = () => {
                   </label>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="product-item col-span-7">vjfksk</div>

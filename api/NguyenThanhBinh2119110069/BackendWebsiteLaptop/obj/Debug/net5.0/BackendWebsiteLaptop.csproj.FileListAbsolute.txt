@@ -38,3 +38,47 @@ C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BackendWebsiteLapt
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BLL.pdb
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BO.pdb
 C:\Users\binh1\Desktop\KLTN\backend\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\DAL.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\appsettings.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.exe
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.deps.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.runtimeconfig.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.runtimeconfig.dev.json
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\ref\BackendWebsiteLaptop.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BackendWebsiteLaptop.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\System.Data.SqlClient.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BLL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BO.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\DAL.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BLL.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\BO.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\bin\Debug\net5.0\DAL.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.csproj.AssemblyReference.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.AssemblyInfoInputs.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.AssemblyInfo.cs
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.csproj.CoreCompileInputs.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\scopedcss\bundle\BackendWebsiteLaptop.styles.css
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\staticwebassets\BackendWebsiteLaptop.StaticWebAssets.Manifest.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.RazorTargetAssemblyInfo.cache
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.csproj.CopyComplete
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\ref\BackendWebsiteLaptop.dll
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.pdb
+C:\Users\binh1\Desktop\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\obj\Debug\net5.0\BackendWebsiteLaptop.genruntimeconfig.cache

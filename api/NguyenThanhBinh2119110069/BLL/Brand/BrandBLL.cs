@@ -76,11 +76,6 @@ namespace BLL.Brand
                 }
             }
 
-
-
-
-
-
             return listParentByBrandId;
         }
 
