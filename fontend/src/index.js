@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./index.scss";
+
 import "../src/component/css/styleAll.css";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./component/context";

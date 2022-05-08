@@ -30,7 +30,7 @@ namespace DAL.Cart
             da.Fill(dt);//do du lieu vao datatable
             com.Dispose();//huy com
             con.Close();
-            if (dt.Rows.Count != null)
+            if (dt.Rows != null)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -55,10 +55,10 @@ namespace DAL.Cart
             com.Parameters.AddWithValue("@productID", objCartBO.productID);
             com.Parameters.AddWithValue("@cartID", newCartID);
 
-            con.Open();
+             await con.OpenAsync();
             var KQ = com.ExecuteNonQuery();
             com.Dispose();//huy com
-            com.Clone();
+             await con.CloseAsync();
             if (KQ == 1)
                 return true;
             else if (KQ == -1)
@@ -82,7 +82,7 @@ namespace DAL.Cart
             com.Dispose();//huy com
             com.Clone();
             string cartID="";
-            if (dt.Rows.Count != null)
+            if (dt.Rows != null)
             {
                 for(int i=0; i < dt.Rows.Count; i++)
                 {

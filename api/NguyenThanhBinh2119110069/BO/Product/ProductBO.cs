@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,12 +11,12 @@ namespace BO.Product
    public class ProductBO
     {
         public String ProductID { get; set; }
-        [Display(Name = "Tên sản phẩm")]
-        [DataType(DataType.Text)]
+        
         public String name { get; set; }
         public String brandID { get; set; }
         public Double price { get; set; }
         public Double priceSale { get; set; }
+        public FormFile file { get; set; }
         public String avatar { get; set; }
         public String urlImage { get; set; }
         public String slug { get; set; }

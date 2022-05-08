@@ -31,7 +31,7 @@ namespace BackendWebsiteLaptop.Controllers
         }
         [HttpPost]
         [Route("postInsertCart")]
-        public async Task<IActionResult> postCreateUser(CartBO objCart )
+        public async Task<IActionResult> postCreateUser(CartBO objCart)
         {
             if (ModelState.IsValid)
             {
