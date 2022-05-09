@@ -25,13 +25,13 @@ namespace BackendWebsiteLaptop.Controllers
             List<CategoryBO> listPro = categoryBLL.getCategory();
             return listPro.ToArray();
         }
-        [HttpGet]
-        [Route("getProductByCategory")]
-        public IEnumerable<CategoryBO> getProductByCategory(string brandID)
-        {
-            List<CategoryBO> listPro = categoryBLL.getProductByCategory(brandID);
-            return listPro.ToArray();
-        }
+        //[HttpGet]
+        //[Route("getProductByCategory")]
+        //public IEnumerable<CategoryBO> getProductByCategory(string brandID)
+        //{
+        //    List<CategoryBO> listPro = categoryBLL.getProductByCategory(brandID);
+        //    return listPro.ToArray();
+        //}
 
     }
 }

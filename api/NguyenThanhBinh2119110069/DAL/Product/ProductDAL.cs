@@ -301,81 +301,82 @@ namespace DAL.Product
 
             return productList;
         }
-        //public List<ProductBO> getProductNewTopX(int SL)
-        //{
-        //    string procedure = "getProductNewTop";
-        //    List<ProductBO> productList = new List<ProductBO>();
-        //    SqlConnection con = DB.getConnection();
-        //    SqlCommand com = new SqlCommand(procedure, con);
-        //    com.CommandType = CommandType.StoredProcedure;
+        /// trang admin 
+        public int getMaxSttProduct()
+        {
+            string procedure = "getMaxSttProduct";
+            List<ProductBO> productList = new List<ProductBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
 
-        //    var Category = new SqlParameter("@x", SL); // Tạo tham số
-        //    com.Parameters.Add(Category);
+            DataTable dt = new DataTable();
 
-        //    SqlDataAdapter da = new SqlDataAdapter(com);
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+            int stt = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                stt = Convert.ToInt32(dt.Rows[i]["MaxStt"].ToString());
+            }
+            return stt;
+        }
+        public string getNewProductIDByStt(string a)
+        {
+            string procedure = "getProductIDByStt";
+            List<ProductBO> productList = new List<ProductBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
 
+            DataTable dt = new DataTable();
 
-        //    DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+            string stt = "";
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                stt = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
+            }
+            int id = Convert.ToInt32(stt.Substring(1, stt.Length));
+            id++;
+            stt = "SP" + id.ToString();
+            return stt;
+        }
+        public async Task<bool> postCreateProductAdmin(ProductBO objProduct)
+        {
+            string procedure = "getProductByID";
+            List<ProductBO> productList = new List<ProductBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@productID", objProduct.ProductID);
+            com.Parameters.AddWithValue("@name", objProduct.name);
+            com.Parameters.AddWithValue("@price", objProduct.price);
+            com.Parameters.AddWithValue("@priceSale", objProduct.priceSale);
+            com.Parameters.AddWithValue("@avatar", objProduct.avatar);
+            com.Parameters.AddWithValue("@brandID", objProduct.brandID);
+            com.Parameters.AddWithValue("@slug", objProduct.slug);
+            com.Parameters.AddWithValue("@shortDes", objProduct.shortDes);
+            com.Parameters.AddWithValue("@fullDes", objProduct.fullDes);
+            com.Parameters.AddWithValue("@status", objProduct.status);
+            com.Parameters.AddWithValue("@createdDate", objProduct.ProductID);
+            com.Parameters.AddWithValue("@createdBy", 1);
+            com.Parameters.AddWithValue("@amount", objProduct.amount);
 
-        //    con.Open();
-        //    da.Fill(dt);//do du lieu vao datatable
-        //    com.Dispose();//huy com
-        //    con.Close();
+            
 
-        //    ProductBO productDTO;
-        //    for (int i = 0; i < dt.Rows.Count; i++)
-        //    {
-        //        productDTO = new ProductBO();//doc 1 dong khoi tao ProductDTO
-        //        //gan tung truong du lieu
-        //        productDTO.ProductID = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
-        //        productDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
-        //        productDTO.price = Convert.ToDouble(dt.Rows[i]["price"].ToString());
-        //        productDTO.priceSale = Convert.ToDouble(dt.Rows[i]["priceSale"].ToString());
-        //        productDTO.avatar = Convert.ToString(dt.Rows[i]["avatar"].ToString());
-        //        productDTO.urlImage = Convert.ToString(dt.Rows[i]["urlImage"].ToString());
-        //        productList.Add(productDTO);
-        //    }
-
-        //    return productList;
-        //}
-        //public List<ProductBO> getLoadProductByBrandTopX(int SL, string Brand)
-        //{
-        //    string procedure = "getLoadProductByBrandTopX";
-        //    List<ProductBO> productList = new List<ProductBO>();
-        //    SqlConnection con = DB.getConnection();
-        //    SqlCommand com = new SqlCommand(procedure, con);
-        //    com.CommandType = CommandType.StoredProcedure;
-
-        //    com.Parameters.AddWithValue("@x", SL);
-        //    com.Parameters.AddWithValue("@nameBrand", Brand);
-
-
-        //    SqlDataAdapter da = new SqlDataAdapter(com);
-
-
-        //    DataTable dt = new DataTable();
-
-        //    con.Open();
-        //    da.Fill(dt);//do du lieu vao datatable
-        //    com.Dispose();//huy com
-        //    con.Close();
-
-        //    ProductBO productDTO;
-        //    for (int i = 0; i < dt.Rows.Count; i++)
-        //    {
-        //        productDTO = new ProductBO();//doc 1 dong khoi tao ProductDTO
-        //        //gan tung truong du lieu
-        //        productDTO.ProductID = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
-        //        productDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
-        //        productDTO.price = Convert.ToDouble(dt.Rows[i]["price"].ToString());
-        //        productDTO.priceSale = Convert.ToDouble(dt.Rows[i]["priceSale"].ToString());
-        //        productDTO.avatar = Convert.ToString(dt.Rows[i]["avatar"].ToString());
-        //        productDTO.urlImage = Convert.ToString(dt.Rows[i]["urlImage"].ToString());
-        //        productList.Add(productDTO);
-        //    }
-
-        //    return productList;
-        //}
+            await con.OpenAsync();
+            com.ExecuteNonQuery();
+            com.Dispose();//huy com
+            await con.CloseAsync();
+        }
     }
 }
 
