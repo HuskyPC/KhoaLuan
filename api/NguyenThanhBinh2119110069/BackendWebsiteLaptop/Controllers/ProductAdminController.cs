@@ -19,15 +19,15 @@ namespace BackendWebsiteLaptop.Controllers
             productBLL = new ProductBLL();
         }
         [HttpPost]
-        [Route("postInsertCart")]
-        public async Task<IActionResult> postCreateUser(ProductBO  objCart)
+        [Route("postCreateProductAdmin")]
+        public async Task<IActionResult> postCreateProductAdmin(ProductBO  objProduct)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var user = await productBLL.postCreateProductAdmin(objCart);
-                    
+                    var product = await productBLL.postCreateProductAdmin(objProduct);
+                    return Ok(product);
                 }
                 catch
                 {

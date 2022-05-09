@@ -324,13 +324,14 @@ namespace DAL.Product
             }
             return stt;
         }
-        public string getNewProductIDByStt(string a)
+        public string getNewProductIDByStt(int a)
         {
             string procedure = "getProductIDByStt";
             List<ProductBO> productList = new List<ProductBO>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@stt", a);
             SqlDataAdapter da = new SqlDataAdapter(com);
 
             DataTable dt = new DataTable();
@@ -370,12 +371,16 @@ namespace DAL.Product
             com.Parameters.AddWithValue("@createdBy", 1);
             com.Parameters.AddWithValue("@amount", objProduct.amount);
 
-            
-
             await con.OpenAsync();
-            com.ExecuteNonQuery();
-            com.Dispose();//huy com
+            var result = com.ExecuteNonQuery();
+           
             await con.CloseAsync();
+
+            if(result > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

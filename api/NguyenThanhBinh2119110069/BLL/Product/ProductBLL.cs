@@ -53,7 +53,7 @@ namespace BLL.Product
             List<ProductBO> listProFre = productDAL.getSearchProductFREETEXT(keySearch);
             List<ProductBO> listProLike = productDAL.getSearchProductLike(keySearch);
             List<ProductBO> listProExa = productDAL.getSearchProductExact(keySearch);
-           if (listProLike.Count > 1 && listProLike.Count != null)
+           if (listProLike.Count > 1 )
             {
                 listProFre.InsertRange(0, listProLike);
                 
@@ -98,17 +98,18 @@ namespace BLL.Product
             return listProduct;
         }
 
-        //public List<ProductBO> getProductNewTopX(int SL)
-        //{
-        //    ProductDAL objProduct = new ProductDAL();
-        //    List<ProductBO> listProduct = objProduct.getProductNewTopX(SL);
-        //    return listProduct;
-        //}
-        //public List<ProductBO> getLoadProductByBrandTopX(int SL, string Brand)
-        //{
-        //    ProductDAL objProduct = new ProductDAL();
-        //    List<ProductBO> listProduct = objProduct.getLoadProductByBrandTopX(SL, Brand);
-        //    return listProduct;
-        //}
+        public int getMaxSttProduct()
+        {
+            return productDAL.getMaxSttProduct();
+        }
+        public string getNewProductIDByStt(int id)
+        {
+            return productDAL.getNewProductIDByStt(id);
+
+        }
+        public async Task<bool> postCreateProductAdmin(ProductBO objProduct)
+        {
+           return await productDAL.postCreateProductAdmin(objProduct);
+        }
     }
 }
