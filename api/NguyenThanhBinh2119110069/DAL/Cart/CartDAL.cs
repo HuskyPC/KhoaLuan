@@ -30,7 +30,7 @@ namespace DAL.Cart
             da.Fill(dt);//do du lieu vao datatable
             com.Dispose();//huy com
             con.Close();
-            if (dt.Rows.Count != 0)
+            if (dt.Rows !=null)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -81,7 +81,7 @@ namespace DAL.Cart
             com.Dispose();//huy com
             com.Clone();
             string cartID="";
-            if (dt.Rows.Count != 0)
+            if (dt.Rows != null)
             {
                 for(int i=0; i < dt.Rows.Count; i++)
                 {

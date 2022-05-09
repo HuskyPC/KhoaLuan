@@ -53,10 +53,10 @@ namespace BLL.Product
             List<ProductBO> listProFre = productDAL.getSearchProductFREETEXT(keySearch);
             List<ProductBO> listProLike = productDAL.getSearchProductLike(keySearch);
             List<ProductBO> listProExa = productDAL.getSearchProductExact(keySearch);
-           if (listProLike.Count > 1 )
+            if (listProLike.Count > 1)
             {
                 listProFre.InsertRange(0, listProLike);
-                
+
                 for (int i = listProLike.Count; i < listProFre.Count; i++)
                 {
                     for (int j = 0; j < listProLike.Count; j++)
@@ -109,7 +109,9 @@ namespace BLL.Product
         }
         public async Task<bool> postCreateProductAdmin(ProductBO objProduct)
         {
-           return await productDAL.postCreateProductAdmin(objProduct);
+            return await productDAL.postCreateProductAdmin(objProduct);
         }
+        
+
     }
 }
