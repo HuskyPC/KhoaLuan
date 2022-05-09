@@ -1,4 +1,5 @@
-﻿using BLL.Product;
+﻿using BLL.lib;
+using BLL.Product;
 using BO.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,18 @@ namespace BackendWebsiteLaptop.Controllers
         }
         [HttpPost]
         [Route("postCreateProductAdmin")]
-        public async Task<IActionResult> postCreateProductAdmin(ProductBO  objProduct)
+        public async Task<IActionResult> postCreateProductAdmin(ProductBO objProduct)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    LibaryBLL libBLL = new LibaryBLL();
+                    objProduct.ProductID = productBLL.getNewProductIDByStt(productBLL.getMaxSttProduct());
+                    objProduct.slug = libBLL.ToUrlSlug(libBLL.RemoveUnicode(objProduct.name)) ;
+
                     var product = await productBLL.postCreateProductAdmin(objProduct);
+
                     return Ok(product);
                 }
                 catch
@@ -40,4 +46,6 @@ namespace BackendWebsiteLaptop.Controllers
             }
         }
     }
+
 }
+

@@ -24,7 +24,7 @@ namespace BLL.User
             if (result)
             {
                 return "done";
-                return "done";
+               
             }
             return "fail";
         }

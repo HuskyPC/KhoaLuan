@@ -345,7 +345,7 @@ namespace DAL.Product
             {
                 stt = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
             }
-            int id = Convert.ToInt32(stt.Substring(1, stt.Length));
+            int id = Convert.ToInt32(stt.Substring(2, stt.Length-2));
             id++;
             stt = "SP" + id.ToString();
             return stt;
