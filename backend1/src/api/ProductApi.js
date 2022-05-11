@@ -15,7 +15,7 @@ const ProductApi = {
   //   return response;
   // },
   postCreteProduct(obj) {
-    const url = "ProductAdmin/postCreateProduct";
+    const url = "ProductAdmin/postCreateProductAdmin";
     return axiosClient.post(url, obj);
   },
 

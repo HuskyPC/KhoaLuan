@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      <div class="content-wrapper p-3 ">
+      <div className="content-wrapper p-3 ">
         <Routes>
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />

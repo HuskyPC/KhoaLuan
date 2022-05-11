@@ -4,37 +4,35 @@ import imgTem from "../../asset/dist/img/AdminLTELogo.png";
 import imgAcc from "../../asset/dist/img/user2-160x160.jpg";
 const Header = () => {
   return (
-    <div>
-      <div>
-        {/* Navbar */}
-        <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-          {/* Left navbar links */}
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                data-widget="pushmenu"
-                to="/"
-                role="button"
-              >
-                <i className="fas fa-bars" />
-              </Link>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <Link to="index3.html" className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <Link to="/" className="nav-link">
-                Contact
-              </Link>
-            </li>
-          </ul>
-          {/* Right navbar links */}
-        </nav>
-        {/* /.navbar */}
-      </div>
+    <>
+      {/* Navbar */}
+      <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+        {/* Left navbar links */}
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              data-widget="pushmenu"
+              to="/"
+              role="button"
+            >
+              <i className="fas fa-bars" />
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="index3.html" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/" className="nav-link">
+              Contact
+            </Link>
+          </li>
+        </ul>
+        {/* Right navbar links */}
+      </nav>
+      {/* /.navbar */}
       {/* Main Sidebar Container */}
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
         {/* Brand Logo */}
@@ -116,7 +114,7 @@ const Header = () => {
         </div>
         {/* /.sidebar */}
       </aside>
-    </div>
+    </>
   );
 };
 
