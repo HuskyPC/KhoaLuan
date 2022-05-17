@@ -7,17 +7,28 @@ import ProductApi from "../../../api/ProductApi";
 import { MultiSelect } from "react-multi-select-component";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import CategoryAPI from "../../../api/CategoryAPI";
 
 const ProductCreate = () => {
   const [loading, setLoading] = useState(false);
   const [objSubmitData, setObjSubmitData] = useState("");
 
   const [selected, setSelected] = useState([]);
-  const options = [
+  const [options, setOption] = useState([
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
-  ];
+  ]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await CategoryAPI.getCategory();
+        setOption(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -62,18 +73,6 @@ const ProductCreate = () => {
         priceSale: valuesForm.priceSale,
         avatar: valuesForm.avatar,
       });
-      formik.resetForm({
-        name: "",
-        price: "",
-        priceSale: "",
-        avarta: "",
-        brandID: "",
-        shortDes: "",
-        fullDes: "",
-        status: "",
-        amount: "",
-        category: "",
-      });
 
       // setEmail(valuesForm.email);
       // setPassWord(valuesForm.password);
@@ -105,9 +104,20 @@ const ProductCreate = () => {
           });
 
           setLoading(false);
-          Navigate("/login");
+          formik.resetForm({
+            name: "",
+            price: "",
+            priceSale: "",
+            avarta: "",
+            brandID: "",
+            shortDes: "",
+            fullDes: "",
+            status: "",
+            amount: "",
+            category: "",
+          });
         } else if (reposeData.status >= 400 && reposeData < 500) {
-          toast.error("Đăng ký thất bại", {
+          toast.error("Thêm sản phẩm thất bại", {
             className: "top-10",
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
@@ -125,18 +135,13 @@ const ProductCreate = () => {
     }
     fechData().catch(() => {
       setLoading(false);
-      toast.error("Đăng ký thất bại 2", {
+      toast.error("Thêm sản phẩm thất bại", {
         className: "top-10",
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
     });
-  }, [
-    objSubmitData.avatar,
-    objSubmitData.name,
-    objSubmitData.price,
-    objSubmitData.priceSale,
-  ]);
+  }, [objSubmitData]);
 
   return (
     <div>
@@ -243,30 +248,7 @@ const ProductCreate = () => {
                 ""
               )}
             </div>
-            <div className="form-group mb-3">
-              <label
-                htmlFor="amount"
-                className="form-label inline-block mb-2 text-gray-700"
-              >
-                Số lượng
-              </label>
-              <input
-                type="number"
-                className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="amount"
-                aria-describedby="emailHelp"
-                placeholder="nhập số lượng "
-                {...formik.getFieldProps("amount")}
-              />
-              {formik.touched.amount && formik.errors.amount ? (
-                <div className="text-sm text-red-500">
-                  {formik.errors.amount}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
+
             <div className="form-group mb-3">
               <label
                 htmlFor="amount"
@@ -292,7 +274,7 @@ const ProductCreate = () => {
               )}
             </div>
             <div className="form-group">
-              <label>Multiple</label>
+              <label>Danh mục sản phẩm</label>
               <MultiSelect
                 options={options}
                 value={selected}
@@ -301,31 +283,42 @@ const ProductCreate = () => {
               />
             </div>
             <div className="form-group mb-3">
-              <label>Textarea</label>
+              <label>Mô tả ngắn gọn</label>
               <textarea
                 className="form-control w-100"
                 rows="3"
                 placeholder="Enter ..."
               ></textarea>
             </div>
-            <CKEditor
-              editor={ClassicEditor}
-              data=""
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                console.log({ event, editor, data });
-              }}
-              onBlur={(event, editor) => {
-                console.log("Blur.", editor);
-              }}
-              onFocus={(event, editor) => {
-                console.log("Focus.", editor);
-              }}
-            />
+            <div className="form-group mb-3">
+              <label>Mô tả đầy đủ</label>
+              <CKEditor
+                editor={ClassicEditor}
+                data=""
+                onReady={(editor) => {
+                  // You can store the "editor" and use when it is needed.
+                  console.log("Editor is ready to use!", editor);
+                }}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  console.log({ event, editor, data });
+                }}
+                onBlur={(event, editor) => {
+                  console.log("Blur.", editor);
+                }}
+                onFocus={(event, editor) => {
+                  console.log("Focus.", editor);
+                }}
+                {...formik.getFieldProps("fullDes")}
+              />
+              {formik.touched.fullDes && formik.errors.fullDes ? (
+                <div className="text-sm text-red-500">
+                  {formik.errors.fullDes}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
 
             {loading === true ? (
               <button
@@ -365,7 +358,7 @@ const ProductCreate = () => {
                 transition  duration-150  ease-in-out"
                 onClick={(kq) => (kq === 201 ? formik.resetForm() : "")}
               >
-                Đăng Ký
+                thêm sản phẩm
               </button>
             )}
           </form>

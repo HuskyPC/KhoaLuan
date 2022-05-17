@@ -1,5 +1,7 @@
-﻿using BLL.lib;
+﻿using BLL.Category;
+using BLL.lib;
 using BLL.Product;
+using BO.Category;
 using BO.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +46,13 @@ namespace BackendWebsiteLaptop.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpGet]
+        [Route("getCateCreatePro")]
+        public IEnumerable<CategoryBO> getCateCreatePro() 
+        {
+            CategoryBLL objcate = new CategoryBLL();
+            return objcate.getCateCreatePro();
         }
     }
 

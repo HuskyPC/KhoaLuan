@@ -16,7 +16,7 @@ namespace BO.Product
         public String brandID { get; set; }
         public Double price { get; set; }
         public Double priceSale { get; set; }
-        //public IFormFile file { get; set; }
+        public IFormFile file { get; set; }
         public String avatar { get; set; }
         public String urlImage { get; set; }
         public String slug { get; set; }
