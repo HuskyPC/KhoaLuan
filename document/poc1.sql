@@ -110,6 +110,15 @@ where status =1 and name= @x
 
 exec getSearchProductexact @x=N'Sản phẩm 1'
 
+
+--proc get all brand
+--drop proc getAllBrand
+create proc getAllBrand
+as
+select brandID, parentID, name, avatar, urlImage, slug
+from Brand
+where status=1
+
 --select * from Product 
 --where name like N'%Sản phẩm 5%' or FREETEXT(name,'"*sản phẩm*"');
 
