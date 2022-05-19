@@ -14,6 +14,10 @@ const ProductApi = {
   //   });
   //   return response;
   // },
+  getAllProduct() {
+    const url = `SanPham/getAllProduct`;
+    return axiosClient.get(url);
+  },
   getTopNewProduct(top) {
     const url = `Home/getTopNewProduct?top=${top}`;
     return axiosClient.get(url);

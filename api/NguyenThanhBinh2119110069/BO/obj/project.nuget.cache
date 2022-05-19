@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DeyXPuFCNxNBGy448v3KObRgdsa2UxGHAnSuWRg7B756hIWEQuq4FDeOybp7HfwwgrvBRm2M2jh2QPBHhG1M9Q==",
+  "dgSpecHash": "fOcyvSOY7lsp8OifvzakQfkHh+98cua4sbT7xO/lzL5Y2X1gzN+2QhRXNDOYaGmssEfqIO3q0oMDyzAIMtxq7Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+  "projectFilePath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

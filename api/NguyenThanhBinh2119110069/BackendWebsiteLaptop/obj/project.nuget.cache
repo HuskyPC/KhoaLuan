@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fxO/8LH2ol5xHWUMJd5WduvZjhEScVPHDSeQnp2LFP2faIEpVNgPjF3LCBg+cdJyeOojHNLp3l/tW6IxDY1eCA==",
+  "dgSpecHash": "HbdzTuK6O7a4oOYSB5nsMbcAjs2n3DP2WMHjk6pAjne9CUBibedJvMj4dXgyiYtAtXdEpEa/dG7iz26cBBviMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+  "projectFilePath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.8\\microsoft.aspnet.webapi.client.5.2.8.nupkg.sha512",
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.8\\microsoft.aspnet.webapi.core.5.2.8.nupkg.sha512",
