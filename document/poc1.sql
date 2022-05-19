@@ -155,7 +155,7 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 create proc postCreateUsser
 @userName nvarchar(50),
 @email nvarchar(200),
-@password nvarchar(100),
+
 @lastName nvarchar(50),
 @fristName nvarchar(100),
 @status int,
@@ -163,8 +163,8 @@ create proc postCreateUsser
 @createdDate datetime,
 @createdBy int
 as 
-INSERT INTO users( userName,email, password,lastName,fristName,status,access,createdDate,createdBy) 
-values(@userName, @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
+INSERT INTO users( userName,email, lastName,fristName,status,access,createdDate,createdBy) 
+values(@userName, @email, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
 
 SET DATEFORMAT DMY
 exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
@@ -177,22 +177,54 @@ exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456
  select userName from users
  where status= 1
 
- exec getAllUser 
+ exec getAllUserName 
  --delete  from users 
+
+ create proc getUserName
+ @x nvarchar(50)
+ as 
+ select userID
+ from users 
+ where status =1 and userName=@x
+
+ create proc insertPassword
+ @password nvarchar(max),
+ @userID int, 
+ @paswordSalt nvarchar(8)
+ as
+ insert into UserPassword(userID, password, passwordSalt) values(@userID, @password, @paswordSalt)
  
  --user login 
 
  --drop proc postLoginUser
- create proc postLoginUser
- @email nvarchar(200),
- @password nvarchar(100)
- as
- select us.userID,  us.lastName, us.fristName, us.avatar, us.access, us.urlImage
- from users us
- where us.status=1 and us.email=@email and us.password= @password
+ --create proc postLoginUser
+ --@userName nvarchar(20),
+ --@password nvarchar(100)
+ --as
+ --select us.userID,  us.lastName, us.fristName, us.avatar, us.access, us.urlImage
+ --from users us
+ --where us.status=1 and us.userName= @userName and us.password= @password
  
- exec postLoginUser @email='bin@gmail.com', @password='123456'
+ --exec postLoginUser @userName='bin', @password='123456'
 
+ --drop proc postLoginUser
+ create proc postLoginUser
+ @username varchar(20),
+ @password varchar(100)
+ as
+ begin 
+  DECLARE @passwordSalt varchar(8), @userID int 
+  begin select @userID = userID from users where userName = @username and status=1 end
+  begin select @passwordSalt = passwordSalt from UserPassword where userID= @userID end
+
+ select up.userID, us.lastName, us.fristName, us.avatar, us.access, us.urlImage
+ from UserPassword up, users us
+ where up.userID= us.userID and up.password =CONVERT(VARCHAR(max), HashBytes('MD5', @password+@passwordSalt), 2)
+ end 
+
+ --select  passwordSalt from UserPassword where userID=7
+ --select userID from users where userName = 'binh5'
+ exec postLoginUser @username='bin5', @password='123456'
 
  -- trang cart và truy vấn liên quan đến cart --------------------
  
