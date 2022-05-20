@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 import ProductApi from "../../../api/ProductApi";
 import { MultiSelect } from "react-multi-select-component";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import CategoryAPI from "../../../api/CategoryAPI";
+import { Editor } from "@tinymce/tinymce-react";
 
 const ProductCreate = () => {
   const [loading, setLoading] = useState(false);
   const [objSubmitData, setObjSubmitData] = useState("");
+  const editorRef = useRef();
 
   const [selected, setSelected] = useState([]);
   const [options, setOption] = useState([
@@ -142,6 +141,11 @@ const ProductCreate = () => {
       });
     });
   }, [objSubmitData]);
+  const [editor, setEditor] = useState("");
+  console.log(
+    "🚀 ~ file: ProductCreate.js ~ line 145 ~ ProductCreate ~ editor",
+    editor
+  );
 
   return (
     <div>
@@ -292,7 +296,7 @@ const ProductCreate = () => {
             </div>
             <div className="form-group mb-3">
               <label>Mô tả đầy đủ</label>
-              <CKEditor
+              {/* <CKEditor
                 editor={ClassicEditor}
                 data=""
                 onReady={(editor) => {
@@ -310,14 +314,26 @@ const ProductCreate = () => {
                   console.log("Focus.", editor);
                 }}
                 {...formik.getFieldProps("fullDes")}
+              /> */}
+              <Editor
+                // onInit={(evt, editor) => (editorRef.current = editor)}
+                // onEditorChange={(e) => setEditor(e.target.getContent())}
+                // value={editor}
+                init={{
+                  plugins: "link image code",
+                  toolbar:
+                    "undo redo | bold italic | alignleft aligncenter alignright | code",
+                }}
+                onEditorChange={(e) => setEditor(e)}
               />
-              {formik.touched.fullDes && formik.errors.fullDes ? (
+
+              {/* {formik.touched.fullDes && formik.errors.fullDes ? (
                 <div className="text-sm text-red-500">
                   {formik.errors.fullDes}
                 </div>
               ) : (
                 ""
-              )}
+              )} */}
             </div>
 
             {loading === true ? (

@@ -333,4 +333,12 @@ where status=1 and ProductID= @productID
 
 exec getProductByID @productID='sp1'
 
+---------------- trnag product Detail 
+
+create proc getProductDetail
+@productID varchar(10)
+as 
+select ProductID, name, price, priceSale,avatar,urlImage,brandID,slug,shortDes,fullDes
+from product 
+where status=1 and ProductID=@productID
 

@@ -111,7 +111,12 @@ namespace BLL.Product
         {
             return await productDAL.postCreateProductAdmin(objProduct);
         }
-        
+        public ProductBO getProductDetail(string ProductID)
+        {
+            return productDAL.getProductDetail(ProductID);
+        }
+
+
 
     }
 }
