@@ -15,7 +15,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="header-cart mt-10  px-20 w-full bg-white p-2">
+      <div className="header-cart mt-11  px-20 w-full bg-white p-2">
         <span className="text-3xl font-light">Giỏ hàng </span>
       </div>
       <div className="cart mt-4 px-20 grid grid-cols-10 gap-4">
