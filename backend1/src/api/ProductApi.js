@@ -15,8 +15,11 @@ const ProductApi = {
   //   return response;
   // },
   postCreteProduct(obj) {
-    const url = `/api/ProductAdmin/postCreateProductAdmin`;
-    return axiosClient.post(url, obj);
+    const url = `ProductAdmin/postCreateProductAdmin`;
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+    };
+    return axiosClient.post(url, obj, config);
   },
 
   // get(id) {

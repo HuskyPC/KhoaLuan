@@ -10,25 +10,27 @@ import { Editor } from "@tinymce/tinymce-react";
 const ProductCreate = () => {
   const [loading, setLoading] = useState(false);
   const [objSubmitData, setObjSubmitData] = useState("");
-  const editorRef = useRef();
-
+  console.log(
+    "🚀 ~ file: ProductCreate.js ~ line 13 ~ ProductCreate ~ objSubmitData",
+    objSubmitData
+  );
+  const [editor, setEditor] = useState("");
+  const [onSubmits, setOnSubmit] = useState(false);
+  const [avatar, setAvatar] = useState();
+  console.log(
+    "🚀 ~ file: ProductCreate.js ~ line 16 ~ ProductCreate ~ avatar",
+    avatar
+  );
   const [selected, setSelected] = useState([]);
   const [options, setOption] = useState([
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ]);
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await CategoryAPI.getCategory();
-        setOption(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
-  }, []);
-
+  const handleOnSubmit = (e) => {
+    handlePreviewAvatar(e);
+    formik.setFieldValue("avatar", e.currentTarget.files[0]);
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -71,6 +73,9 @@ const ProductCreate = () => {
         price: valuesForm.price,
         priceSale: valuesForm.priceSale,
         avatar: valuesForm.avatar,
+        shortDes: valuesForm.shortDes,
+        fullDes: editor,
+        amount: valuesForm.amount,
       });
 
       // setEmail(valuesForm.email);
@@ -78,75 +83,139 @@ const ProductCreate = () => {
     },
   });
   useEffect(() => {
-    async function fechData() {
-      const formData = new FormData();
-      formData.append("name", objSubmitData.name);
-      formData.append("price", objSubmitData.price);
-      formData.append("priceSale", objSubmitData.priceSale);
-      // formData.append("file", objSubmitData.avatar);
+    (async () => {
+      try {
+        const response = await CategoryAPI.getCategory();
+        setOption(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+    (async () => {
+      if (onSubmits === true) {
+        const formData = new FormData();
+        formData.append("name", objSubmitData.name);
+        formData.append("price", objSubmitData.price);
+        formData.append("priceSale", objSubmitData.priceSale);
+        formData.append("file", objSubmitData.avatar);
 
-      // formData.append('brandID',objSubmitData.name);
-      // formData.append('slug',objSubmitData.name);
-      // formData.append('shortDes',objSubmitData.name);
-      // formData.append('fullDes',objSubmitData.name);
-      // formData.append('status',objSubmitData.name);
+        // formData.append('brandID',objSubmitData.name);
+        formData.append("shortDes", objSubmitData.shortDes);
+        formData.append("fullDes", editor);
+        formData.append("status", 1);
+        formData.append("amount", objSubmitData.amount);
+        try {
+          setLoading(true);
+          const reposeData = await ProductApi.postCreteProduct(formData);
 
-      if (formData !== undefined) {
-        setLoading(true);
-        const reposeData = await ProductApi.postCreteProduct(formData);
+          if (reposeData.status === 201) {
+            toast.success("Đăng ký thành công", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
 
-        if (reposeData.status === 201) {
-          toast.success("Đăng ký thành công", {
-            className: "top-10",
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 3000,
-          });
-
-          setLoading(false);
-          formik.resetForm({
-            name: "",
-            price: "",
-            priceSale: "",
-            avarta: "",
-            brandID: "",
-            shortDes: "",
-            fullDes: "",
-            status: "",
-            amount: "",
-            category: "",
-          });
-        } else if (reposeData.status >= 400 && reposeData < 500) {
-          toast.error("Thêm sản phẩm thất bại", {
-            className: "top-10",
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 3000,
-          });
-          setLoading(false);
-        } else if (reposeData.status >= 500) {
-          toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
-            className: "top-10",
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 3000,
-          });
-          setLoading(false);
+            setLoading(false);
+            // formik.resetForm({
+            //   name: "",
+            //   price: "",
+            //   priceSale: "",
+            //   avatar: "",
+            //   brandID: "",
+            //   shortDes: "",
+            //   fullDes: "",
+            //   status: "",
+            //   amount: "",
+            //   category: "",
+            // });
+          } else if (reposeData.status >= 400 && reposeData < 500) {
+            toast.error("Thêm sản phẩm thất bại", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+            setLoading(false);
+          } else if (reposeData.status >= 500) {
+            toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          console.log(error.message);
         }
       }
-    }
-    fechData().catch(() => {
-      setLoading(false);
-      toast.error("Thêm sản phẩm thất bại", {
-        className: "top-10",
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
-      });
-    });
-  }, [objSubmitData]);
-  const [editor, setEditor] = useState("");
-  console.log(
-    "🚀 ~ file: ProductCreate.js ~ line 145 ~ ProductCreate ~ editor",
-    editor
-  );
+    })();
 
+    // async function fechData() {
+    //   if (formData !== undefined) {
+    //     setLoading(true);
+    //     const reposeData = await ProductApi.postCreteProduct(formData);
+
+    //     if (reposeData.status === 201) {
+    //       toast.success("Đăng ký thành công", {
+    //         className: "top-10",
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         autoClose: 3000,
+    //       });
+
+    //       setLoading(false);
+    //       formik.resetForm({
+    //         name: "",
+    //         price: "",
+    //         priceSale: "",
+    //         avatar: "",
+    //         brandID: "",
+    //         shortDes: "",
+    //         fullDes: "",
+    //         status: "",
+    //         amount: "",
+    //         category: "",
+    //       });
+    //     } else if (reposeData.status >= 400 && reposeData < 500) {
+    //       toast.error("Thêm sản phẩm thất bại", {
+    //         className: "top-10",
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         autoClose: 3000,
+    //       });
+    //       setLoading(false);
+    //     } else if (reposeData.status >= 500) {
+    //       toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
+    //         className: "top-10",
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         autoClose: 3000,
+    //       });
+    //       setLoading(false);
+    //     }
+    //   }
+    // }
+    // fechData().catch(() => {
+    //   setLoading(false);
+    //   toast.error("Thêm sản phẩm thất bại 1", {
+    //     className: "top-10",
+    //     position: toast.POSITION.TOP_RIGHT,
+    //     autoClose: 3000,
+    //   });
+    // });
+  }, [
+    editor,
+    objSubmitData.amount,
+    objSubmitData.avatar,
+    objSubmitData.name,
+    objSubmitData.price,
+    objSubmitData.priceSale,
+    objSubmitData.shortDes,
+    onSubmits,
+  ]);
+
+  const handlePreviewAvatar = (e) => {
+    const file = e.target.files[0];
+
+    // file = URL.createObjectURL(file);
+    setAvatar(URL.createObjectURL(file));
+  };
   return (
     <div>
       <h3 className="text-3xl text-blue-600 font-medium pb-4">Thêm sản phẩm</h3>
@@ -238,16 +307,15 @@ const ProductCreate = () => {
                 placeholder="Nhập giá bán "
                 accept="image/png, image/jpeg"
                 required
-                onChange={(event) => {
-                  formik.setFieldValue("avatar", event.currentTarget.files[0]);
-                }}
+                onChange={handleOnSubmit}
                 name="avatar"
-                // {...formik.getFieldProps("avatar")}
               />
-              {formik.touched.avatar && formik.errors.avatar ? (
-                <div className="text-sm text-red-500">
-                  {formik.errors.avatar}
-                </div>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="đây là hình ảnh"
+                  className=" w-40 ml-8 mt-4 "
+                />
               ) : (
                 ""
               )}
@@ -296,44 +364,8 @@ const ProductCreate = () => {
             </div>
             <div className="form-group mb-3">
               <label>Mô tả đầy đủ</label>
-              {/* <CKEditor
-                editor={ClassicEditor}
-                data=""
-                onReady={(editor) => {
-                  // You can store the "editor" and use when it is needed.
-                  console.log("Editor is ready to use!", editor);
-                }}
-                onChange={(event, editor) => {
-                  const data = editor.getData();
-                  console.log({ event, editor, data });
-                }}
-                onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
-                }}
-                onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
-                }}
-                {...formik.getFieldProps("fullDes")}
-              /> */}
-              <Editor
-                // onInit={(evt, editor) => (editorRef.current = editor)}
-                // onEditorChange={(e) => setEditor(e.target.getContent())}
-                // value={editor}
-                init={{
-                  plugins: "link image code",
-                  toolbar:
-                    "undo redo | bold italic | alignleft aligncenter alignright | code",
-                }}
-                onEditorChange={(e) => setEditor(e)}
-              />
 
-              {/* {formik.touched.fullDes && formik.errors.fullDes ? (
-                <div className="text-sm text-red-500">
-                  {formik.errors.fullDes}
-                </div>
-              ) : (
-                ""
-              )} */}
+              <Editor onEditorChange={(e) => setEditor(e)} />
             </div>
 
             {loading === true ? (
@@ -372,7 +404,8 @@ const ProductCreate = () => {
                 className="   w-full  px-6  py-2.5 bg-blue-600  text-white  font-medium text-xs  leading-tight  uppercase  rounded
                 shadow-md  hover:bg-blue-700 hover:shadow-lg  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0  active:bg-blue-800 active:shadow-lg
                 transition  duration-150  ease-in-out"
-                onClick={(kq) => (kq === 201 ? formik.resetForm() : "")}
+                // onClick={(kq) => (kq === 201 ? formik.resetForm() : "")}
+                onClick={() => setOnSubmit(true)}
               >
                 thêm sản phẩm
               </button>

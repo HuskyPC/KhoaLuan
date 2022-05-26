@@ -23,9 +23,9 @@ namespace BackendWebsiteLaptop.Controllers
         }
         [HttpPost]
         [Route("postCreateProductAdmin")]
-        public async Task<IActionResult> postCreateProductAdmin(ProductBO objProduct)
+        public async Task<IActionResult> postCreateProductAdmin([FromForm]ProductBO objProduct)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && objProduct != null )
             {
                 try
                 {

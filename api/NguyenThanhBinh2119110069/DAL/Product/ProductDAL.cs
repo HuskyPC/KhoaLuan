@@ -392,7 +392,7 @@ namespace DAL.Product
         }
         public async Task<bool> postCreateProductAdmin(ProductBO objProduct)
         {
-            string procedure = "getProductByID";
+            string procedure = "postCreateProduct";
             List<ProductBO> productList = new List<ProductBO>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
