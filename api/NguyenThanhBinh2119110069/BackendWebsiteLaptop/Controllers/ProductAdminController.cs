@@ -3,10 +3,13 @@ using BLL.lib;
 using BLL.Product;
 using BO.Category;
 using BO.Product;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,9 +20,22 @@ namespace BackendWebsiteLaptop.Controllers
     public class ProductAdminController : ControllerBase
     {
         private ProductBLL productBLL;
-        public ProductAdminController()
+        private IWebHostEnvironment iwebHostEnvironment;
+        public ProductAdminController(IWebHostEnvironment _iwebHostEnvironment)
         {
             productBLL = new ProductBLL();
+            this.iwebHostEnvironment = _iwebHostEnvironment;
+        }
+        [NonAction]
+        public async Task<bool> SaveFile(IFormFile file, string imgName)
+        {
+            var imagePath = Path.Combine(iwebHostEnvironment.ContentRootPath, "Photos", imgName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            return true;
         }
         [HttpPost]
         [Route("postCreateProductAdmin")]
@@ -33,7 +49,40 @@ namespace BackendWebsiteLaptop.Controllers
                     objProduct.ProductID = productBLL.getNewProductIDByStt(productBLL.getMaxSttProduct());
                     objProduct.slug = libBLL.ToUrlSlug(libBLL.RemoveUnicode(objProduct.name)) ;
 
+                    //lấy tên ảnh 
+                    string paths = Path.GetFileNameWithoutExtension(objProduct.slug+"-avatar" );
+                    string extentions = Path.GetExtension(objProduct.file.FileName);
+
+                    objProduct.avatar = objProduct.ProductID.ToString()+ paths + extentions;
+
                     var product = await productBLL.postCreateProductAdmin(objProduct);
+                    //xu li avatar
+                    string productID = productBLL.getProductIDbyMaxStt(productBLL.getMaxSttProduct());
+
+                    if (objProduct.file != null)
+                    {
+                        var saveFile = await SaveFile(objProduct.file, objProduct.avatar.ToString());
+                    }
+                    return StatusCode(StatusCodes.Status201Created);
+
+                    //if (libBLL.setPathsAvatar(productID))
+                    //{
+                    //    string urlAvatarFolder = @"C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\publicFrontend\imagesUpload\" + productID + @"\avatar\";
+
+                    //    //objProduct.file.FileName=objProduct.avatar;
+                    //    using (var stream = new FileStream(Path.Combine(objProduct.file.FileName, objProduct.avatar), FileMode.Create))
+                    //        {
+
+                    //                objProduct.file.CopyTo(stream);
+                    //        }
+                    //        //DirectoryInfo directoryInfo = Directory.CreateDirectory(HttpContext.Current.Server.MapPath(urlAvatarFolder));
+                    //        //var saveFile = await SaveFile(model.File, model.ImageName);
+
+
+                    //}
+
+
+
 
                     return Ok(product);
                 }

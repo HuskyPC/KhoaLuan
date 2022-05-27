@@ -28,6 +28,7 @@ namespace BO.Product
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
         public int amount{ get; set; }
+        //public HttpPostedFileBase ImagesUpload { get; set; }
 
     }
 }

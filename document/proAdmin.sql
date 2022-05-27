@@ -1,4 +1,5 @@
 ﻿---product 
+--drop proc postCreateProduct
 create proc postCreateProduct
 @ProductID varchar(10),
 @name nvarchar(200),
@@ -21,7 +22,7 @@ values(@ProductID,@name,@price,@priceSale,@avatar,@urlImage,@brandID,@slug,@shor
 					@fullDes,@status,@createdDate,@createdBy,@amount)
 
 
-exec postCreateProduct @ProductID='SP12', @name=N'sản phẩm 12', @price=12000,@priceSale= 2345, @avatar= 'null', @urlImage='null',
+exec postCreateProduct @ProductID='SP14', @name=N'sản phẩm 12', @price=12000,@priceSale= 2345, @avatar= 'null', @urlImage='null',
 @brandID='MP1', @slug='null', @shortDes='null',@fullDes='null',@status=1,@createdDate='08/05/2022',@createdBy=1,@amount=2
 
 --drop proc getNewProductIDByStt
@@ -41,3 +42,13 @@ select max(stt) as MaxStt
 from Product
 
 exec getMaxSttProduct
+
+--drop proc getProductIDbyMaxStt
+create proc getProductIDbyMaxStt
+@x int 
+as 
+select ProductID
+from product
+where stt= @x
+
+exec getProductIDbyMaxStt @x='12'

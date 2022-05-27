@@ -115,6 +115,11 @@ namespace BLL.Product
         {
             return productDAL.getProductDetail(ProductID);
         }
+        public string getProductIDbyMaxStt(int id)
+        {
+            return productDAL.getProductIDbyMaxStt(id);
+
+        }
 
 
 

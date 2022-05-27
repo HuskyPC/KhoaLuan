@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -125,7 +126,28 @@ namespace BLL.lib
             }
             return sb.ToString();
         }
-
+        public bool setPathsAvatar(string productID)
+        {
+            // tao dương dan luu ảnh 
+            string path = @"C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\publicFrontend\imagesUpload\" + productID + @"\avatar";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                return true;
+            }
+            return false;
+        }
+        public bool setPathsImg(string productID)
+        {
+            // tao dương dan luu ảnh 
+            string path = @"~\publicFrontend\imagesUpload\" + productID + @"\img";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                return true;
+            }
+            return false;
+        }
 
     }
 }

@@ -397,17 +397,18 @@ namespace DAL.Product
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@productID", objProduct.ProductID);
-            com.Parameters.AddWithValue("@name", objProduct.name);
+            com.Parameters.AddWithValue("@productID", objProduct.ProductID.ToString());
+            com.Parameters.AddWithValue("@name", objProduct.name.ToString());
             com.Parameters.AddWithValue("@price", objProduct.price);
             com.Parameters.AddWithValue("@priceSale", objProduct.priceSale);
-            com.Parameters.AddWithValue("@avatar", objProduct.avatar);
-            com.Parameters.AddWithValue("@brandID", objProduct.brandID);
-            com.Parameters.AddWithValue("@slug", objProduct.slug);
-            com.Parameters.AddWithValue("@shortDes", objProduct.shortDes);
-            com.Parameters.AddWithValue("@fullDes", objProduct.fullDes);
-            com.Parameters.AddWithValue("@status", objProduct.status);
-            com.Parameters.AddWithValue("@createdDate", objProduct.ProductID);
+            com.Parameters.AddWithValue("@avatar", objProduct.avatar.ToString());
+            com.Parameters.AddWithValue("@urlImage", "abc");
+            com.Parameters.AddWithValue("@brandID","abc");
+            com.Parameters.AddWithValue("@slug", objProduct.slug.ToString());
+            com.Parameters.AddWithValue("@shortDes", "abc");
+            com.Parameters.AddWithValue("@fullDes", objProduct.fullDes.ToString());
+            com.Parameters.AddWithValue("@status", 1);
+            com.Parameters.AddWithValue("@createdDate", DateTime.Now.ToString("MM/dd/yyyy"));
             com.Parameters.AddWithValue("@createdBy", 1);
             com.Parameters.AddWithValue("@amount", objProduct.amount);
 
@@ -422,6 +423,29 @@ namespace DAL.Product
             }
             return false;
         }
+
+        public string getProductIDbyMaxStt(int a)
+        {
+            string procedure = "getProductIDbyMaxStt";
+            List<ProductBO> productList = new List<ProductBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.Parameters.AddWithValue("@x", a);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+            string productID = "";
+;           for (int i = 0; i < dt.Rows.Count; i++)
+            {
+               productID  = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
+            }
+            return productID;
+        }
+
     }
 }
 
