@@ -5,6 +5,7 @@ import Login from "../component/user/Login";
 import LoginTab from "../component/user/LoginTab";
 import RegisterTab from "../component/user/RegisterTab";
 import Cart from "../themes/Cart";
+import Contact from "../themes/Contact";
 import Favorite from "../themes/Favorite";
 import Header from "../themes/Header";
 
@@ -34,6 +35,7 @@ const Routers = () => {
         <Route path="/favorite/" element={<Favorite />} />
         <Route path="/login" element={<LoginTab />} />
         <Route path="/register" element={<RegisterTab />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

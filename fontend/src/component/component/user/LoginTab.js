@@ -12,22 +12,23 @@ const LoginTab = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      userName: "",
       password: "",
       rememberMe: false,
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Không đúng định dạng email")
-        .required("Vui lòng nhập Email"),
+      userName: Yup.string()
+        .max(20, "Tên đăng nhập không quá 20 kí tự")
+        .min(2, "Tên đăng nhập ít nhất 2 kí tự")
+        .required("Vui lòng nhập 'Tên đăng nhập'"),
       password: Yup.string()
         .min(6, "Password có ít nhất 6 kí tự")
         .max(25, "Password không quá 25 kí tự")
-        .required("Vui lòng nhập Password"),
+        .required("Vui lòng nhập 'Mật khẩu'"),
     }),
     onSubmit: (valuesForm) => {
       setObjUser({
-        email: valuesForm.email,
+        userName: valuesForm.userName,
         password: valuesForm.password,
         rememberMe: valuesForm.rememberMe,
       });
@@ -102,7 +103,7 @@ const LoginTab = () => {
           reposeData.data.length === 0
         ) {
           toast.error(
-            "Đăng Nhập thất bại, bạn chắc rằng nhập đúng Email và password !",
+            "Đăng Nhập thất bại, bạn chắc rằng nhập đúng 'Tên đăng nhập' và 'Mật khẩu' !",
             {
               className: "top-10",
               position: toast.POSITION.TOP_RIGHT,
@@ -139,21 +140,21 @@ const LoginTab = () => {
               htmlFor="email"
               className="form-label inline-block mb-2 text-gray-700"
             >
-              Email
+              Tên đăng nhập
             </label>
             <input
-              value={formik.values.email}
               name="email"
-              type="email"
+              type="text"
               className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
               border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="email"
-              placeholder="Email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              placeholder="Nhập tên đăng nhập"
+              {...formik.getFieldProps("userName")}
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="text-sm text-red-500">{formik.errors.email}</div>
+            {formik.touched.userName && formik.errors.userName ? (
+              <div className="text-sm text-red-500">
+                {formik.errors.userName}
+              </div>
             ) : (
               ""
             )}
@@ -163,7 +164,7 @@ const LoginTab = () => {
               htmlFor="password"
               className="form-label inline-block mb-2 text-gray-700"
             >
-              Password
+              Mật khẩu
             </label>
             <input
               value={formik.values.password}
