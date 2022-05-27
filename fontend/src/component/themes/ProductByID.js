@@ -147,8 +147,13 @@ const ProductByID = () => {
         {/* description */}
         <div className="description  mt-3 grid md:grid-cols-5 md:gap-3">
           <div className="desc-content bg-white  md:col-span-3 p-8 ">
-            <h3 className="text-3xl capitalize pb-10">{productDetail?.name}</h3>
-            <p>{productDetail?.fullDes}</p>
+            <h3 className="text-3xl capitalize pb-10">Mô tả sản Phẩm</h3>
+            <p>
+              <div
+                className="text-justify"
+                dangerouslySetInnerHTML={{ __html: productDetail?.fullDes }}
+              ></div>
+            </p>
           </div>
           {/* details product cấu hình sản phẩm */}
           <div className="details p-8 md:col-span-2 bg-white">

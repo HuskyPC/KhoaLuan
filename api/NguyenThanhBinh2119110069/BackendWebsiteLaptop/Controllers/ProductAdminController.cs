@@ -53,7 +53,7 @@ namespace BackendWebsiteLaptop.Controllers
                     string paths = Path.GetFileNameWithoutExtension(objProduct.slug+"-avatar" );
                     string extentions = Path.GetExtension(objProduct.file.FileName);
 
-                    objProduct.avatar = objProduct.ProductID.ToString()+ paths + extentions;
+                    objProduct.avatar = objProduct.ProductID.ToString()+"-"+ paths + extentions;
 
                     var product = await productBLL.postCreateProductAdmin(objProduct);
                     //xu li avatar
