@@ -17,11 +17,12 @@ const ProductCreate = () => {
   const [editor, setEditor] = useState("");
   const [onSubmits, setOnSubmit] = useState(false);
   const [avatar, setAvatar] = useState();
-  console.log(
-    "🚀 ~ file: ProductCreate.js ~ line 16 ~ ProductCreate ~ avatar",
-    avatar
-  );
+  const [selectedImg, setSelectedImg] = useState([]);
   const [selected, setSelected] = useState([]);
+  console.log(
+    "🚀 ~ file: ProductCreate.js ~ line 25 ~ ProductCreate ~ selected",
+    selectedImg
+  );
   const [options, setOption] = useState([
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
@@ -116,18 +117,18 @@ const ProductCreate = () => {
             });
 
             setLoading(false);
-            // formik.resetForm({
-            //   name: "",
-            //   price: "",
-            //   priceSale: "",
-            //   avatar: "",
-            //   brandID: "",
-            //   shortDes: "",
-            //   fullDes: "",
-            //   status: "",
-            //   amount: "",
-            //   category: "",
-            // });
+            formik.resetForm({
+              name: "",
+              price: "",
+              priceSale: "",
+              avatar: "",
+              brandID: "",
+              shortDes: "",
+              fullDes: "",
+              status: "",
+              amount: "",
+              category: "",
+            });
           } else if (reposeData.status >= 400 && reposeData < 500) {
             toast.error("Thêm sản phẩm thất bại", {
               className: "top-10",
@@ -148,59 +149,9 @@ const ProductCreate = () => {
         }
       }
     })();
-
-    // async function fechData() {
-    //   if (formData !== undefined) {
-    //     setLoading(true);
-    //     const reposeData = await ProductApi.postCreteProduct(formData);
-
-    //     if (reposeData.status === 201) {
-    //       toast.success("Đăng ký thành công", {
-    //         className: "top-10",
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: 3000,
-    //       });
-
-    //       setLoading(false);
-    //       formik.resetForm({
-    //         name: "",
-    //         price: "",
-    //         priceSale: "",
-    //         avatar: "",
-    //         brandID: "",
-    //         shortDes: "",
-    //         fullDes: "",
-    //         status: "",
-    //         amount: "",
-    //         category: "",
-    //       });
-    //     } else if (reposeData.status >= 400 && reposeData < 500) {
-    //       toast.error("Thêm sản phẩm thất bại", {
-    //         className: "top-10",
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: 3000,
-    //       });
-    //       setLoading(false);
-    //     } else if (reposeData.status >= 500) {
-    //       toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
-    //         className: "top-10",
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: 3000,
-    //       });
-    //       setLoading(false);
-    //     }
-    //   }
-    // }
-    // fechData().catch(() => {
-    //   setLoading(false);
-    //   toast.error("Thêm sản phẩm thất bại 1", {
-    //     className: "top-10",
-    //     position: toast.POSITION.TOP_RIGHT,
-    //     autoClose: 3000,
-    //   });
-    // });
   }, [
     editor,
+    formik,
     objSubmitData.amount,
     objSubmitData.avatar,
     objSubmitData.name,
@@ -215,6 +166,15 @@ const ProductCreate = () => {
 
     // file = URL.createObjectURL(file);
     setAvatar(URL.createObjectURL(file));
+  };
+  const onselectImg = (event) => {
+    const selectFile = event.target.files;
+    const selectIMGArray = Array.from(selectFile);
+    const imgesArray = selectIMGArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setSelectedImg((prevImg) => prevImg.concat(imgesArray));
   };
   return (
     <div>
@@ -291,6 +251,7 @@ const ProductCreate = () => {
                 ""
               )}
             </div>
+            {/* ảnh đại diện */}
             <div className="form-group mb-3">
               <label
                 htmlFor="avatar"
@@ -320,7 +281,64 @@ const ProductCreate = () => {
                 ""
               )}
             </div>
+            {/* ảnh chi tiết sản phẩm */}
+            <div className="form-group mb-3">
+              <label
+                htmlFor="avatarDetail"
+                className="form-label inline-block mb-2 text-gray-700"
+              >
+                Ảnh chi tiết sản phẩm
+              </label>
+              <input
+                type="file"
+                multiple
+                className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="avatarDetail"
+                accept="image/png, image/jpeg"
+                required
+                onChange={onselectImg}
+                name="avatarimg"
+              />
 
+              {/* view detail hing anh product */}
+              <div className="gird grid-cols-4 gap-3 pt-2 w-full ">
+                {selectedImg &&
+                  selectedImg.map((item, index) => {
+                    return (
+                      <div
+                        key={item}
+                        className="inline-block border-[1px] rounded mt-2"
+                      >
+                        <img
+                          src={item}
+                          alt="hinh anh"
+                          className="max-w-[200px]  "
+                        />
+                        <hr />
+                        <div className="w-full grid grid-cols-2 px-3">
+                          <span>{index + 1}</span>
+                          <button
+                            className=" text-right text-red-400"
+                            onClick={
+                              () =>
+                                setSelectedImg(
+                                  selectedImg.filter((e) => e !== item)
+                                )
+                              //  &&
+                              // URL.revokeObjectURL(
+                              //   selectedImg.filter((e) => e !== item)
+                              // )
+                            }
+                          >
+                            Xóa hình
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
             <div className="form-group mb-3">
               <label
                 htmlFor="amount"
@@ -351,6 +369,15 @@ const ProductCreate = () => {
                 options={options}
                 value={selected}
                 onChange={setSelected}
+                labelledBy="Select"
+              />
+            </div>
+            <div className="form-group">
+              <label>Thương hiệu</label>
+              <MultiSelect
+                options={options}
+                value={selected}
+                onChange={(e) => setSelected}
                 labelledBy="Select"
               />
             </div>
