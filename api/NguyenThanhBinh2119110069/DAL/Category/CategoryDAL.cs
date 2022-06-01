@@ -44,10 +44,10 @@ namespace DAL.Category
 
             return categoryList;
         }
-        public List<CategoryBO> getCateCreatePro()
+        public List<VMListCategory> getCateCreatePro()
         {
             string procedure = "getCategory";
-            List<CategoryBO> categoryList = new List<CategoryBO>();
+            List<VMListCategory> categoryList = new List<VMListCategory>();
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
@@ -58,10 +58,10 @@ namespace DAL.Category
             com.Dispose();//huy com
             con.Close();
 
-            CategoryBO categoryDTO;
+            VMListCategory categoryDTO;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                categoryDTO = new CategoryBO();//doc 1 dong khoi tao ProductDTO
+                categoryDTO = new VMListCategory();//doc 1 dong khoi tao ProductDTO
                 //gan tung truong du lieu
                 categoryDTO.value = Convert.ToString(dt.Rows[i]["categoryID"].ToString());
                 categoryDTO.label = Convert.ToString(dt.Rows[i]["name"].ToString());

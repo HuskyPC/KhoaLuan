@@ -43,5 +43,28 @@ namespace DAL.Mapping
 
             return productList;
         }
+        public async Task< bool> insertProductToCategory(string productID, string categoryID)
+        {
+            string procedure = "insertProductToCategory";
+            List<ProductToCategoryBO> productList = new List<ProductToCategoryBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@productID", productID);
+            com.Parameters.AddWithValue("@categoryID", categoryID);
+
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+
+            await con.CloseAsync();
+
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+
+            
+        }
     }
 }

@@ -52,3 +52,40 @@ from product
 where stt= @x
 
 exec getProductIDbyMaxStt @x='12'
+
+
+create proc insertProductToCategory
+@productID varchar(10),
+@categoryID varchar(10)
+as 
+insert into mapping_Product_to_Category(productID, categoryID, status) values(@productID, @categoryID, 1)
+
+
+--drop proc insertProductToImages
+create proc insertProductToImages
+@ProductID varchar(10),
+@ImageID varchar(20)
+as 
+insert into mapping_Product_to_Image (ProductID, ImageID, status) values(@ProductID, @ImageID, 1)
+
+
+create proc insertImages
+@ImageID nvarchar(20),
+@avatar nvarchar(MAX)
+as
+insert into Image(ImageID, avatar, url, status)values(@ImageID, @avatar, 'null', 1)
+
+drop proc MaxSTTImages
+create proc MaxSTTImages 
+as
+select MAX(stt) as MaxStt
+from Image 
+
+create proc getImagesIDbySTT
+@stt int
+as
+select ImageID
+from Image
+where stt= @stt
+
+exec getImagesIDbySTT 40

@@ -26,9 +26,9 @@ namespace BLL.Category
             List<CategoryBO> listCategory = categoryDAL.getCategory();
             return listCategory;
         }
-        public List<CategoryBO> getCateCreatePro()
+        public List<VMListCategory> getCateCreatePro()
         {
-            List<CategoryBO> listCategory = categoryDAL.getCateCreatePro();
+            List<VMListCategory> listCategory = categoryDAL.getCateCreatePro();
             return listCategory;
         }
         //public List<CategoryBO> getProductByCategory(string brandID)
