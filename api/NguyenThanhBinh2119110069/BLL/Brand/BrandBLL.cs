@@ -78,6 +78,10 @@ namespace BLL.Brand
 
             return listParentByBrandId;
         }
+        public List<BrandBO> getAllBrand()
+        {
+            return brandDAL.getAllBrand();
+        }
 
     }
 }

@@ -33,7 +33,10 @@ const RegisterTab = () => {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      userName: Yup.string().required("Vui lòng nhập Username"),
+      userName: Yup.string()
+        .max(20, "Tên đăng nhập không quá 20 kí tự")
+        .min(2, "Tên đăng nhập ít nhất 2 kí tự")
+        .required("Vui lòng nhập 'Tên đăng nhập'"),
       // .test(
       //   "Tài khoảng chưa được sử dung",
       //   "Tài khoảng đã tồn tại ",
@@ -62,11 +65,11 @@ const RegisterTab = () => {
 
         .min(6, "Password có ít nhất 6 kí tự")
         .max(25, "Password không quá 25 kí tự")
-        .required("Vui lòng nhập Password"),
+        .required("Vui lòng nhập 'Mật khẩu'"),
       //   regex pattern for password
       // .matches(/dieu kien loi/, 'thong bao moi')
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Password không khớp")
+        .oneOf([Yup.ref("password")], "Mật khẩu không khớp")
         .required("Vui lòng nhập Xác nhận mật khẩu "),
     }),
     onSubmit: (valuesForm) => {
@@ -77,14 +80,14 @@ const RegisterTab = () => {
         password: valuesForm.password,
         email: valuesForm.email,
       });
-      formik.resetForm({
-        fristName: "",
-        lastName: "",
-        userName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+      // formik.resetForm({
+      //   fristName: "",
+      //   lastName: "",
+      //   userName: "",
+      //   email: "",
+      //   password: "",
+      //   confirmPassword: "",
+      // });
 
       // setEmail(valuesForm.email);
       // setPassWord(valuesForm.password);
@@ -101,7 +104,14 @@ const RegisterTab = () => {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
           });
-
+          formik.resetForm({
+            fristName: "",
+            lastName: "",
+            userName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          });
           setLoading(false);
           navigate("/login");
         } else if (reposeData.status >= 400 && reposeData < 500) {
@@ -177,7 +187,7 @@ const RegisterTab = () => {
               className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="lastName"
-              placeholder="Họ và tên đệm"
+              placeholder="Tên"
               {...formik.getFieldProps("lastName")}
             />
             {formik.touched.lastName && formik.errors.lastName ? (
@@ -193,14 +203,14 @@ const RegisterTab = () => {
               htmlFor="userName"
               className="form-label inline-block mb-2 text-gray-700"
             >
-              Username
+              Tên đăng nhập
             </label>
             <input
               type="text"
               className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="userName"
-              placeholder="Username để đăng nhập"
+              placeholder="Nhập tên đăng nhập"
               {...formik.getFieldProps("userName")}
             />
             {formik.touched.userName && formik.errors.userName ? (
@@ -224,7 +234,7 @@ const RegisterTab = () => {
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="emails"
               aria-describedby="emailHelp"
-              placeholder="Email"
+              placeholder="Nhập email"
               {...formik.getFieldProps("email")}
             />
             {formik.touched.email && formik.errors.email ? (
@@ -238,14 +248,14 @@ const RegisterTab = () => {
               htmlFor="passwords"
               className="form-label inline-block mb-2 text-gray-700"
             >
-              Password
+              Mật khẩu
             </label>
             <input
               type="password"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300  rounded  transition ease-in-out  m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="passwords"
-              placeholder="Password"
+              placeholder="Nhập mật khẩu"
               {...formik.getFieldProps("password")}
             />
             {formik.touched.password && formik.errors.password ? (
@@ -261,14 +271,14 @@ const RegisterTab = () => {
               htmlFor="confirmPassword"
               className="form-label inline-block mb-2 text-gray-700"
             >
-              Nhập lại password
+              Nhập lại mật khẩu
             </label>
             <input
               type="password"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300  rounded  transition ease-in-out  m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="confirmPassword"
-              placeholder="Nhập lại password"
+              placeholder="Nhập lại mật khẩu"
               {...formik.getFieldProps("confirmPassword")}
             />
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (

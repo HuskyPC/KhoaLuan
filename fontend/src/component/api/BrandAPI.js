@@ -9,6 +9,10 @@ const BrandApi = {
     const url = `Home/getBrandIDandParentID`;
     return axiosClient.get(url);
   },
+  getAllBrand() {
+    const url = `SanPham/getAllBrand`;
+    return axiosClient.get(url);
+  },
 };
 
 export default BrandApi;

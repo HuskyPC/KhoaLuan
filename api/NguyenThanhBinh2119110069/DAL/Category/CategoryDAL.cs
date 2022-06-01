@@ -44,5 +44,32 @@ namespace DAL.Category
 
             return categoryList;
         }
+        public List<VMListCategory> getCateCreatePro()
+        {
+            string procedure = "getCategory";
+            List<VMListCategory> categoryList = new List<VMListCategory>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            VMListCategory categoryDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                categoryDTO = new VMListCategory();//doc 1 dong khoi tao ProductDTO
+                //gan tung truong du lieu
+                categoryDTO.value = Convert.ToString(dt.Rows[i]["categoryID"].ToString());
+                categoryDTO.label = Convert.ToString(dt.Rows[i]["name"].ToString());
+
+                categoryList.Add(categoryDTO);
+            }
+
+            return categoryList;
+        }
     }
 }
