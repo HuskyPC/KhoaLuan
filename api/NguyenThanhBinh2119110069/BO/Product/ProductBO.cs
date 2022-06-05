@@ -17,6 +17,7 @@ namespace BO.Product
         public Double price { get; set; }
         public Double priceSale { get; set; }
         public IFormFile file { get; set; }
+        public List<IFormFile> Files { get; set; }
         public String avatar { get; set; }
         public String urlImage { get; set; }
         public String slug { get; set; }
@@ -27,7 +28,10 @@ namespace BO.Product
         public int createdBy { get; set; }
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
-        public int amount{ get; set; }
+        public int amount { get; set; }
+        public List<String> CateID { get; set; }
+        public List<String> BrandID { get; set; }
+        public string TH { get; set; }
         //public HttpPostedFileBase ImagesUpload { get; set; }
 
     }

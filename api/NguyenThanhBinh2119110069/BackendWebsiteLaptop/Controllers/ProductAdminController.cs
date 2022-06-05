@@ -46,9 +46,9 @@ namespace BackendWebsiteLaptop.Controllers
                 try
                 {
                     LibaryBLL libBLL = new LibaryBLL();
+                    objProduct.status = Int32.Parse(objProduct.TH.ToString());
                     objProduct.ProductID = productBLL.getNewProductIDByStt(productBLL.getMaxSttProduct());
                     objProduct.slug = libBLL.ToUrlSlug(libBLL.RemoveUnicode(objProduct.name)) ;
-
                     //lấy tên ảnh 
                     string paths = Path.GetFileNameWithoutExtension(objProduct.slug+"-avatar" );
                     string extentions = Path.GetExtension(objProduct.file.FileName);
@@ -65,26 +65,6 @@ namespace BackendWebsiteLaptop.Controllers
                     }
                     return StatusCode(StatusCodes.Status201Created);
 
-                    //if (libBLL.setPathsAvatar(productID))
-                    //{
-                    //    string urlAvatarFolder = @"C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BackendWebsiteLaptop\publicFrontend\imagesUpload\" + productID + @"\avatar\";
-
-                    //    //objProduct.file.FileName=objProduct.avatar;
-                    //    using (var stream = new FileStream(Path.Combine(objProduct.file.FileName, objProduct.avatar), FileMode.Create))
-                    //        {
-
-                    //                objProduct.file.CopyTo(stream);
-                    //        }
-                    //        //DirectoryInfo directoryInfo = Directory.CreateDirectory(HttpContext.Current.Server.MapPath(urlAvatarFolder));
-                    //        //var saveFile = await SaveFile(model.File, model.ImageName);
-
-
-                    //}
-
-
-
-
-                    return Ok(product);
                 }
                 catch
                 {

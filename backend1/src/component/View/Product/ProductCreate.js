@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
@@ -6,27 +6,32 @@ import ProductApi from "../../../api/ProductApi";
 import { MultiSelect } from "react-multi-select-component";
 import CategoryAPI from "../../../api/CategoryAPI";
 import { Editor } from "@tinymce/tinymce-react";
+import Select from "react-select";
 
 const ProductCreate = () => {
   const [loading, setLoading] = useState(false);
   const [objSubmitData, setObjSubmitData] = useState("");
-  console.log(
-    "🚀 ~ file: ProductCreate.js ~ line 13 ~ ProductCreate ~ objSubmitData",
-    objSubmitData
-  );
+
   const [editor, setEditor] = useState("");
   const [onSubmits, setOnSubmit] = useState(false);
   const [avatar, setAvatar] = useState();
+  const [imgSelect, setImgSelect] = useState([]);
+  const [status, setStatus] = useState("");
+
   const [selectedImg, setSelectedImg] = useState([]);
-  const [selected, setSelected] = useState([]);
-  console.log(
-    "🚀 ~ file: ProductCreate.js ~ line 25 ~ ProductCreate ~ selected",
-    selectedImg
-  );
+
+  const [cateID, setCateID] = useState([]);
+
+  const [brandID, setBrandID] = useState([]);
+
   const [options, setOption] = useState([
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
+  ]);
+  const [options2, setOptions2] = useState([
+    { value: "1", label: "Phát hành" },
+    { value: "0", label: "Ẩn đi" },
   ]);
   const handleOnSubmit = (e) => {
     handlePreviewAvatar(e);
@@ -44,6 +49,7 @@ const ProductCreate = () => {
       status: "",
       amount: "",
       category: "",
+      Files: [],
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -99,12 +105,24 @@ const ProductCreate = () => {
         formData.append("price", objSubmitData.price);
         formData.append("priceSale", objSubmitData.priceSale);
         formData.append("file", objSubmitData.avatar);
-
         // formData.append('brandID',objSubmitData.name);
         formData.append("shortDes", objSubmitData.shortDes);
         formData.append("fullDes", editor);
-        formData.append("status", 1);
+
+        formData.append("TH", status.value);
+        console.log("🚀 ~ file: ProductCreate.js ~ line 113 ~ status", status);
+
         formData.append("amount", objSubmitData.amount);
+        for (var i = 0; i < imgSelect.length; i++) {
+          formData.append("Files", imgSelect[i]);
+        }
+        for (var j = 0; j < cateID.length; j++) {
+          formData.append("CateID", cateID[j].value);
+        }
+        for (var k = 0; k < brandID.length; k++) {
+          formData.append("BrandID", brandID[k].value);
+        }
+
         try {
           setLoading(true);
           const reposeData = await ProductApi.postCreteProduct(formData);
@@ -129,6 +147,7 @@ const ProductCreate = () => {
               amount: "",
               category: "",
             });
+            setOnSubmit(false);
           } else if (reposeData.status >= 400 && reposeData < 500) {
             toast.error("Thêm sản phẩm thất bại", {
               className: "top-10",
@@ -136,6 +155,7 @@ const ProductCreate = () => {
               autoClose: 3000,
             });
             setLoading(false);
+            setOnSubmit(false);
           } else if (reposeData.status >= 500) {
             toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
               className: "top-10",
@@ -143,15 +163,20 @@ const ProductCreate = () => {
               autoClose: 3000,
             });
             setLoading(false);
+            setOnSubmit(false);
           }
         } catch (error) {
           console.log(error.message);
+          setOnSubmit(false);
         }
       }
     })();
   }, [
+    brandID,
+    cateID,
     editor,
     formik,
+    imgSelect,
     objSubmitData.amount,
     objSubmitData.avatar,
     objSubmitData.name,
@@ -159,6 +184,7 @@ const ProductCreate = () => {
     objSubmitData.priceSale,
     objSubmitData.shortDes,
     onSubmits,
+    status,
   ]);
 
   const handlePreviewAvatar = (e) => {
@@ -169,12 +195,27 @@ const ProductCreate = () => {
   };
   const onselectImg = (event) => {
     const selectFile = event.target.files;
+
     const selectIMGArray = Array.from(selectFile);
+    console.log(
+      "🚀 ~ file: ProductCreate.js ~ line 181 ~ onselectImg ~ selectIMGArray",
+      selectIMGArray
+    );
+
     const imgesArray = selectIMGArray.map((file) => {
       return URL.createObjectURL(file);
     });
-
+    setImgSelect((prevImg) => prevImg.concat(selectIMGArray));
     setSelectedImg((prevImg) => prevImg.concat(imgesArray));
+  };
+  const DeleteImg = (item, index) => {
+    setSelectedImg(selectedImg.filter((e) => e !== item));
+    const a1 = imgSelect.slice(0, index);
+    const a2 = imgSelect.slice(index + 1, imgSelect.length);
+    setImgSelect(() => a1.concat(a2));
+    if (a1.concat(a2).length === 0) {
+      console.log("console log line 201 vô đây");
+    }
   };
   return (
     <div>
@@ -182,6 +223,7 @@ const ProductCreate = () => {
       <div className={` h-100%  top-0 left-0 right-0  `}>
         <div className={`block p-6 rounded-lg shadow-lg bg-white  `}>
           <form onSubmit={formik.handleSubmit}>
+            {/* ten sản phẩm */}
             <div className="form-group mb-3">
               <label
                 htmlFor="name"
@@ -204,6 +246,7 @@ const ProductCreate = () => {
                 ""
               )}
             </div>
+            {/* giá bán */}
             <div className="form-group mb-3">
               <label
                 htmlFor="price"
@@ -227,6 +270,7 @@ const ProductCreate = () => {
                 ""
               )}
             </div>
+            {/* giá giảm */}
             <div className="form-group mb-3">
               <label
                 htmlFor="priceSale"
@@ -250,6 +294,51 @@ const ProductCreate = () => {
               ) : (
                 ""
               )}
+            </div>
+
+            <div className="form-group mb-3">
+              <label
+                htmlFor="amount"
+                className="form-label inline-block mb-2 text-gray-700"
+              >
+                Số lượng
+              </label>
+              <input
+                type="number"
+                className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="amount"
+                aria-describedby="emailHelp"
+                placeholder="nhập số lượng "
+                {...formik.getFieldProps("amount")}
+              />
+              {formik.touched.amount && formik.errors.amount ? (
+                <div className="text-sm text-red-500">
+                  {formik.errors.amount}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+            {/* danh mục sản phẩm  */}
+            <div className="form-group">
+              <label>Danh mục sản phẩm</label>
+              <MultiSelect
+                options={options}
+                value={cateID}
+                onChange={setCateID}
+                labelledBy="Select"
+              />
+            </div>
+            {/* thương hiệu */}
+            <div className="form-group">
+              <label>Thương hiệu</label>
+              <MultiSelect
+                options={options}
+                value={brandID}
+                onChange={setBrandID}
+                labelledBy="Select"
+              />
             </div>
             {/* ảnh đại diện */}
             <div className="form-group mb-3">
@@ -298,7 +387,7 @@ const ProductCreate = () => {
                 accept="image/png, image/jpeg"
                 required
                 onChange={onselectImg}
-                name="avatarimg"
+                name="Files"
               />
 
               {/* view detail hing anh product */}
@@ -320,16 +409,7 @@ const ProductCreate = () => {
                           <span>{index + 1}</span>
                           <button
                             className=" text-right text-red-400"
-                            onClick={
-                              () =>
-                                setSelectedImg(
-                                  selectedImg.filter((e) => e !== item)
-                                )
-                              //  &&
-                              // URL.revokeObjectURL(
-                              //   selectedImg.filter((e) => e !== item)
-                              // )
-                            }
+                            onClick={() => DeleteImg(item, index)}
                           >
                             Xóa hình
                           </button>
@@ -339,48 +419,7 @@ const ProductCreate = () => {
                   })}
               </div>
             </div>
-            <div className="form-group mb-3">
-              <label
-                htmlFor="amount"
-                className="form-label inline-block mb-2 text-gray-700"
-              >
-                Số lượng
-              </label>
-              <input
-                type="number"
-                className="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="amount"
-                aria-describedby="emailHelp"
-                placeholder="nhập số lượng "
-                {...formik.getFieldProps("amount")}
-              />
-              {formik.touched.amount && formik.errors.amount ? (
-                <div className="text-sm text-red-500">
-                  {formik.errors.amount}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="form-group">
-              <label>Danh mục sản phẩm</label>
-              <MultiSelect
-                options={options}
-                value={selected}
-                onChange={setSelected}
-                labelledBy="Select"
-              />
-            </div>
-            <div className="form-group">
-              <label>Thương hiệu</label>
-              <MultiSelect
-                options={options}
-                value={selected}
-                onChange={(e) => setSelected}
-                labelledBy="Select"
-              />
-            </div>
+            {/* mô tả ngắn gọn */}
             <div className="form-group mb-3">
               <label>Mô tả ngắn gọn</label>
               <textarea
@@ -389,10 +428,17 @@ const ProductCreate = () => {
                 placeholder="Enter ..."
               ></textarea>
             </div>
+            {/* mo tả đầy đủ */}
             <div className="form-group mb-3">
               <label>Mô tả đầy đủ</label>
 
               <Editor onEditorChange={(e) => setEditor(e)} />
+            </div>
+            {/* status */}
+            {/* danh mục sản phẩm  */}
+            <div className="form-group">
+              <label>Danh mục sản phẩm</label>
+              <Select value={status} onChange={setStatus} options={options2} />
             </div>
 
             {loading === true ? (
