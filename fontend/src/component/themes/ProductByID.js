@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 // import { useParams } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,16 +12,29 @@ import "swiper/css/thumbs";
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
+import ProductDetailAPI from "../api/ProductDetail";
 
 const ProductByID = () => {
-  // let { id } = useParams();
+  let { id } = useParams();
+
+  const [productDetail, setProductDetail] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await ProductDetailAPI.getProductDetail(id);
+        setProductDetail(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, [id]);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const numberFormat = (value) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(value);
-
   return (
     <>
       <section className="mt-10 md:mt-16 main md:px-20">
@@ -84,7 +97,9 @@ const ProductByID = () => {
           </div>
           {/* name product */}
           <div className="productContent col-span-2 bg-white p-4">
-            <h2 className=" text-3xl first-letter:uppercase">product1</h2>
+            <h2 className=" text-3xl first-letter:uppercase">
+              {productDetail?.name}
+            </h2>
             <div className="mt-7 pb-5 grid grid-cols-4 gap-2 ">
               <button className="p-1.5  border-[1px] border-gray-400 text-gray-500 rounded relative">
                 core i3 4030-ram 6gb-ssd 120gb <br /> {numberFormat(2000000)}
@@ -94,12 +109,21 @@ const ProductByID = () => {
               </button>
             </div>
 
-            <span className="price text-blue-500 text-3xl ">
-              {numberFormat(2000000)}
-            </span>
-            <span className={` priceSale text-xs line-through text-red-500`}>
-              {numberFormat(28000000)}
-            </span>
+            {productDetail?.priceSale !== 0 ? (
+              <>
+                <span className="price text-blue-500 text-3xl ">
+                  {numberFormat(productDetail?.priceSale)}
+                </span>
+                <span
+                  className={` priceSale text-xs line-through text-red-500`}
+                >
+                  {numberFormat(productDetail?.price)}
+                </span>
+              </>
+            ) : (
+              ""
+            )}
+
             <div className="grid auto-rows-max grid-cols-2 mt-5 md:p-4">
               <Link
                 to="/"
@@ -123,8 +147,13 @@ const ProductByID = () => {
         {/* description */}
         <div className="description  mt-3 grid md:grid-cols-5 md:gap-3">
           <div className="desc-content bg-white  md:col-span-3 p-8 ">
-            <h3 className="text-3xl capitalize pb-10">Name Product</h3>
-            <p>bhjdsbjhfbsdjvfksvfjsdvkfds</p>
+            <h3 className="text-3xl capitalize pb-10">Mô tả sản Phẩm</h3>
+            <p>
+              <div
+                className="text-justify"
+                dangerouslySetInnerHTML={{ __html: productDetail?.fullDes }}
+              ></div>
+            </p>
           </div>
           {/* details product cấu hình sản phẩm */}
           <div className="details p-8 md:col-span-2 bg-white">

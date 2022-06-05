@@ -19,6 +19,8 @@ namespace BO.Category
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
         public List<ProductBO> productBO { get; set; }
+        public string value { get; set; }
+        public string label { get; set; }
 
     }
 }
