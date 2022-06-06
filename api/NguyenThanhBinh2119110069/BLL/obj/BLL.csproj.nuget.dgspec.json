@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {}
+    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
+    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
+        "projectUniqueName": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
+        "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
         "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\obj\\",
+        "outputPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
-                "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
+              "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+                "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
               },
-              "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj"
+              "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj"
               }
             }
           }
@@ -61,18 +61,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+        "projectUniqueName": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
         "projectName": "BO",
-        "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+        "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
         "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\obj\\",
+        "outputPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -101,6 +101,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "System.Runtime": {
               "target": "Package",
               "version": "[4.3.1, )"
@@ -121,18 +125,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj": {
+    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj",
+        "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -149,8 +153,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
-                "projectPath": "C:\\Users\\binh1\\Desktop\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
+              "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+                "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
               }
             }
           }
@@ -189,7 +193,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
