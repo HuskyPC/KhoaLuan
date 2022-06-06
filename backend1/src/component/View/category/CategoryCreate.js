@@ -66,6 +66,18 @@ const CategoryCreate = () => {
               position: toast.POSITION.TOP_RIGHT,
               autoClose: 3000,
             });
+            formik.resetForm({
+              name: "",
+              status: "",
+            });
+            setLoading(false);
+          }
+          if (respon.status >= 300) {
+            toast.error("Thêm danh mục không thành công", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
             setLoading(false);
           }
         } catch (error) {
