@@ -31,6 +31,25 @@ namespace BLL.Category
             List<CategoryBO> listCategory = categoryDAL.getCateCreatePro();
             return listCategory;
         }
+        public int getMaxSTTCategory()
+        {
+            return categoryDAL.getMaxSTTCategory();
+        }
+        public string getCategoryIDBySTT(int a)
+        {
+            return categoryDAL.getCategoryIDBySTT(a);
+        }
+        public int newSttCategory(string a )
+        {
+            int id = Convert.ToInt32(a.Substring(2, a.Length - 2));
+            id++;
+            return id;
+        }
+        public async Task<bool> insertCategory(CategoryBO objcate)
+        {
+            return await categoryDAL.insertCategory(objcate);
+            
+        }
         //public List<CategoryBO> getProductByCategory(string brandID)
         //{
         //    BrandBLL objBrand = new BrandBLL();

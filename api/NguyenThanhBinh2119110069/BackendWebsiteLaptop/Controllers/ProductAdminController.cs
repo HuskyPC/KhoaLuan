@@ -46,7 +46,7 @@ namespace BackendWebsiteLaptop.Controllers
                 try
                 {
                     LibaryBLL libBLL = new LibaryBLL();
-                    objProduct.status = Int32.Parse(objProduct.TH.ToString());
+                    //objProduct.status = Int32.Parse(objProduct.TH.ToString());
                     objProduct.ProductID = productBLL.getNewProductIDByStt(productBLL.getMaxSttProduct());
                     objProduct.slug = libBLL.ToUrlSlug(libBLL.RemoveUnicode(objProduct.name)) ;
                     //lấy tên ảnh 

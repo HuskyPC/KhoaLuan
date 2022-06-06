@@ -89,3 +89,34 @@ from Image
 where stt= @stt
 
 exec getImagesIDbySTT 40
+
+update Product set status=0 where ProductID= 'sp1'
+
+create proc getMaxSTTCategory
+as
+select MAX(stt ) as maxstt
+from Category
+
+exec getMaxSTTCategory
+
+
+create proc getCategoryIDBySTT
+@x int
+as
+select categoryID
+from Category
+where stt= @x
+
+exec getCategoryIDBySTT 4
+
+create proc createCategory
+@categoryID varchar(10),
+@name nvarchar(70),
+@slug nvarchar(MAX),
+@status int,
+@createdDate datetime,
+@createdBy int
+as
+insert into Category(categoryID, name, slug, status, createdDate, createdBy)values(@categoryID, @name, @slug, @status, @createdDate, @createdBy)
+
+--exec createCategory @categoryID='ct5', @name='hfbjdsvds', @slug='fhdbs', @status=1, @createdDate='07/06/2022', @createdBy=1

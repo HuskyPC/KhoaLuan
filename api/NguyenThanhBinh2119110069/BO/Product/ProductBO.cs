@@ -29,9 +29,9 @@ namespace BO.Product
         public DateTime updatedDate { get; set; }
         public int updatedBy { get; set; }
         public int amount { get; set; }
-        public List<String> CateID { get; set; }
-        public List<String> BrandID { get; set; }
-        public string TH { get; set; }
+        //public List<String> CateID { get; set; }
+        //public List<String> BrandID { get; set; }
+        //public string TH { get; set; }
         //public HttpPostedFileBase ImagesUpload { get; set; }
 
     }
