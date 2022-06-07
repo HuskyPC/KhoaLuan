@@ -1,44 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import imgTem from "../../asset/dist/img/AdminLTELogo.png";
+import imgAcc from "../../asset/dist/img/user2-160x160.jpg";
 const Header = () => {
   return (
-    <div>
-      <div>
-        {/* Navbar */}
-        <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-          {/* Left navbar links */}
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                data-widget="pushmenu"
-                to="/"
-                role="button"
-              >
-                <i className="fas fa-bars" />
-              </Link>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <Link to="index3.html" className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <Link to="/" className="nav-link">
-                Contact
-              </Link>
-            </li>
-          </ul>
-          {/* Right navbar links */}
-        </nav>
-        {/* /.navbar */}
-      </div>
+    <>
+      {/* Navbar */}
+      <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+        {/* Left navbar links */}
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              data-widget="pushmenu"
+              to="/"
+              role="button"
+            >
+              <i className="fas fa-bars" />
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="index3.html" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/" className="nav-link">
+              Contact
+            </Link>
+          </li>
+        </ul>
+        {/* Right navbar links */}
+      </nav>
+      {/* /.navbar */}
       {/* Main Sidebar Container */}
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
         {/* Brand Logo */}
         <Link to="." className="brand-link">
           <img
-            src="dist/img/AdminLTELogo.png"
+            src={imgTem}
             alt="AdminLTE Logo"
             className="brand-image img-circle elevation-3"
             style={{ opacity: ".8" }}
@@ -51,7 +51,7 @@ const Header = () => {
           <div className="user-panel mt-3 pb-3 mb-3 d-flex">
             <div className="image">
               <img
-                src="dist/img/user2-160x160.jpg"
+                src={imgAcc}
                 className="img-circle elevation-2"
                 alt="hinh anh"
               />
@@ -102,13 +102,31 @@ const Header = () => {
                   </li>
                 </ul>
               </li>
+              <li className="nav-item">
+                <Link to="product/create" className="nav-link">
+                  <i className="far fa-circle nav-icon" />
+                  <p>Thêm sản phẩm</p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="product/all" className="nav-link">
+                  <i className="far fa-circle nav-icon" />
+                  <p>Tất cả sản phẩm</p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/category/create" className="nav-link">
+                  <i className="far fa-circle nav-icon" />
+                  <p>Thêm danh mục sản phẩm</p>
+                </Link>
+              </li>
             </ul>
           </nav>
           {/* /.sidebar-menu */}
         </div>
         {/* /.sidebar */}
       </aside>
-    </div>
+    </>
   );
 };
 
