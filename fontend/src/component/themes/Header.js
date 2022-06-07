@@ -27,6 +27,8 @@ const Header = () => {
     sessionStorage.removeItem("avatar");
     localStorage.removeItem("userName");
     sessionStorage.removeItem("userName");
+    localStorage.removeItem("cart");
+    sessionStorage.removeItem("cart");
 
     setDropDownUser(!dropdownUser);
     setCartCout(0);

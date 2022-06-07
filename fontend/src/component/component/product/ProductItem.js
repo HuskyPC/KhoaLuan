@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStoreContext, action } from "../../context";
-import { toast } from "react-toastify";
 
 const ProductItem = (props) => {
-  const [state, dispatchCartContext] = useStoreContext();
-  const [isExitCart, setIsExitCart] = useState(false);
   let isUserLocal = JSON.parse(localStorage.getItem("user"));
   let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
   const [UserID, setUser] = useState();
@@ -13,13 +10,22 @@ const ProductItem = (props) => {
     if (isUserLocal !== null) setUser(isUserLocal);
     else if (isUserSEC !== null) setUser(isUserSEC);
   }
+
+  const [state, dispatchCartContext] = useStoreContext();
+
   const numberFormat = (value) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(value);
   const hadleAddToCart = () => {
-    dispatchCartContext(action.addToCart(props.id));
+    dispatchCartContext(
+      action.addToCart(
+        props.id,
+        props.priceSale !== 0 ? props.priceSale : props.price,
+        UserID
+      )
+    );
   };
   return (
     <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
