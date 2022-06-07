@@ -1,5 +1,7 @@
 ﻿using BLL.Cart;
+using BLL.Product;
 using BO.cart;
+using BO.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,9 +16,11 @@ namespace BackendWebsiteLaptop.Controllers
     public class CartController : ControllerBase
     {
         private CartBLL cartBLL;
+        private ProductBLL productBLL;
         public CartController()
         {
             cartBLL = new CartBLL();
+            productBLL = new ProductBLL();
         }
         [HttpGet]
         [Route("getCountCart")]
@@ -64,5 +68,18 @@ namespace BackendWebsiteLaptop.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet]
+        [Route("getCartByProductID")]
+        public IEnumerable<ProductBO> getCartByProductID(List<string> productID)
+        {
+            List<ProductBO> objproduct = new List<ProductBO>();
+            //for (int i=0; i < productID.Count; i++)
+            //{
+            //    objproduct[i] = productBLL.getProductByID(productID[i]);
+            //}
+           
+            return objproduct.ToArray();
+        }
+
     }
 }

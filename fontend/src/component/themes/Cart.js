@@ -1,115 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CartApi from "../api/CartAPI";
+import CartItem from "../component/cart/CartItem";
+import useGetLocalSec from "../hook/useGetLocalSec";
 const Cart = () => {
-  const [sl, setSL] = useState(1);
-  const tangSL = () => {
-    if (sl >= 1 && sl < 10) {
-      setSL(sl + 1);
+  const cartcount = useGetLocalSec("cart");
+  const userID = useGetLocalSec("user");
+  console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ userID", userID);
+  console.log("🚀 ~ file: Cart.js ~ line 5 ~ Cart ~ cartcount", cartcount);
+  const [product, setProduct] = useState("");
+  useEffect(() => {
+    function getItemproduct(id) {
+      (async () => {
+        try {
+          const respone = await CartApi.getCartItemByProductID(id);
+          setProduct(respone.data);
+          return product;
+        } catch (error) {
+          console.log(error.message);
+        }
+      })();
     }
-  };
-  const giamSL = () => {
-    if (sl > 1 && sl <= 10) {
-      setSL(sl - 1);
-    }
-  };
-
+    getItemproduct();
+  }, [product]);
   return (
     <>
       <div className="header-cart mt-11  px-20 w-full bg-white p-2">
         <span className="text-3xl font-light">Giỏ hàng </span>
       </div>
-      <div className="cart mt-4 px-20 grid grid-cols-10 gap-4">
-        <div className="col-span-7  ">
-          {/* header cart control */}
-          <div className="cart-control grid grid-cols-12 text-center text-sm bg-white p-2">
-            <div className="col-span-5">
-              <input
-                type="checkbox"
-                name="selectAll"
-                id="selectAll"
-                className="  form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200  align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-              />
-              <label
-                htmlFor="selectAll"
-                className="block cursor-pointer text-left "
-              >
-                Tất cả (số lượng)
-              </label>
-            </div>
-            <div className="col-span-2">Đơn giá</div>
-            <div className="col-span-2">Số lượng</div>
-            <div className="col-span-2">Thành tiền</div>
-            <div>
-              <i className="fa-solid fa-trash"></i>
-            </div>
-          </div>
-          <div className="cart-item-content mt-2 bg-white p-2 text-center">
-            <div className="card-item grid grid-cols-12">
-              <div className="col-span-5 grid grid-cols-10 gap-2 text-left">
+      {userID === undefined ? (
+        <div className="w-full text-center font-light">
+          <h1 className=" mt-6 text-2xl ">Giỏ hàng của bạn đang trống! </h1>
+          <Link to="/" className="text-blue-400">
+            Quay lại trang chủ thêm sản phẩm
+          </Link>
+        </div>
+      ) : cartcount === undefined || cartcount?.Cart?.lenght <= 1 ? (
+        <div className="w-full text-center font-light">
+          <h1 className=" mt-6 text-2xl ">Giỏ hàng của bạn đang trống! </h1>
+          <Link to="/" className="text-blue-400">
+            Quay lại trang chủ thêm sản phẩm
+          </Link>
+        </div>
+      ) : (
+        <div className="cart mt-4 px-20 grid grid-cols-10 gap-4">
+          <div className="col-span-7  ">
+            {/* header cart control */}
+            <div className="cart-control grid grid-cols-12 text-center text-sm bg-white p-2">
+              <div className="col-span-5">
                 <input
-                  className="col-span-1 mt-5  form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200  align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
+                  name="selectAll"
+                  id="selectAll"
+                  className="  form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200  align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 />
-                <img
-                  src="asset/img/error/img/placeholder.png"
-                  alt="hinh anh"
-                  className="col-span-3 "
-                />
-                <p className="col-span-6 ">
-                  <Link
-                    to=""
-                    className=" nameProductNoBreak"
-                    title="product 1 product 1 product 1 product 1 product 1 product 1
-                    product 1 product 1 product 1 product 1"
-                  >
-                    product 1 product 1 product 1 product 1 product 1 product 1
-                    product 1 product 1 product 1 product 1
-                  </Link>
-                  <span className="text-xs text-[#777] ">
-                    cấu hình Cấu hình Cấu hình Cấu hình
-                  </span>
-                </p>
+                <label
+                  htmlFor="selectAll"
+                  className="block cursor-pointer text-left "
+                >
+                  Tất cả
+                </label>
               </div>
-              <div className="col-span-2 flex items-center justify-center">
-                2000000
-              </div>
-              <div className="col-span-2 flex items-center justify-center">
-                <div className="buttons_added">
-                  <input
-                    className="minus is-form"
-                    type="button"
-                    defaultValue="-"
-                    onClick={giamSL}
-                  />
-                  <input
-                    aria-label="quantity"
-                    className="input-qty"
-                    max="10"
-                    min="1"
-                    name="soLuong"
-                    type="number"
-                    value={sl}
-                  />
-                  <input
-                    className="plus is-form"
-                    type="button"
-                    defaultValue="+"
-                    onClick={tangSL}
-                  />
-                </div>
-              </div>
-              <div className="col-span-2 flex items-center justify-center">
-                2000000
-              </div>
-              <div className="flex items-center justify-center text-sm ">
-                <i className="fa-solid fa-trash-can"></i>
+              <div className="col-span-2">Đơn giá</div>
+              <div className="col-span-2">Số lượng</div>
+              <div className="col-span-2">Thành tiền</div>
+              <div>
+                <i className="fa-solid fa-trash"></i>
               </div>
             </div>
+            {/* cart item */}
+            {cartcount?.cart?.map((item, index) =>
+              item.id === undefined ? "" : <CartItem key={item.id} />
+            )}
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

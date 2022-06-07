@@ -1,5 +1,6 @@
 import { ADD_TO_CART } from "./constant";
 import { toast } from "react-toastify";
+import useGetLocalSec from "../hook/useGetLocalSec";
 const initState = {
   cart: [
     {
@@ -16,10 +17,6 @@ function reducer(state, action) {
 
   //kiểm tra có trùng id ko
   function isExitIDCart(values) {
-    console.log(
-      "🚀 ~ file: reducer.js ~ line 16 ~ isExitIDCart ~ values chay vao day",
-      values.length
-    );
     if (values.length >= 2) {
       for (var i = 1; i < values.length; i++) {
         if (action.payload === values[i].id) {
