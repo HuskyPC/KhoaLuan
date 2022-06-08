@@ -1,5 +1,7 @@
 ﻿using BLL.Cart;
+using BLL.Product;
 using BO.cart;
+using BO.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,20 +16,24 @@ namespace BackendWebsiteLaptop.Controllers
     public class CartController : ControllerBase
     {
         private CartBLL cartBLL;
+        private ProductBLL productBLL;
         public CartController()
         {
             cartBLL = new CartBLL();
+            productBLL = new ProductBLL();
         }
         [HttpGet]
         [Route("getCountCart")]
         public int getCountCart(int userID)
         {
-            if (userID != null)
-            {
-                int sl = cartBLL.getCountCart(userID);
-                return sl;
-            }
-            return -1;
+            int sl = cartBLL.getCountCart(userID);
+            return sl;
+            //if (userID )
+            //{
+            //    int sl = cartBLL.getCountCart(userID);
+            //    return sl;
+            //}
+            //return -1;
         }
         [HttpPost]
         [Route("postInsertCart")]
@@ -61,6 +67,25 @@ namespace BackendWebsiteLaptop.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpPost]
+        [Route("postCartByProductID")]
+        public async Task<IActionResult> postCartByProductID(List<string> listProID)
+        {
+            var reault = await productBLL.getListProductID(listProID);
+                if (reault.Count == 0)
+            {
+                return BadRequest();
+            }
+            return Ok(reault);
+        }
+        [HttpGet]
+        [Route("getCartByProductID")]
+        public IEnumerable<ProductBO> getCartByProductID(string id)
+        {
+           
+            return productBLL.getProductByID(id).ToArray();
+           
         }
     }
 }
