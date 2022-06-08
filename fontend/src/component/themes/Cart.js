@@ -4,25 +4,34 @@ import CartApi from "../api/CartAPI";
 import CartItem from "../component/cart/CartItem";
 import useGetLocalSec from "../hook/useGetLocalSec";
 const Cart = () => {
+  document.title = "Giỏ Hàng";
   const cartcount = useGetLocalSec("cart");
+  console.log(
+    "🚀 ~ file: Cart.js ~ line 9 ~ Cart ~ cartcount",
+    cartcount?.cart[0]?.id
+  );
   const userID = useGetLocalSec("user");
-  console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ userID", userID);
-  console.log("🚀 ~ file: Cart.js ~ line 5 ~ Cart ~ cartcount", cartcount);
-  const [product, setProduct] = useState("");
-  useEffect(() => {
-    function getItemproduct(id) {
-      (async () => {
-        try {
-          const respone = await CartApi.getCartItemByProductID(id);
-          setProduct(respone.data);
-          return product;
-        } catch (error) {
-          console.log(error.message);
-        }
-      })();
-    }
-    getItemproduct();
-  }, [product]);
+
+  // const fetchProducts = async (arr) => {
+  //   await CartApi.getCartItemByProductID(arr)
+  //     .then((res) => {
+  //       setProduct(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(
+  //         "🚀 ~ file: Cart.js ~ line 24 ~ fetchProducts ~ error",
+  //         error
+  //       );
+  //     });
+  // };
+  // useEffect(() => {
+  //   var newArr = [];
+  //   for (var i = 1; i < cartcount?.cart?.length; i++) {
+  //     newArr.push(cartcount?.cart[i].id);
+  //   }
+  //   fetchProducts(newArr);
+  // }, [cartcount?.cart]);
+
   return (
     <>
       <div className="header-cart mt-11  px-20 w-full bg-white p-2">
@@ -70,7 +79,11 @@ const Cart = () => {
             </div>
             {/* cart item */}
             {cartcount?.cart?.map((item, index) =>
-              item.id === undefined ? "" : <CartItem key={item.id} />
+              item.id === "" ? (
+                ""
+              ) : (
+                <CartItem key={item.id} id={item.id} sl={item.amount} />
+              )
             )}
           </div>
         </div>

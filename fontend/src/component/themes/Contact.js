@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Contact = () => {
+  document.title = "Liên hệ";
   return (
     <div className=" mt-20  text-center">
       <p className="  text-3xl">Comming soon!</p>

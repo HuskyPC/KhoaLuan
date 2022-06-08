@@ -7,6 +7,7 @@ import ProductApi from "../api/ProductAPI";
 import ProductItem from "../component/product/ProductItem";
 
 const Product = () => {
+  document.title = "Sản phẩm";
   const [brandSuggestion, setBrandSuggestion] = useState("");
 
   const [category, setCategory] = useState("");

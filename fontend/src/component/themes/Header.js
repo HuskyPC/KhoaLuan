@@ -101,31 +101,31 @@ const Header = () => {
         font-light rounded-br pb-2 first-letter:uppercase "
             >
               <Link to="/" className="py-2 px-3 uppercase">
-                Home
+                Trang chủ
               </Link>
               <Link to="/product/all" className="py-2 px-3 uppercase">
                 Sản phẩm
               </Link>
               <Link to="/cart" className="py-2 px-3 uppercase">
-                Cart
+                Giỏ hàng
               </Link>
               <Link to="/contact" className="py-2 px-3 uppercase">
-                Contact
+                Liên hệ
               </Link>
             </div>
           </div>
           <header className="menu hidden md:flex items-center justify-center text-base font-light ">
             <Link to="/" className="p-3 uppercase">
-              Home
+              Trang chủ
             </Link>
             <Link to="/product/all" className="p-3 uppercase">
               Sản phẩm
             </Link>
             <Link to="/cart" className="p-3 uppercase ">
-              Cart
+              Giỏ hàng
             </Link>
             <Link to="/contact" className="p-3 uppercase">
-              Contact
+              Liên hệ
             </Link>
           </header>
         </div>

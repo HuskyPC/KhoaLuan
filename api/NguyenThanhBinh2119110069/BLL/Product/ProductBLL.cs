@@ -121,6 +121,21 @@ namespace BLL.Product
 
         }
 
+        public async Task<List<VMsProductBO>> getListProductID(List<string> lisID)
+        {
+            List<VMsProductBO> listProduct = new List<VMsProductBO>();
+            VMsProductBO objproduct = new VMsProductBO();
+            for (int i=0; i<lisID.Count; i++)
+            {
+               
+                objproduct = await productDAL.getProductByIDTask(lisID[i]);
+                
+                listProduct.Add(objproduct);
+
+            }
+            return listProduct;
+        }
+
 
 
     }

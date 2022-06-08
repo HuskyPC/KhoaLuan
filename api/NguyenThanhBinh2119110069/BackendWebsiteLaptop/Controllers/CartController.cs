@@ -68,18 +68,24 @@ namespace BackendWebsiteLaptop.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost]
+        [Route("postCartByProductID")]
+        public async Task<IActionResult> postCartByProductID(List<string> listProID)
+        {
+            var reault = await productBLL.getListProductID(listProID);
+                if (reault.Count == 0)
+            {
+                return BadRequest();
+            }
+            return Ok(reault);
+        }
         [HttpGet]
         [Route("getCartByProductID")]
-        public IEnumerable<ProductBO> getCartByProductID(List<string> productID)
+        public IEnumerable<ProductBO> getCartByProductID(string id)
         {
-            List<ProductBO> objproduct = new List<ProductBO>();
-            //for (int i=0; i < productID.Count; i++)
-            //{
-            //    objproduct[i] = productBLL.getProductByID(productID[i]);
-            //}
            
-            return objproduct.ToArray();
+            return productBLL.getProductByID(id).ToArray();
+           
         }
-
     }
 }

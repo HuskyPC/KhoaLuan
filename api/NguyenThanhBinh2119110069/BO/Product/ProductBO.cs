@@ -34,5 +34,6 @@ namespace BO.Product
         //public string TH { get; set; }
         //public HttpPostedFileBase ImagesUpload { get; set; }
 
+      
     }
 }

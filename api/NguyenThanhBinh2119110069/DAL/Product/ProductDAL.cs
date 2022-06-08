@@ -301,6 +301,40 @@ namespace DAL.Product
 
             return productList;
         }
+        public async Task<VMsProductBO> getProductByIDTask(string productID)
+        {
+            string procedure = "getProductByID";
+            VMsProductBO productList = new VMsProductBO();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            com.Parameters.AddWithValue("@productID", productID);
+            DataTable dt = new DataTable();
+
+           await con.OpenAsync();
+            da.Fill(dt);//do du lieu vao datatable
+            await com.DisposeAsync();//huy com
+            await con.CloseAsync();
+
+            VMsProductBO productDTO;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                productDTO = new VMsProductBO();//doc 1 dong khoi tao ProductDTO
+                //gan tung truong du lieu
+                productDTO.ProductID = Convert.ToString(dt.Rows[i]["ProductID"].ToString());
+                productDTO.name = Convert.ToString(dt.Rows[i]["name"].ToString());
+                productDTO.price = Convert.ToDouble(dt.Rows[i]["price"].ToString());
+                productDTO.priceSale = Convert.ToDouble(dt.Rows[i]["priceSale"].ToString());
+                productDTO.avatar = Convert.ToString(dt.Rows[i]["avatar"].ToString());
+                productDTO.urlImage = Convert.ToString(dt.Rows[i]["urlImage"].ToString());
+
+
+                productList = productDTO;
+            }
+
+            return productList;
+        }
         // trang detail 
 
         public ProductBO getProductDetail(string productID)

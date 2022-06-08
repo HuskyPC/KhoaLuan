@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CartApi from "../../api/CartAPI";
 
 const CartItem = (props) => {
-  const [sl, setSL] = useState(1);
+  const [product, setProduct] = useState("");
+  console.log("🚀 ~ file: CartItem.js ~ line 7 ~ CartItem ~ product", product);
+  useEffect(() => {
+    (async () => {
+      if (props.id !== undefined) {
+        const resopne = await CartApi.getProductbyID(props.id);
+        console.log("🚀 ~ file: CartItem.js ~ line 12 ~ resopne", resopne.data);
+        setProduct(resopne.data);
+      }
+    })();
+  }, [props.id]);
+  const [sl, setSL] = useState(props.sl);
   const tangSL = () => {
     if (sl >= 1 && sl < 10) {
       setSL(sl + 1);
@@ -35,7 +47,9 @@ const CartItem = (props) => {
               title="product 1 product 1 product 1 product 1 product 1 product 1
                     product 1 product 1 product 1 product 1"
             >
-              {props.name}
+              {product[0]?.name === undefined
+                ? "sản phẩm thử nghiệm"
+                : product[0]?.name}
             </Link>
             <span className="text-xs text-[#777] ">
               cấu hình Cấu hình Cấu hình Cấu hình
@@ -43,7 +57,7 @@ const CartItem = (props) => {
           </p>
         </div>
         <div className="col-span-2 flex items-center justify-center">
-          {props.price}
+          {product[0]?.price === undefined ? 0 : product[0]?.price}
         </div>
         <div className="col-span-2 flex items-center justify-center">
           <div className="buttons_added">
@@ -72,7 +86,7 @@ const CartItem = (props) => {
           </div>
         </div>
         <div className="col-span-2 flex items-center justify-center">
-          {props.price * sl}
+          {product[0]?.price === undefined ? 0 : product[0]?.price * sl}
         </div>
         <div className="flex items-center justify-center text-sm ">
           <i className="fa-solid fa-trash-can"></i>

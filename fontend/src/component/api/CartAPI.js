@@ -5,8 +5,12 @@ const CartApi = {
     const url = `Cart/postInsertCart`;
     return axiosClient.post(url, objCart);
   },
-  getCartItemByProductID(productId) {
-    const url = `Cart/getCartByProductID?productID=${productId}`;
+  postCartByProductID(productId) {
+    const url = `Cart/postCartByProductID`;
+    return axiosClient.post(url, productId);
+  },
+  getProductbyID(id) {
+    const url = `Cart/getCartByProductID?id=${id}`;
     return axiosClient.get(url);
   },
 };
