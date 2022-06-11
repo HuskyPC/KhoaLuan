@@ -1,30 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import CartApi from "../../api/CartAPI";
+import { action, useStoreContext } from "../../context";
+import useGetLocalSec from "../../hook/useGetLocalSec";
 
 const CartItem = (props) => {
+  const [state, dispatchCartContext] = useStoreContext();
+
+  const [cart, setcart] = useState("");
+  const cartcount = useGetLocalSec("cart");
+  console.log(
+    "🚀 ~ file: CartItem.js ~ line 13 ~ CartItem ~ cartcount",
+    cartcount
+  );
+  useEffect(() => {
+    setcart(cartcount);
+  }, [cartcount]);
+  function isChangeAmountcart() {
+    for (var i = 1; i < cart?.cart?.length; i++) {
+      if (props.id === cart.cart[i].id && sl !== cart.cart[i].amount) {
+        return true;
+      }
+    }
+    return false;
+  }
   const [product, setProduct] = useState("");
-  console.log("🚀 ~ file: CartItem.js ~ line 7 ~ CartItem ~ product", product);
   useEffect(() => {
     (async () => {
       if (props.id !== undefined) {
         const resopne = await CartApi.getProductbyID(props.id);
-        console.log("🚀 ~ file: CartItem.js ~ line 12 ~ resopne", resopne.data);
+
         setProduct(resopne.data);
       }
     })();
   }, [props.id]);
   const [sl, setSL] = useState(props.sl);
   const tangSL = () => {
-    if (sl >= 1 && sl < 10) {
+    dispatchCartContext(
+      action.increaseItem(sl + 1, props.cartCount, props.id, props.user)
+    );
+    if (sl >= 1 && sl < 10 && isChangeAmountcart === true) {
       setSL(sl + 1);
+      toast.success("Tăng thành công", {
+        className: "top-10",
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     }
   };
+
   const giamSL = () => {
     if (sl > 1 && sl <= 10) {
       setSL(sl - 1);
     }
   };
+
   return (
     <div className="cart-item-content mt-2 bg-white p-2 text-center">
       <div className="card-item grid grid-cols-12">

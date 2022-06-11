@@ -1,6 +1,5 @@
-import { ADD_TO_CART } from "./constant";
+import { ADD_TO_CART, INCREASE_TO_CARTITEM } from "./constant";
 import { toast } from "react-toastify";
-import useGetLocalSec from "../hook/useGetLocalSec";
 const initState = {
   cart: [
     {
@@ -11,8 +10,8 @@ const initState = {
     },
   ],
 };
-
 function reducer(state, action) {
+  console.log("🚀 ~ file: reducer.js ~ line 14 ~ reducer ~ action", action);
   let countCart = 0;
 
   //kiểm tra có trùng id ko
@@ -31,6 +30,16 @@ function reducer(state, action) {
       countCart = values[j].amount;
     }
     if (countCart > 10) {
+      return true;
+    }
+    return false;
+  }
+  function sumCartCount(value, newsl) {
+    const sum = 0;
+    for (var i = 1; i < value.cart.length; i++) {
+      sum += value.cart.amount;
+    }
+    if (sum + newsl > 10) {
       return true;
     }
     return false;
@@ -84,6 +93,28 @@ function reducer(state, action) {
         });
 
         return newList;
+
+      case INCREASE_TO_CARTITEM:
+        for (var j = 1; j < action.cart.length; j++) {
+          if (
+            action.productID === action.cart.id &&
+            sumCartCount(action.cart, action.payload) === true
+          ) {
+            const newList = {
+              ...state,
+              cart: [
+                ...state.cart,
+                {
+                  id: action,
+                  action: action.type,
+                  amount: 1,
+                  price: action.price,
+                },
+              ],
+            };
+          }
+        }
+        return state;
 
       default:
         throw new Error("Hành động không hợp lệ");

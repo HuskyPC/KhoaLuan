@@ -6,10 +6,7 @@ import useGetLocalSec from "../hook/useGetLocalSec";
 const Cart = () => {
   document.title = "Giỏ Hàng";
   const cartcount = useGetLocalSec("cart");
-  console.log(
-    "🚀 ~ file: Cart.js ~ line 9 ~ Cart ~ cartcount",
-    cartcount?.cart[0]?.id
-  );
+
   const userID = useGetLocalSec("user");
 
   // const fetchProducts = async (arr) => {
@@ -82,7 +79,13 @@ const Cart = () => {
               item.id === "" ? (
                 ""
               ) : (
-                <CartItem key={item.id} id={item.id} sl={item.amount} />
+                <CartItem
+                  key={item.id}
+                  id={item.id}
+                  sl={item.amount}
+                  user={userID}
+                  cartCount={cartcount}
+                />
               )
             )}
           </div>
