@@ -20,14 +20,26 @@ namespace BLL.Cart
             int sl = cartDAL.getCountCart(userID);
             return sl;
         }
-        public async Task<String> postInsertCart(CartBO objCart)
+        public async Task<bool> postInsertCart(CartBO objCart)
         {
-           var sl = await cartDAL.postInsertCart(objCart);
-            if (sl)
-            {
-                return "done";
-            }
-            return "fail";
+           return await cartDAL.postInsertCart(objCart);
+            
+        }
+        public int getMaxSTT()
+        {
+            return cartDAL.getMaxSTT();
+        }
+        public int getCartIDBySTT(int id)
+        {
+            return cartDAL.getCartIDBySTT(id);
+        }
+        public async Task<bool> isExitsCart(int userid, string priductID)
+        {
+            return await cartDAL.isExitsCart(userid, priductID);
+        }
+        public int getCountItemCartByUsertID(int userid)
+        {
+            return cartDAL.getCountItemCartByUsertID(userid);
         }
     }
 }

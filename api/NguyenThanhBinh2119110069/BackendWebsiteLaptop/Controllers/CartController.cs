@@ -37,26 +37,38 @@ namespace BackendWebsiteLaptop.Controllers
         }
         [HttpPost]
         [Route("postInsertCart")]
-        public async Task<IActionResult> postCreateUser(CartBO objCart )
+        public async Task<IActionResult> postCreateUser([FromForm] CartBO objCart )
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var user = await cartBLL.postInsertCart(objCart);
-                    switch (user)
+                    var isExitsCart = await cartBLL.isExitsCart(objCart.userID, objCart.productID);
+                    var countItem = cartBLL.getCountItemCartByUsertID(objCart.userID);
+                    if (isExitsCart==true)
                     {
-                        case "fail":
-                            return BadRequest();
-                        case "pass":
-                            return Content("pass");
-                        case "exists":
-                            return Content("exists");
-                        case "done":
-                            return StatusCode(StatusCodes.Status201Created);
-                        default:
-                            return BadRequest();
+                        return StatusCode(StatusCodes.Status202Accepted);
+                    }else  if(countItem >= 10)
+                    {
+                        return StatusCode(StatusCodes.Status203NonAuthoritative);
                     }
+                    else
+                    {
+
+                    int id = cartBLL.getCartIDBySTT(cartBLL.getMaxSTT());
+                    id++;
+                    objCart.cartID = "CA" + id.ToString();
+                    var resul =await cartBLL.postInsertCart(objCart);
+                        if (resul == true)
+                        {
+
+
+                    return StatusCode(StatusCodes.Status201Created);
+                        }
+                        return BadRequest();
+
+                    }
+                    
                 }
                 catch
                 {
@@ -87,5 +99,7 @@ namespace BackendWebsiteLaptop.Controllers
             return productBLL.getProductByID(id).ToArray();
            
         }
+
+        
     }
 }

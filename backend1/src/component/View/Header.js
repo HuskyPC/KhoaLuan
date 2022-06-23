@@ -75,7 +75,7 @@ const Header = () => {
               {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to="/" className="nav-link">
                   <i className="nav-icon fas fa-copy" />
                   <p>
@@ -101,19 +101,19 @@ const Header = () => {
                     </a>
                   </li>
                 </ul>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <Link to="product/create" className="nav-link">
                   <i className="far fa-circle nav-icon" />
                   <p>Thêm sản phẩm</p>
                 </Link>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <Link to="product/all" className="nav-link">
                   <i className="far fa-circle nav-icon" />
                   <p>Tất cả sản phẩm</p>
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="/category/create" className="nav-link">
                   <i className="far fa-circle nav-icon" />

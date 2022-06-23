@@ -11,6 +11,7 @@ const initState = {
   ],
 };
 function reducer(state, action) {
+  let isUserLocal = JSON.parse(localStorage.getItem("user"));
   console.log("🚀 ~ file: reducer.js ~ line 14 ~ reducer ~ action", action);
   let countCart = 0;
 
@@ -79,7 +80,6 @@ function reducer(state, action) {
             },
           ],
         };
-        let isUserLocal = JSON.parse(localStorage.getItem("user"));
 
         if (isUserLocal !== null) {
           localStorage.setItem("cart", JSON.stringify(newList));
@@ -95,6 +95,7 @@ function reducer(state, action) {
         return newList;
 
       case INCREASE_TO_CARTITEM:
+        console.log("chay vào increase cart item");
         for (var j = 1; j < action.cart.length; j++) {
           if (
             action.productID === action.cart.id &&
@@ -112,6 +113,18 @@ function reducer(state, action) {
                 },
               ],
             };
+            if (isUserLocal !== null) {
+              localStorage.setItem("cart", JSON.stringify(newList));
+              console.log(localStorage.getItem("cart"));
+            } else {
+              sessionStorage.setItem("cart", JSON.stringify(newList));
+              console.log(sessionStorage.getItem("cart"));
+            }
+            toast.success("Thêm vào giỏ hàng thành công", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
           }
         }
         return state;

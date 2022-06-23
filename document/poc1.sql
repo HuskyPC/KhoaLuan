@@ -233,12 +233,22 @@ exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456
  create proc getCountCart
  @userID int
  as 
- select count(productID) as tong
+ select count(quantity) as tong
  from CART 
  where status= 1 and userID= @userID
 group by userid
 
-exec getCountCart @userID= 3
+exec getCountCart @userID= 12
+
+
+--proc get item product buy id user
+--drop proc getCountItemCartByUsertID
+create proc getCountItemCartByUsertID
+@userID int 
+as
+select  quantity from Cart where status=1and  userID= 12 
+
+exec getCountItemCartByUsertID 12
 
 
 --proc get cart 
@@ -257,6 +267,8 @@ select cartID
 from cart 
 where stt =@stt
 
+exec getCartIDBySTT 14
+
 
 
 --proc insert cart 
@@ -264,12 +276,13 @@ where stt =@stt
 create proc postInsertCart 
 @productID varchar(10),
 @userID int, 
-@cartID varchar(15)
+@cartID varchar(15),
+@quantity int 
 as 
-insert into cart(cartID,productID, userID, status ) values(@cartID,@productID,@userID, 1)
+insert into cart(cartID,productID, userID, status, quantity ) values(@cartID,@productID,@userID, 1 ,@quantity)
 
  
-exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA9'
+exec postInsertCart @productID= 'SP3', @userID='4', @cartID='CA9', @quantity=2
 
 
 

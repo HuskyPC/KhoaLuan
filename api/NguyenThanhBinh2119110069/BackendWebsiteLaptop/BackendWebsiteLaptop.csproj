@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Photos\imagesUpload\**" />
-    <Content Remove="Photos\imagesUpload\**" />
-    <EmbeddedResource Remove="Photos\imagesUpload\**" />
-    <None Remove="Photos\imagesUpload\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
@@ -19,6 +12,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
     <ProjectReference Include="..\BO\BO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Photos\" />
   </ItemGroup>
 
 </Project>

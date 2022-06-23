@@ -17,14 +17,14 @@ const CartItem = (props) => {
   useEffect(() => {
     setcart(cartcount);
   }, [cartcount]);
-  function isChangeAmountcart() {
+  const isChangeAmountcart = () => {
     for (var i = 1; i < cart?.cart?.length; i++) {
       if (props.id === cart.cart[i].id && sl !== cart.cart[i].amount) {
         return true;
       }
     }
     return false;
-  }
+  };
   const [product, setProduct] = useState("");
   useEffect(() => {
     (async () => {
@@ -39,6 +39,11 @@ const CartItem = (props) => {
   const tangSL = () => {
     dispatchCartContext(
       action.increaseItem(sl + 1, props.cartCount, props.id, props.user)
+    );
+
+    console.log(
+      "🚀 ~ file: CartItem.js ~ line 13 ~ CartItem ~ cartcount",
+      cartcount
     );
     if (sl >= 1 && sl < 10 && isChangeAmountcart === true) {
       setSL(sl + 1);
@@ -93,7 +98,7 @@ const CartItem = (props) => {
         <div className="col-span-2 flex items-center justify-center">
           <div className="buttons_added">
             <input
-              className="minus is-form"
+              className="minus is-form cursor-pointer"
               type="button"
               defaultValue="-"
               onClick={giamSL}
@@ -109,7 +114,7 @@ const CartItem = (props) => {
               value={sl}
             />
             <input
-              className="plus is-form"
+              className="plus is-form cursor-pointer"
               type="button"
               defaultValue="+"
               onClick={tangSL}

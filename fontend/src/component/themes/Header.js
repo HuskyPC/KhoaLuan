@@ -5,7 +5,7 @@ import "../css/homeStyle.css";
 import { toast } from "react-toastify";
 import HeaderApi from "../api/HeaderAPI";
 import useGetLocalSec from "../hook/useGetLocalSec";
-
+import imgAccDefault from "../account/defaultAccountImg.png";
 const Header = () => {
   const UserID = useGetLocalSec("user");
   const countCart = useGetLocalSec("cart");
@@ -159,7 +159,7 @@ const Header = () => {
           >
             {UserID ? (
               <img
-                src="asset/img/account/defaultAccountImg.png"
+                src={imgAccDefault}
                 alt="hinh anh"
                 className=" w-10 rounded-full  "
               />

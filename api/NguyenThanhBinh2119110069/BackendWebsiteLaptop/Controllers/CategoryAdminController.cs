@@ -36,8 +36,12 @@ namespace BackendWebsiteLaptop.Controllers
                     int newid = categoryBLL.newSttCategory(categoryBLL.getCategoryIDBySTT(categoryBLL.getMaxSTTCategory()));
                     objCate.categoryID = cateID + newid.ToString();
                     var result = await categoryBLL.insertCategory(objCate);
-                   
-                    return StatusCode(StatusCodes.Status201Created);
+                    if (result)
+                    {
+
+                        return StatusCode(StatusCodes.Status201Created);
+                    }
+                    return BadRequest();
                 }
                 catch
                 {

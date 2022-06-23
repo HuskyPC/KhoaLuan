@@ -7,8 +7,6 @@ import { MultiSelect } from "react-multi-select-component";
 import CategoryAPI from "../../../api/CategoryAPI";
 import { Editor } from "@tinymce/tinymce-react";
 import Select from "react-select";
-import axiosClient from "../../../api/axiosClient";
-import axios from "axios";
 
 const ProductCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -100,78 +98,78 @@ const ProductCreate = () => {
         console.log(error.message);
       }
     })();
-    // (async () => {
-    //   if (onSubmits === true) {
-    //     const formData = new FormData();
-    //     formData.append("name", objSubmitData.name);
-    //     formData.append("price", objSubmitData.price);
-    //     formData.append("priceSale", objSubmitData.priceSale);
-    //     formData.append("file", objSubmitData.avatar);
-    //     // formData.append('brandID',objSubmitData.name);
-    //     formData.append("shortDes", objSubmitData.shortDes);
-    //     formData.append("fullDes", editor);
+    (async () => {
+      if (onSubmits === true) {
+        const formData = new FormData();
+        formData.append("name", objSubmitData.name);
+        formData.append("price", objSubmitData.price);
+        formData.append("priceSale", objSubmitData.priceSale);
+        formData.append("file", objSubmitData.avatar);
+        // formData.append('brandID',objSubmitData.name);
+        formData.append("shortDes", objSubmitData.shortDes);
+        formData.append("fullDes", editor);
 
-    //     formData.append("TH", status.value);
+        formData.append("TH", status.value);
 
-    //     formData.append("amount", objSubmitData.amount);
-    //     for (var i = 0; i < imgSelect.length; i++) {
-    //       formData.append("Files", imgSelect[i]);
-    //     }
-    //     for (var j = 0; j < cateID.length; j++) {
-    //       formData.append("CateID", cateID[j].value);
-    //     }
-    //     for (var k = 0; k < brandID.length; k++) {
-    //       formData.append("BrandID", brandID[k].value);
-    //     }
+        // formData.append("amount", objSubmitData.amount);
+        // for (var i = 0; i < imgSelect.length; i++) {
+        //   formData.append("Files", imgSelect[i]);
+        // }
+        // for (var j = 0; j < cateID.length; j++) {
+        //   formData.append("CateID", cateID[j].value);
+        // }
+        // for (var k = 0; k < brandID.length; k++) {
+        //   formData.append("BrandID", brandID[k].value);
+        // }
 
-    //     try {
-    //       setLoading(true);
-    //       const reposeData = await ProductApi.postCreteProduct(formData);
+        try {
+          setLoading(true);
+          const reposeData = await ProductApi.postCreteProduct(formData);
 
-    //       if (reposeData.status === 201) {
-    //         toast.success("Đăng ký thành công", {
-    //           className: "top-10",
-    //           position: toast.POSITION.TOP_RIGHT,
-    //           autoClose: 3000,
-    //         });
+          if (reposeData.status === 201) {
+            toast.success("Đăng ký thành công", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
 
-    //         setLoading(false);
-    //         formik.resetForm({
-    //           name: "",
-    //           price: "",
-    //           priceSale: "",
-    //           avatar: "",
-    //           brandID: "",
-    //           shortDes: "",
-    //           fullDes: "",
-    //           status: "",
-    //           amount: "",
-    //           category: "",
-    //         });
-    //         setOnSubmit(false);
-    //       } else if (reposeData.status >= 400 && reposeData < 500) {
-    //         toast.error("Thêm sản phẩm thất bại", {
-    //           className: "top-10",
-    //           position: toast.POSITION.TOP_RIGHT,
-    //           autoClose: 3000,
-    //         });
-    //         setLoading(false);
-    //         setOnSubmit(false);
-    //       } else if (reposeData.status >= 500) {
-    //         toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
-    //           className: "top-10",
-    //           position: toast.POSITION.TOP_RIGHT,
-    //           autoClose: 3000,
-    //         });
-    //         setLoading(false);
-    //         setOnSubmit(false);
-    //       }
-    //     } catch (error) {
-    //       console.log(error.message);
-    //       setOnSubmit(false);
-    //     }
-    //   }
-    // })();
+            setLoading(false);
+            formik.resetForm({
+              name: "",
+              price: "",
+              priceSale: "",
+              avatar: "",
+              brandID: "",
+              shortDes: "",
+              fullDes: "",
+              status: "",
+              amount: "",
+              category: "",
+            });
+            setOnSubmit(false);
+          } else if (reposeData.status >= 400 && reposeData < 500) {
+            toast.error("Thêm sản phẩm thất bại", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+            setLoading(false);
+            setOnSubmit(false);
+          } else if (reposeData.status >= 500) {
+            toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+            setLoading(false);
+            setOnSubmit(false);
+          }
+        } catch (error) {
+          console.log(error.message);
+          setOnSubmit(false);
+        }
+      }
+    })();
   }, [
     brandID,
     cateID,
@@ -356,7 +354,7 @@ const ProductCreate = () => {
               />
             </div>
             {/* thương hiệu */}
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Thương hiệu</label>
               <MultiSelect
                 options={options}
@@ -364,7 +362,7 @@ const ProductCreate = () => {
                 onChange={setBrandID}
                 labelledBy="Select"
               />
-            </div>
+            </div> */}
             {/* ảnh đại diện */}
             <div className="form-group mb-3">
               <label

@@ -156,7 +156,7 @@ const ProductByID = () => {
             </p>
           </div>
           {/* details product cấu hình sản phẩm */}
-          <div className="details p-8 md:col-span-2 bg-white">
+          {/* <div className="details p-8 md:col-span-2 bg-white">
             <table className="table-auto w-full">
               <tbody>
                 <tr className="leading-10">
@@ -179,7 +179,7 @@ const ProductByID = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

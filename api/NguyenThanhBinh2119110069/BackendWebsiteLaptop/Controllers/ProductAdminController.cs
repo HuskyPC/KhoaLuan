@@ -57,12 +57,12 @@ namespace BackendWebsiteLaptop.Controllers
 
                     var product = await productBLL.postCreateProductAdmin(objProduct);
                     //xu li avatar
-                    string productID = productBLL.getProductIDbyMaxStt(productBLL.getMaxSttProduct());
+                    //string productID = productBLL.getProductIDbyMaxStt(productBLL.getMaxSttProduct());
 
-                    if (objProduct.file != null)
-                    {
-                        var saveFile = await SaveFile(objProduct.file, objProduct.avatar.ToString());
-                    }
+                    //if (objProduct.file != null)
+                    //{
+                    //    var saveFile = await SaveFile(objProduct.file, objProduct.avatar.ToString());
+                    //}
                     return StatusCode(StatusCodes.Status201Created);
 
                 }
