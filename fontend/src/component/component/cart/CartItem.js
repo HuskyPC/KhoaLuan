@@ -63,7 +63,7 @@ const CartItem = (props) => {
       setSL(respon.data);
     }
   }
-  console.log("🚀 ~ file: CartItem.js ~ line 64 ~ tangSL ~ sl", sl);
+
   const tangSL = () => {
     if (sl >= 1 && sl < 10) {
       fetchDataAgain(sl + 1, 1);
@@ -132,6 +132,7 @@ const CartItem = (props) => {
             type="checkbox"
             value=""
             id="flexCheckDefault"
+            onClick={(e) => console.log(e.target.checked, props.cartId)}
           />
           <img
             src="asset/img/error/img/placeholder.png"

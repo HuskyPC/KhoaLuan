@@ -304,7 +304,13 @@ where stt =@stt
 
 exec getCartIDBySTT 14
 
+--proc get information userAccount 
+create proc getInformationInCart
+as
+select u.userID, u.fristName, u.lastName, ud.address, ud.phone from users u, userDetail ud 
+where u.userID= ud.userID 
 
+exec getInformationInCart
 
 --proc insert cart 
 --drop proc postInsertCart

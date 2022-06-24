@@ -155,6 +155,35 @@ namespace DAL.User
             }
             return false;
         }
+        public UserBO getInformationInCart(int userid)
+        {
+            string procedure = "getInformationInCart";
+           
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userid", userid);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            UserBO userDTO;
+             userDTO = new UserBO();//doc 1 dong khoi tao ProductDTO
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                //gan tung truong du lieu
+                userDTO.userID = Convert.ToInt32(dt.Rows[i]["userID"].ToString());
+                userDTO.lastName = Convert.ToString(dt.Rows[i]["lastName"].ToString());
+                userDTO.fristName = Convert.ToString(dt.Rows[i]["fristName"].ToString());
+                userDTO.avatar = Convert.ToString(dt.Rows[i]["address"].ToString());
+                userDTO.urlImage = Convert.ToString(dt.Rows[i]["phone"].ToString());
+            }
+
+            return userDTO;
+        }
 
 
     }

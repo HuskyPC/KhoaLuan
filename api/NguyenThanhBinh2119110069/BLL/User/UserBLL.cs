@@ -51,6 +51,10 @@ namespace BLL.User
         {
             return userDAL.getUserName(user);
         }
+        public UserBO getInformationInCart(int userid)
+        {
+            return userDAL.getInformationInCart(userid);
+        }
 
 
 

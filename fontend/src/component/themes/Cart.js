@@ -35,7 +35,7 @@ const Cart = () => {
           </Link>
         </div>
       ) : (
-        <div className="cart mt-4 px-20 grid grid-cols-10 gap-4">
+        <div className="cart mt-4 px-20 grid grid-cols-10 gap-4 h-auto">
           <div className="col-span-7  ">
             {/* header cart control */}
             <div className="cart-control grid grid-cols-12 text-center text-sm bg-white p-2">
@@ -83,6 +83,16 @@ const Cart = () => {
                 user={userID}
               />
             ))}
+          </div>
+          <div className="col-span-3 ">
+            <div className=" bg-white p-2">
+              <div className="grid grid-cols-2">
+                <span>Giao tới</span>
+                <span className="text-right text-blue-400 text-base cursor-pointer">
+                  Thay đổi
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}

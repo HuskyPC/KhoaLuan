@@ -24,6 +24,9 @@ namespace BO.User
         public int createdBy { get; set; }
         public DateTime updatedDate { get; set; }
         public DateTime updatedBy { get; set; }
+        public string phone { get; set; }
+        public string address { get; set; }
+        public DateTime dateOfBirth { get; set; }
 
     }
 }
