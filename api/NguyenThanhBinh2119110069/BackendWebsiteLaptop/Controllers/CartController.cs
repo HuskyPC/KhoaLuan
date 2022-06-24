@@ -37,7 +37,7 @@ namespace BackendWebsiteLaptop.Controllers
         }
         [HttpPost]
         [Route("postInsertCart")]
-        public async Task<IActionResult> postCreateUser([FromForm] CartBO objCart )
+        public async Task<IActionResult> postCreateUser([FromForm] CartBO objCart)
         {
             if (ModelState.IsValid)
             {
@@ -45,30 +45,31 @@ namespace BackendWebsiteLaptop.Controllers
                 {
                     var isExitsCart = await cartBLL.isExitsCart(objCart.userID, objCart.productID);
                     var countItem = cartBLL.getCountItemCartByUsertID(objCart.userID);
-                    if (isExitsCart==true)
+                    if (isExitsCart == true)
                     {
                         return StatusCode(StatusCodes.Status202Accepted);
-                    }else  if(countItem >= 10)
+                    }
+                    else if (countItem >= 10)
                     {
                         return StatusCode(StatusCodes.Status203NonAuthoritative);
                     }
                     else
                     {
 
-                    int id = cartBLL.getCartIDBySTT(cartBLL.getMaxSTT());
-                    id++;
-                    objCart.cartID = "CA" + id.ToString();
-                    var resul =await cartBLL.postInsertCart(objCart);
+                        int id = cartBLL.getCartIDBySTT(cartBLL.getMaxSTT());
+                        id++;
+                        objCart.cartID = "CA" + id.ToString();
+                        var resul = await cartBLL.postInsertCart(objCart);
                         if (resul == true)
                         {
 
 
-                    return StatusCode(StatusCodes.Status201Created);
+                            return StatusCode(StatusCodes.Status201Created);
                         }
                         return BadRequest();
 
                     }
-                    
+
                 }
                 catch
                 {
@@ -85,7 +86,7 @@ namespace BackendWebsiteLaptop.Controllers
         public async Task<IActionResult> postCartByProductID(List<string> listProID)
         {
             var reault = await productBLL.getListProductID(listProID);
-                if (reault.Count == 0)
+            if (reault.Count == 0)
             {
                 return BadRequest();
             }
@@ -95,11 +96,91 @@ namespace BackendWebsiteLaptop.Controllers
         [Route("getCartByProductID")]
         public IEnumerable<ProductBO> getCartByProductID(string id)
         {
-           
+
             return productBLL.getProductByID(id).ToArray();
-           
+
+        }
+        [HttpGet]
+        [Route("getItemCardByUserID")]
+        public IEnumerable<CartBO> getItemCardByUserID(int userid)
+        {
+            return cartBLL.getItemCardByUserID(userid).ToArray();
+        }
+        [HttpPatch]
+        [Route("updateQuantityCart")]
+        public async Task<IActionResult> postCartByProductID([FromForm] CartBO cart)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var countItem = cartBLL.getCountItemCartByUsertID(cart.userID);
+                    if ((countItem + 1) > 10 && cart.status == 1)
+                    {
+                        return StatusCode(StatusCodes.Status203NonAuthoritative);
+                    }
+
+                    else
+                    {
+
+                        var resul = await cartBLL.updateQuantityCart(cart.userID, cart.productID, cart.quantity);
+                        if (resul == true)
+                        {
+                            return StatusCode(StatusCodes.Status201Created);
+                        }
+                        else return BadRequest();
+                    }
+
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+
         }
 
-        
+        [HttpGet]
+        [Route("getQuantityItemCartByUserProduct")]
+        public int getQuantityItemCartByUserProduct(int userID, string productId)
+        {
+            return cartBLL.getQuantityItemCartByUserProduct(userID, productId);
+        }
+        [HttpPatch]
+        [Route("deleteCartItem")]
+        public async Task<IActionResult> deleteCartItem([FromForm] CartBO cart)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var result = await cartBLL.deleteCartItem(cart.cartID);
+                    if (result == true)
+                    {
+                        return StatusCode(StatusCodes.Status201Created);
+                    }
+                    else return BadRequest();
+
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+        }
+
     }
 }

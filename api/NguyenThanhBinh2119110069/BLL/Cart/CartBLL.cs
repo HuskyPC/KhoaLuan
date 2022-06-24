@@ -41,5 +41,21 @@ namespace BLL.Cart
         {
             return cartDAL.getCountItemCartByUsertID(userid);
         }
+        public List<CartBO> getItemCardByUserID(int userid)
+        {
+            return cartDAL.getItemCardByUserID(userid);
+        }
+        public async Task<bool> updateQuantityCart(int userid, string priductID, int quantity)
+        {
+            return await cartDAL.updateQuantityCart(userid, priductID, quantity);
+        }
+        public int  getQuantityItemCartByUserProduct(int userid, string productid)
+        {
+            return cartDAL.getQuantityItemCartByUserProduct(userid, productid);
+        }
+        public async Task<bool> deleteCartItem(string cartid)
+        {
+            return await cartDAL.deleteCartItem(cartid);
+        }
     }
 }

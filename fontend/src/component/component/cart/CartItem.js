@@ -2,67 +2,129 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import CartApi from "../../api/CartAPI";
-import { action, useStoreContext } from "../../context";
-import useGetLocalSec from "../../hook/useGetLocalSec";
 
 const CartItem = (props) => {
-  const [state, dispatchCartContext] = useStoreContext();
-
-  const [cart, setcart] = useState("");
-  const cartcount = useGetLocalSec("cart");
-  console.log(
-    "🚀 ~ file: CartItem.js ~ line 13 ~ CartItem ~ cartcount",
-    cartcount
-  );
-  useEffect(() => {
-    setcart(cartcount);
-  }, [cartcount]);
-  const isChangeAmountcart = () => {
-    for (var i = 1; i < cart?.cart?.length; i++) {
-      if (props.id === cart.cart[i].id && sl !== cart.cart[i].amount) {
-        return true;
-      }
-    }
-    return false;
-  };
+  const [sl, setSL] = useState(props.sl ? props.sl : 0);
+  const [result, setResul] = useState(0);
   const [product, setProduct] = useState("");
+  const [isdelete, setIsdelete] = useState(false);
   useEffect(() => {
+    setResul(result);
     (async () => {
-      if (props.id !== undefined) {
-        const resopne = await CartApi.getProductbyID(props.id);
+      if (props.productID !== undefined) {
+        const resopne = await CartApi.getProductbyID(props.productID);
 
         setProduct(resopne.data);
       }
     })();
-  }, [props.id]);
-  const [sl, setSL] = useState(props.sl);
-  const tangSL = () => {
-    dispatchCartContext(
-      action.increaseItem(sl + 1, props.cartCount, props.id, props.user)
-    );
+  }, [props.productID, result]);
 
-    console.log(
-      "🚀 ~ file: CartItem.js ~ line 13 ~ CartItem ~ cartcount",
-      cartcount
+  async function fetchDataAgain(newsl, actions) {
+    const formData = new FormData();
+    formData.append("userID", props.user);
+    formData.append("productID", props.productID);
+    formData.append("quantity", newsl);
+    formData.append("status", actions);
+    (async () => {
+      if (formData) {
+        const respon = await CartApi.putchUpdateQuantityCart(formData);
+        console.log("🚀 ~ file: CartItem.js ~ line 29 ~ respon", respon.status);
+        if (respon.status === 201) {
+          setResul(1);
+        } else if (respon.status === 203) {
+          setResul(2);
+
+          toast.warning("Giỏ hàng có số lượng tối đa 10 sản phẩm", {
+            className: "top-10",
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+          setResul(true);
+        } else if (respon.status >= 400 || respon.status <= 499) {
+          setResul(3);
+          toast.error(
+            `Chức năng tăng sản phẩm ${product[0]?.name} thực hiện không thành công`,
+            {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            }
+          );
+        }
+      }
+    })();
+  }
+  async function undateQuantity() {
+    const respon = await CartApi.getQuantityByUserIDProductID(
+      props.user,
+      props.productID
     );
-    if (sl >= 1 && sl < 10 && isChangeAmountcart === true) {
-      setSL(sl + 1);
-      toast.success("Tăng thành công", {
-        className: "top-10",
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
-      });
+    if (respon.data) {
+      setSL(respon.data);
+    }
+  }
+  console.log("🚀 ~ file: CartItem.js ~ line 64 ~ tangSL ~ sl", sl);
+  const tangSL = () => {
+    if (sl >= 1 && sl < 10) {
+      fetchDataAgain(sl + 1, 1);
+      if (result === 1) {
+        setSL(sl + 1);
+        setResul(0);
+      }
     }
   };
 
   const giamSL = () => {
     if (sl > 1 && sl <= 10) {
-      setSL(sl - 1);
+      fetchDataAgain(sl - 1, 0);
+      if (result === 1) {
+        setSL(sl - 1);
+        setResul(0);
+      }
     }
   };
-
+  console.log(
+    "🚀 ~ file: CartItem.js ~ line 93 ~ delette ~  props.cartId",
+    props.cartId
+  );
+  const delette = () => {
+    var answer = window.confirm(
+      `Bạn chắn chắn muốn xóa '${product[0]?.name}' này!`
+    );
+    if (answer) {
+      const formData = new FormData();
+      formData.append("cartID", props.cartId);
+      // formData.append("productID", props.productID);
+      // formData.append("userID", props.user);
+      // formData.append("quantity", sl);
+      // formData.append("status", 1);
+      if (formData) {
+        (async () => {
+          const respon = await CartApi.deleteCartItem(formData);
+          if (respon.status === 201) {
+            setIsdelete(true);
+            toast.success("Xóa thành công", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+          } else if (respon.status >= 400 || respon <= 499) {
+            toast.error("Không thể xóa! Có lỗi xảy ra", {
+              className: "top-10",
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            });
+          }
+        })();
+      }
+    }
+  };
   return (
-    <div className="cart-item-content mt-2 bg-white p-2 text-center">
+    <div
+      className={`${
+        isdelete === true ? "hidden" : ""
+      } cart-item-content mt-2 bg-white p-2 text-center`}
+    >
       <div className="card-item grid grid-cols-12">
         <div className="col-span-5 grid grid-cols-10 gap-2 text-left">
           <input
@@ -125,7 +187,10 @@ const CartItem = (props) => {
           {product[0]?.price === undefined ? 0 : product[0]?.price * sl}
         </div>
         <div className="flex items-center justify-center text-sm ">
-          <i className="fa-solid fa-trash-can"></i>
+          <i
+            className="fa-solid fa-trash-can cursor-pointer "
+            onClick={delette}
+          ></i>
         </div>
       </div>
     </div>

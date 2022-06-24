@@ -250,6 +250,41 @@ select  quantity from Cart where status=1and  userID= 12
 
 exec getCountItemCartByUsertID 12
 
+--proc get item card by user id
+create proc getItemCardByUserID
+@userID int 
+as
+select cartID, productID, quantity from Cart where status=1 and userID= @userID
+
+exec getItemCardByUserID 12
+
+
+--proc update quantity in cart by product id and user id 
+--drop proc updateQuantityCart
+create proc updateQuantityCart
+@userId int,
+@productID varchar(6),
+@quantity int 
+as
+update Cart set quantity=@quantity where userID=@userId and productID= @productID
+
+exec updateQuantityCart @userId=12, @productID='sp7',@quantity=2
+
+
+--proc get quantity item cart by user id and product id 
+create proc getQuantityItemCartByUserProduct
+@userID int,
+@productID varchar(6)
+as 
+select quantity from cart where userID= @userID and productID =@productID
+
+
+--proc delete cart item by user id and product id
+create proc deleteCartitem 
+@cartID varchar(15)
+as
+delete from Cart where cartID=@cartID
+
 
 --proc get cart 
 --drop proc getMaxSTT

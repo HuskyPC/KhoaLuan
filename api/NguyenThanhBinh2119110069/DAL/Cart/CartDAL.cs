@@ -162,5 +162,101 @@ namespace DAL.Cart
 
             return sl;
         }
+        public List<CartBO> getItemCardByUserID(int userid)
+        {
+            string procedure = "getItemCardByUserID";
+            List<CartBO> listCart = new List<CartBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            int sl = 0;
+            con.Close();
+            CartBO cartitem;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                cartitem = new CartBO();
+                cartitem.cartID = Convert.ToString(dt.Rows[i]["cartID"].ToString());
+                cartitem.productID = Convert.ToString(dt.Rows[i]["productID"].ToString());
+                cartitem.quantity = Convert.ToInt32(dt.Rows[i]["quantity"].ToString());
+                listCart.Add(cartitem);
+            }
+
+            return listCart;
+        }
+        public async Task<bool> updateQuantityCart(int userid, string priductID ,int quantity)
+        {
+            string procedure = "updateQuantityCart";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+            com.Parameters.AddWithValue("@productID", priductID);
+            com.Parameters.AddWithValue("@quantity", quantity);
+
+
+           
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+            if (result> 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public int getQuantityItemCartByUserProduct(int userid, string productid)
+        {
+            string procedure = "getQuantityItemCartByUserProduct";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+            com.Parameters.AddWithValue("@productID", productid);
+  
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            int sl = 0;
+            con.Close();
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                sl  = Convert.ToInt32(dt.Rows[i]["quantity"].ToString());
+              
+            }
+
+            return sl;
+        }
+        public async Task<bool> deleteCartItem( string cartid)
+        {
+            string procedure = "deleteCartitem";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@cartID", cartid);
+
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

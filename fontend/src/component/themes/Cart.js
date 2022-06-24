@@ -5,43 +5,29 @@ import CartItem from "../component/cart/CartItem";
 import useGetLocalSec from "../hook/useGetLocalSec";
 const Cart = () => {
   document.title = "Giỏ Hàng";
-  const cartcount = useGetLocalSec("cart");
 
+  const [cart, setCart] = useState();
+  console.log("🚀 ~ file: Cart.js ~ line 10 ~ Cart ~ cart", cart);
   const userID = useGetLocalSec("user");
 
-  // const fetchProducts = async (arr) => {
-  //   await CartApi.getCartItemByProductID(arr)
-  //     .then((res) => {
-  //       setProduct(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(
-  //         "🚀 ~ file: Cart.js ~ line 24 ~ fetchProducts ~ error",
-  //         error
-  //       );
-  //     });
-  // };
-  // useEffect(() => {
-  //   var newArr = [];
-  //   for (var i = 1; i < cartcount?.cart?.length; i++) {
-  //     newArr.push(cartcount?.cart[i].id);
-  //   }
-  //   fetchProducts(newArr);
-  // }, [cartcount?.cart]);
+  useEffect(() => {
+    async function fechData() {
+      (async () => {
+        const respon = await CartApi.getItemCardByUserID(userID);
+        if (respon.data) {
+          setCart(respon.data);
+        }
+      })();
+    }
+    fechData();
+  }, [userID]);
 
   return (
     <>
       <div className="header-cart mt-11  px-20 w-full bg-white p-2">
         <span className="text-3xl font-light">Giỏ hàng </span>
       </div>
-      {userID === undefined ? (
-        <div className="w-full text-center font-light">
-          <h1 className=" mt-6 text-2xl ">Giỏ hàng của bạn đang trống! </h1>
-          <Link to="/" className="text-blue-400">
-            Quay lại trang chủ thêm sản phẩm
-          </Link>
-        </div>
-      ) : cartcount === undefined || cartcount?.Cart?.lenght <= 1 ? (
+      {userID === undefined || cart === undefined || cart.length === 0 ? (
         <div className="w-full text-center font-light">
           <h1 className=" mt-6 text-2xl ">Giỏ hàng của bạn đang trống! </h1>
           <Link to="/" className="text-blue-400">
@@ -75,7 +61,7 @@ const Cart = () => {
               </div>
             </div>
             {/* cart item */}
-            {cartcount?.cart?.map((item, index) =>
+            {/* {cartcount?.cart?.map((item, index) =>
               item.id === "" ? (
                 ""
               ) : (
@@ -87,7 +73,16 @@ const Cart = () => {
                   cartCount={cartcount}
                 />
               )
-            )}
+            )} */}
+            {cart.map((item, index) => (
+              <CartItem
+                key={item.cartID}
+                cartId={item.cartID}
+                productID={item.productID}
+                sl={item.quantity}
+                user={userID}
+              />
+            ))}
           </div>
         </div>
       )}
