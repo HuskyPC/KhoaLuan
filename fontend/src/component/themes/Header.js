@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
 import { toast } from "react-toastify";
-import HeaderApi from "../api/HeaderAPI";
 import useGetLocalSec from "../hook/useGetLocalSec";
 import imgAccDefault from "../account/defaultAccountImg.png";
 const Header = () => {
@@ -76,7 +75,7 @@ const Header = () => {
             />
           </Link>
           <Link to="/">
-            <span className="md:inline-block hidden uppercase">logo</span>
+            <span className="md:inline-block hidden uppercase">laptop TB</span>
           </Link>
         </div>
         {/* menu */}
@@ -186,7 +185,7 @@ const Header = () => {
               {UserID !== undefined ? (
                 <>
                   <Link
-                    to="/"
+                    to="/user"
                     className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
                     onClick={handeleDropdownUser}
                   >

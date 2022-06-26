@@ -55,7 +55,7 @@ const Product = () => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-full">
       <div className="product-tag h-40 bg-white grid grid-rows-2 ">
         <div className="h-1/2"></div>
         <div className="tag flex items-center justify-center pb-10">
@@ -254,7 +254,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -23,7 +23,7 @@ const Cart = () => {
   }, [userID]);
 
   return (
-    <>
+    <div className="min-h-full">
       <div className="header-cart mt-11  px-20 w-full bg-white p-2">
         <span className="text-3xl font-light">Giỏ hàng </span>
       </div>
@@ -96,7 +96,7 @@ const Cart = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
