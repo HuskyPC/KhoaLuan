@@ -6,6 +6,7 @@ import BrandSuggestion from "../component/home/BrandSuggestion";
 import LoadProductByBrand from "../component/home/LoadProductByBrand";
 import NewProduct from "../component/home/NewProduct";
 const Home = () => {
+  document.title = "Trang chủ";
   const [brandData, setBrandData] = useState([]);
   useEffect(() => {
     (async () => {
