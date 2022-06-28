@@ -30,7 +30,7 @@ namespace DAL.Cart
             da.Fill(dt);//do du lieu vao datatable
             com.Dispose();//huy com
             con.Close();
-            if (dt.Rows.Count != null)
+            if (dt.Rows != null)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -40,35 +40,31 @@ namespace DAL.Cart
             }
             else return 0;
         }
-        public async  Task<bool> postInsertCart(CartBO objCartBO)
+        public async Task<bool> postInsertCart(CartBO objCartBO)
         {
             string procedure = "postInsertCart";
-            int stt = getMaxSTT();
-            string cartID = getCartIDBySTT(stt);
-            int idCart = Convert.ToInt32(cartID);
-            idCart++;
-            string newCartID = "CA" + idCart.ToString();
+
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@userID", objCartBO.userID);
             com.Parameters.AddWithValue("@productID", objCartBO.productID);
-            com.Parameters.AddWithValue("@cartID", newCartID);
+            com.Parameters.AddWithValue("@cartID", objCartBO.cartID);
+            com.Parameters.AddWithValue("@quantity", objCartBO.quantity);
 
-            con.Open();
-            var KQ = com.ExecuteNonQuery();
-            com.Dispose();//huy com
-            com.Clone();
-            if (KQ == 1)
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+            if (result > 0)
+            {
                 return true;
-            else if (KQ == -1)
-                return false;
+            }
             return false;
         }
-        public string getCartIDBySTT(int id)
+        public int getCartIDBySTT(int id)
         {
             string procedure = "getCartIDBySTT";
-           
+
             SqlConnection con = DB.getConnection();
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
@@ -81,20 +77,21 @@ namespace DAL.Cart
             da.Fill(dt);
             com.Dispose();//huy com
             com.Clone();
-            string cartID="";
-            if (dt.Rows.Count != null)
+            string cartID = "";
+            if (dt.Rows != null)
             {
-                for(int i=0; i < dt.Rows.Count; i++)
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     cartID = Convert.ToString(dt.Rows[i]["cartID"].ToString());
                 }
-                
+
             }
-           string newCartID=cartID.Substring(3);
+            int newid = Convert.ToInt32(cartID.Substring(2, cartID.Length - 2));
 
 
 
-            return newCartID;
+
+            return newid;
         }
         public int getMaxSTT()
         {
@@ -110,14 +107,156 @@ namespace DAL.Cart
             da.Fill(dt);
             com.Dispose();//huy com
             com.Clone();
-            int kq=0;
-            for(int i=0; i< dt.Rows.Count; i++)
+            int kq = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 kq = Convert.ToInt32(dt.Rows[i]["maxs"].ToString());
-            }    
-            
+            }
+
             return kq;
+
+        }
+        public async Task<bool> isExitsCart(int userid, string priductID)
+        {
+            string procedure = "isExitsCart";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+            com.Parameters.AddWithValue("@productID", priductID);
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            await con.OpenAsync();
+            da.Fill(dt);
             
+            await con.CloseAsync();
+            if (dt.Rows.Count!=0)
+            {
+                return true;
+            }
+            
+            return false;
+        }
+        public int getCountItemCartByUsertID(int userid)
+        {
+            string procedure = "getCountItemCartByUsertID";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+           
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            int sl=0;
+            con.Close();
+            for(int i=0; i< dt.Rows.Count; i++)
+            {
+                sl += Convert.ToInt32(dt.Rows[i]["quantity"].ToString());
+            }
+
+            return sl;
+        }
+        public List<CartBO> getItemCardByUserID(int userid)
+        {
+            string procedure = "getItemCardByUserID";
+            List<CartBO> listCart = new List<CartBO>();
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            int sl = 0;
+            con.Close();
+            CartBO cartitem;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                cartitem = new CartBO();
+                cartitem.cartID = Convert.ToString(dt.Rows[i]["cartID"].ToString());
+                cartitem.productID = Convert.ToString(dt.Rows[i]["productID"].ToString());
+                cartitem.quantity = Convert.ToInt32(dt.Rows[i]["quantity"].ToString());
+                listCart.Add(cartitem);
+            }
+
+            return listCart;
+        }
+        public async Task<bool> updateQuantityCart(int userid, string priductID ,int quantity)
+        {
+            string procedure = "updateQuantityCart";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+            com.Parameters.AddWithValue("@productID", priductID);
+            com.Parameters.AddWithValue("@quantity", quantity);
+
+
+           
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+            if (result> 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public int getQuantityItemCartByUserProduct(int userid, string productid)
+        {
+            string procedure = "getQuantityItemCartByUserProduct";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userID", userid);
+            com.Parameters.AddWithValue("@productID", productid);
+  
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            int sl = 0;
+            con.Close();
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                sl  = Convert.ToInt32(dt.Rows[i]["quantity"].ToString());
+              
+            }
+
+            return sl;
+        }
+        public async Task<bool> deleteCartItem( string cartid)
+        {
+            string procedure = "deleteCartitem";
+
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@cartID", cartid);
+
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

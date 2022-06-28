@@ -14,4 +14,8 @@
     <ProjectReference Include="..\BO\BO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Photos\" />
+  </ItemGroup>
+
 </Project>

@@ -1,17 +1,19 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Login from "../component/user/Login";
 import LoginTab from "../component/user/LoginTab";
 import RegisterTab from "../component/user/RegisterTab";
 import Cart from "../themes/Cart";
+import Contact from "../themes/Contact";
 import Favorite from "../themes/Favorite";
+import Footer from "../themes/Footer";
 import Header from "../themes/Header";
 
 import Home from "../themes/Home";
+import Order from "../themes/Order";
 import Product from "../themes/Product";
 import ProductByID from "../themes/ProductByID";
 import Search from "../themes/Search";
+import User from "../themes/User";
 const Routers = () => {
   return (
     <BrowserRouter>
@@ -34,7 +36,11 @@ const Routers = () => {
         <Route path="/favorite/" element={<Favorite />} />
         <Route path="/login" element={<LoginTab />} />
         <Route path="/register" element={<RegisterTab />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/order/:id" element={<Order />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
