@@ -1,7 +1,7 @@
 import React from "react";
 
 const History = () => {
-  return <div>history</div>;
+  return <div className="w-full "></div>;
 };
 
 export default History;

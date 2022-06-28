@@ -9,6 +9,7 @@ import Footer from "../themes/Footer";
 import Header from "../themes/Header";
 
 import Home from "../themes/Home";
+import Order from "../themes/Order";
 import Product from "../themes/Product";
 import ProductByID from "../themes/ProductByID";
 import Search from "../themes/Search";
@@ -37,6 +38,7 @@ const Routers = () => {
         <Route path="/register" element={<RegisterTab />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user" element={<User />} />
+        <Route path="/order/:id" element={<Order />} />
       </Routes>
       <Footer />
     </BrowserRouter>

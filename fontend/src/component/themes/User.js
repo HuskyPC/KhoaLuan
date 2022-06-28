@@ -43,7 +43,7 @@ const User = ({ tab = 0 }) => {
                 Thông tin tài khoảng
               </span>
             </span>
-            <span
+            {/* <span
               className="mt-1 grid grid-cols-12 gap-1 p-2 hover:bg-white rounded cursor-pointer"
               onClick={() => setState(2)}
             >
@@ -51,7 +51,7 @@ const User = ({ tab = 0 }) => {
               <span className="text-xs font-light col-span-10">
                 Thông báo của tôi
               </span>
-            </span>{" "}
+            </span> */}
             <span
               className="mt-1 grid grid-cols-12 gap-1 p-2 hover:bg-white rounded cursor-pointer"
               onClick={() => setState(3)}
