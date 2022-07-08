@@ -154,6 +154,7 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 -- drop proc postCreateUsser
 create proc postCreateUsser
 @userName nvarchar(50),
+
 @email nvarchar(200),
 
 @lastName nvarchar(50),
@@ -398,3 +399,13 @@ select ProductID, name, price, priceSale,avatar,urlImage,brandID,slug,shortDes,f
 from product 
 where status=1 and ProductID=@productID
 
+---user 
+---proc update user 
+create proc updateUser
+@userID int,
+@lastName nvarchar(50),
+@fristName nvarchar(100),
+@avatar varchar(max)
+as
+update users set fristName =@fristName , lastName= @lastName, avatar= @avatar where userID=@userId 
+exec updateUser @fristName='TB', @lastName='Nguyen', @avatar= 'null',@userID=12

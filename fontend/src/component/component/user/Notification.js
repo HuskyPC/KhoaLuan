@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import imgAccDefault from "../../account/defaultProduct.jpg";
 
-const Notification = () => {
+const Notification = (props) => {
   const numberFormat = (value) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -16,7 +16,7 @@ const Notification = () => {
         </h1>
         <hr className="p-2 mt-2" />
 
-        <Link to="/order/2" className="grid grid-cols-12">
+        <Link to="/detail/SP12" className="grid grid-cols-12">
           <img
             src={imgAccDefault}
             alt="hình ảnh"
@@ -35,7 +35,7 @@ const Notification = () => {
             Tổng tiền: <strong>{numberFormat(1000000)}</strong>
           </span>
           <Link
-            to="/order/2"
+            to="/user/Quan-li-don-hang/1"
             className="inline-block mt-3 col-span-2    px-6  py-2.5 bg-blue-600  text-white  font-medium text-xs  leading-tight  uppercase  rounded
                 shadow-md  hover:bg-blue-700 hover:shadow-lg  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0  active:bg-blue-800 active:shadow-lg
                 transition  duration-150  ease-in-out"

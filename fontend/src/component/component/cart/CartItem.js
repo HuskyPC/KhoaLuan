@@ -83,10 +83,10 @@ const CartItem = (props) => {
       }
     }
   };
-  console.log(
-    "🚀 ~ file: CartItem.js ~ line 93 ~ delette ~  props.cartId",
-    props.cartId
-  );
+  // console.log(
+  //   "🚀 ~ file: CartItem.js ~ line 93 ~ delette ~  props.cartId",
+  //   props.cartId
+  // );
   const delette = () => {
     var answer = window.confirm(
       `Bạn chắn chắn muốn xóa '${product[0]?.name}' này!`

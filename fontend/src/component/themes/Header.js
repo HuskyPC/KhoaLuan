@@ -137,10 +137,9 @@ const Header = () => {
 
           <Link className="p-3 relative" to="/cart">
             <i className="fa-solid fa-cart-shopping "></i>
-            {countCart?.cart.lenght > 1 ? (
+            {countCart?.cart?.lenght > 1 ? (
               <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
-                {countCart?.cart.lenght}
-                {console.log("vô đây header ")}
+                {countCart?.cart?.lenght}
               </span>
             ) : (
               ""

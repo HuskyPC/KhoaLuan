@@ -29,5 +29,9 @@ const CartApi = {
     const url = `Cart/deleteCartItem`;
     return axiosClient.patch(url, cartid);
   },
+  getInformationInCart(userID) {
+    const url = `/User/getInformationInCart?userid=${userID}`;
+    return axiosClient.get(url);
+  },
 };
 export default CartApi;

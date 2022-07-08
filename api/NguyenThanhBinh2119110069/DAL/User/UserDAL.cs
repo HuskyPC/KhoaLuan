@@ -178,12 +178,14 @@ namespace DAL.User
                 userDTO.userID = Convert.ToInt32(dt.Rows[i]["userID"].ToString());
                 userDTO.lastName = Convert.ToString(dt.Rows[i]["lastName"].ToString());
                 userDTO.fristName = Convert.ToString(dt.Rows[i]["fristName"].ToString());
-                userDTO.avatar = Convert.ToString(dt.Rows[i]["address"].ToString());
                 userDTO.urlImage = Convert.ToString(dt.Rows[i]["phone"].ToString());
+                userDTO.address= Convert.ToString(dt.Rows[i]["address"].ToString());
             }
 
             return userDTO;
         }
+
+        
 
 
     }

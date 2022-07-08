@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import imgAccDefault from "../../account/defaultAccountImg.png";
 import { Link } from "react-router-dom";
+import UserAPI from "../../api/UserAPI";
 
 const Edit = () => {
   const [avatar, setAvatar] = useState();
@@ -13,10 +14,13 @@ const Edit = () => {
   const [edSdt, setEdSdt] = useState(false);
   const [edEmail, setEDEmail] = useState(false);
   const [edLocation, setEdLocation] = useState(false);
+  const [objSubmitData, setObjSubmitData] = useState();
+  const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues: {
       fristName: "",
       lastName: "",
+      date: "",
       tempAvatar: "",
       avatar: "",
     },
@@ -31,6 +35,16 @@ const Edit = () => {
         .required("Vui lòng nhập Tên"),
     }),
     onSubmit: (valuesForm) => {
+      console.log(
+        "🚀 ~ file: Edit.js ~ line 34 ~ Edit ~ valuesForm",
+        valuesForm
+      );
+      setObjSubmitData({
+        fristName: valuesForm.fristName,
+        lastName: valuesForm.lastName,
+        date: valuesForm.date,
+        avatar: valuesForm.avatar,
+      });
       // setEmail(valuesForm.email);
       // setPassWord(valuesForm.password);
     },
@@ -58,6 +72,61 @@ const Edit = () => {
     setToastImg(false);
     setTepAvatar("");
   };
+  useEffect(() => {
+    async function fechData() {
+      if (objSubmitData.length !== 0) {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("fristName", objSubmitData.name);
+        formData.append("lastName", objSubmitData.price);
+        formData.append("date", objSubmitData.priceSale);
+        formData.append("file", tempAvatar2);
+        const reposeData = await UserAPI.postUpdateAcc(formData);
+        if (reposeData.status === 201) {
+          toast.success("Cập nhật thành công", {
+            className: "top-10",
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+          formik.resetForm({
+            fristName: "",
+            lastName: "",
+            userName: "",
+            date: "",
+            
+          });
+          setLoading(false);
+          
+        } else if (reposeData.status >= 400 && reposeData < 500) {
+          toast.error("Cập nhật thành công", {
+            className: "top-10",
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+          setLoading(false);
+        } else if (reposeData.status >= 500) {
+          toast.warning("Có sự cố xảy ra chúng tôi rất tiếc vì điều này", {
+            className: "top-10",
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+          setLoading(false);
+        }
+      }
+    }
+    fechData().catch(() => {
+      setLoading(false);
+      toast.error("Cập nhật thất bại", {
+        className: "top-10",
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+      // toast.error(`Đăng ký thất bại`, {
+      //   position: toast.POSITION.TOP_RIGHT,
+      //   autoClose: 3000,
+      // });
+    });
+  }, [ objSubmitData]);
   return (
     <>
       <h1 className="text-lg text-blue-500 font-light">Thông tin tài khoảng</h1>
@@ -108,108 +177,121 @@ const Edit = () => {
             </button>
           </div>
         </div>
-        <form className="col-span-6">
-          <span className="col-span-12 block pb-4">Thông tin cá nhân </span>
-          <div className="grid grid-cols-9 gap-3">
-            <span
-              className="col-span-2"
-              readOnly
-              onClick={() => setToastImg(true)}
-            >
-              <div className=" relative">
-                <img
-                  src={
-                    avatar ? URL.createObjectURL(tempAvatar2) : imgAccDefault
-                  }
-                  alt="hinh anh"
-                  className=" rounded-full col-span-2 "
-                  onClick={() => setToastImg(true)}
-                />
-                <i className="fas fa-pencil-alt absolute right-2 bottom-2 p-1 bg-gray-rgba-1 rounded-full text-xs "></i>
-              </div>
-            </span>
-            <div className=" col-span-7 p-2">
-              <div className=" form-group mb-3 grid grid-cols-3">
-                <label
-                  htmlFor="fristName"
-                  className="form-label mb-2 text-gray-700 col-span-1"
-                >
-                  Họ và tên đệm
-                </label>
-                <input
-                  type="text"
-                  className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+        <div className="col-span-6">
+          <form onSubmit={formik.handleSubmit}>
+            <span className="col-span-12 block pb-4">Thông tin cá nhân </span>
+            <div className="grid grid-cols-9 gap-3">
+              <span
+                className="col-span-2"
+                readOnly
+                onClick={() => setToastImg(true)}
+              >
+                <div className=" relative">
+                  <img
+                    src={
+                      avatar ? URL.createObjectURL(tempAvatar2) : imgAccDefault
+                    }
+                    alt="hinh anh"
+                    className=" rounded-full col-span-2 "
+                    onClick={() => setToastImg(true)}
+                  />
+                  <i className="fas fa-pencil-alt absolute right-2 bottom-2 p-1 bg-gray-rgba-1 rounded-full text-xs "></i>
+                </div>
+              </span>
+              <div className=" col-span-7 p-2">
+                <div className=" form-group mb-3 grid grid-cols-3">
+                  <label
+                    htmlFor="fristName"
+                    className="form-label mb-2 text-gray-700 col-span-1"
+                  >
+                    Họ và tên đệm
+                  </label>
+                  <input
+                    type="text"
+                    className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="fristName"
-                  aria-describedby="emailHelp"
-                  placeholder="Họ và tên đệm"
-                  {...formik.getFieldProps("fristName")}
-                />
-                {formik.touched.fristName && formik.errors.fristName ? (
-                  <>
-                    <div className="col-span-1 "></div>
-                    <div className="text-sm text-red-500 col-span-2 float-right">
-                      {formik.errors.fristName}
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="form-group mb-3 grid grid-cols-3">
-                <label
-                  htmlFor="lastName"
-                  className="form-label mb-2 text-gray-700 col-span-1"
-                >
-                  Tên
-                </label>
-                <input
-                  type="text"
-                  className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                    id="fristName"
+                    aria-describedby="emailHelp"
+                    placeholder="Họ và tên đệm"
+                    {...formik.getFieldProps("fristName")}
+                  />
+                  {formik.touched.fristName && formik.errors.fristName ? (
+                    <>
+                      <div className="col-span-1 "></div>
+                      <div className="text-sm text-red-500 col-span-2 float-right">
+                        {formik.errors.fristName}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="form-group mb-3 grid grid-cols-3">
+                  <label
+                    htmlFor="lastName"
+                    className="form-label mb-2 text-gray-700 col-span-1"
+                  >
+                    Tên
+                  </label>
+                  <input
+                    type="text"
+                    className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="lastName"
-                  aria-describedby="emailHelp"
-                  placeholder="Họ và tên đệm"
-                  {...formik.getFieldProps("lastName")}
-                />
-                {formik.touched.lastName && formik.errors.lastName ? (
-                  <>
-                    <div className="col-span-1 "></div>
-                    <div className="text-sm text-red-500 col-span-2 float-right">
-                      {formik.errors.lastName}
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="form-group mb-3 grid grid-cols-3">
-                <label htmlFor="meeting-time">Ngày sinh</label>
+                    id="lastName"
+                    aria-describedby="emailHelp"
+                    placeholder="Họ và tên đệm"
+                    {...formik.getFieldProps("lastName")}
+                  />
+                  {formik.touched.lastName && formik.errors.lastName ? (
+                    <>
+                      <div className="col-span-1 "></div>
+                      <div className="text-sm text-red-500 col-span-2 float-right">
+                        {formik.errors.lastName}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="form-group mb-3 grid grid-cols-3">
+                  <label htmlFor="meeting-time">Ngày sinh</label>
 
-                <input
-                  type="datetime-local"
-                  id="meeting-time"
-                  value=""
-                  name="meeting-time"
-                  min="1930-01-01T00:00"
-                  max="2021-12-01T00:00"
-                  className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                  <input
+                    type="datetime-local"
+                    id="meeting-time"
+                    name="meeting-time"
+                    min="1930-01-01T00:00"
+                    max="2022-12-01T00:00"
+                    className="col-span-2 form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                />
-                {formik.touched.lastName && formik.errors.lastName ? (
-                  <>
-                    <div className="col-span-1 "></div>
-                    <div className="text-sm text-red-500 col-span-2 float-right">
-                      {formik.errors.lastName}
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
+                    {...formik.getFieldProps("date")}
+                  />
+                  {formik.touched.lastName && formik.errors.lastName ? (
+                    <>
+                      <div className="col-span-1 "></div>
+                      <div className="text-sm text-red-500 col-span-2 float-right">
+                        {formik.errors.lastName}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="col-start-3 col-span-6 form-group mb-3 grid grid-cols-3">
+                  <span></span>
+                  <button
+                    type="submit"
+                    className=" col-span-2  w-full  px-6  py-2.5 bg-blue-600  text-white  font-medium text-xs  leading-tight  uppercase  rounded
+                shadow-md  hover:bg-blue-700 hover:shadow-lg  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0  active:bg-blue-800 active:shadow-lg
+                transition  duration-150  ease-in-out"
+                  >
+                    Lưu Thay đổi
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
         <div className="w-full col-span-4 p-2">
           <span className="col-span-12 block pb-4">Thông tin khác</span>
           <div className="grid grid-cols-12 gap-2 text-sm mt-2">
@@ -322,17 +404,6 @@ const Edit = () => {
               Hủy
             </span>
           </div>
-        </div>
-        <div className="col-start-3 col-span-6 form-group mb-3 grid grid-cols-3">
-          <span></span>
-          <button
-            type="submit"
-            className=" col-span-2  w-full  px-6  py-2.5 bg-blue-600  text-white  font-medium text-xs  leading-tight  uppercase  rounded
-                shadow-md  hover:bg-blue-700 hover:shadow-lg  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0  active:bg-blue-800 active:shadow-lg
-                transition  duration-150  ease-in-out"
-          >
-            Lưu Thay đổi
-          </button>
         </div>
       </div>
     </>
