@@ -67,9 +67,10 @@ const Cart = () => {
     }),
     onSubmit: (valuesForm) => {
       console.log(
-        "🚀 ~ file: Cart.js ~ line 83 ~ Cart ~ valuesForm",
+        "🚀 ~ file: Cart.js ~ line 69 ~ Cart ~ valuesForm",
         valuesForm
       );
+
       setIsChangeAddress(false);
       // setIn4User({
       //   fristName: valuesForm.name,

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {}
+    "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+    "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+        "projectUniqueName": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
         "projectName": "BO",
-        "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
+        "projectPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj",
         "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\obj\\",
+        "outputPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",

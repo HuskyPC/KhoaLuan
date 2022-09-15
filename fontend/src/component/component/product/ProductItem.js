@@ -66,7 +66,7 @@ const ProductItem = (props) => {
   };
 
   return (
-    <div className="product-body h-[350px] bg-white  p-3 relative text-center ">
+    <div className="product-body  bg-white  p-3 relative text-center pb-8 rounded">
       <img
         className="w-full h-1/2 "
         src={`${
@@ -103,19 +103,40 @@ const ProductItem = (props) => {
           {props.name}
         </p>
       </Link>
+      <span className="text-gray-400 font-light align-baseline">
+        <span>
+          <i class="fa-solid fa-microchip"></i> core i3 4300u
+        </span>
+        <br />
+        <span>
+          <i className="fa-solid fa-memory"></i> 8gb
+        </span>
+        &emsp;
+        <span>
+          <i className="fa-solid fa-hard-drive"></i> 240gb
+        </span>
+        &emsp;
+        <span>
+          <i className="fa-solid fa-display"></i> 1366x768
+        </span>
+        &emsp;
+        <span>
+          <i className="fa-solid fa-weight-hanging"></i> 2kg
+        </span>
+      </span>
       <div className="grid grid-cols-5 gap-2 mt-5  font-light">
         <Link
           to={`/detail/${props.id} `}
           className="col-span-2 text-xs mt-1 hover:text-blue-500"
         >
           <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          &nbsp;Chi tiết
+          &emsp;Chi tiết
         </Link>
         <button
           className="col-span-3 text-[10px] text-white bg-black rounded-full hover:bg-blue-500"
           onClick={hadleAddToCart}
         >
-          <i className="fa-solid fa-cart-shopping text-xs"></i>&nbsp;Thêm vào
+          <i className="fa-solid fa-cart-shopping text-xs"></i>&emsp;Thêm vào
           giỏ
         </button>
       </div>

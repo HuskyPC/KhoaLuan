@@ -6405,11 +6405,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+      "projectUniqueName": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
       "projectName": "BackendWebsiteLaptop",
-      "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
+      "projectPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\BackendWebsiteLaptop.csproj",
       "packagesPath": "C:\\Users\\binh1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\obj\\",
+      "outputPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BackendWebsiteLaptop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\binh1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6426,11 +6426,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj"
+            "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj": {
+              "projectPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj"
             },
-            "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
-              "projectPath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
+            "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj": {
+              "projectPath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BO\\BO.csproj"
             }
           }
         }

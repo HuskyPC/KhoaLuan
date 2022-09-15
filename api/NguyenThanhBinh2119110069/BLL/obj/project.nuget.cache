@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gzfO4Wef26Qg1C2TjDtcn0wCzCsQ3b6mzk+F+JDm5GULvFgROlcl/5o+bxlsJ16gAjnZojdwBFvbv9pGEoxOPw==",
+  "dgSpecHash": "dzjk6usHDgK3KqiYuWh6zcznrVeEFDQzaaQeQJNkYXm5tQQ7SfPerCvTIThMbFKawI7quL9pgmPdGsKJ/iPUrw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\binh1\\OneDrive\\Máy tính\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
+  "projectFilePath": "F:\\NAM III\\KLTN\\KLTN\\New folder\\api\\NguyenThanhBinh2119110069\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.8\\microsoft.aspnet.webapi.client.5.2.8.nupkg.sha512",
     "C:\\Users\\binh1\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.8\\microsoft.aspnet.webapi.core.5.2.8.nupkg.sha512",

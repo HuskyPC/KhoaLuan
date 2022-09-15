@@ -34,3 +34,15 @@ C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069
 C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.dll
 C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\ref\BO.dll
 C:\Users\binh1\OneDrive\Máy tính\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.pdb
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.deps.json
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.dll
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\ref\BO.dll
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\bin\Debug\net5.0\BO.pdb
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.csproj.AssemblyReference.cache
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.GeneratedMSBuildEditorConfig.editorconfig
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.AssemblyInfoInputs.cache
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.AssemblyInfo.cs
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.csproj.CoreCompileInputs.cache
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.dll
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\ref\BO.dll
+F:\NAM III\KLTN\KLTN\New folder\api\NguyenThanhBinh2119110069\BO\obj\Debug\net5.0\BO.pdb
