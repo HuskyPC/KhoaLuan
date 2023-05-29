@@ -26,45 +26,69 @@ namespace BLL.Category
             List<CategoryBO> listCategory = categoryDAL.getCategory();
             return listCategory;
         }
-        public List<CategoryBO> getProductByCategory(string brandID)
+        public List<CategoryBO> getCateCreatePro()
         {
-            BrandBLL objBrand = new BrandBLL();
-            List<BrandBO> listBrand = objBrand.getBrandIDandParentID();
-
-            List<CategoryBO> listCategory = categoryDAL.getCategory();
-
-            ProductToCategoryBLL objMap = new ProductToCategoryBLL();
-            List<ProductToCategoryBO> listMap = objMap.getAllmappingProductCategory();
-
-
-            for (int i = 0; i < listBrand.Count; i++)
-            {
-                if (listBrand[i].brandID == brandID)
-                {
-                    if (listBrand[i].productBo.Count != 0)
-                    {
-                        for (int y = 0; y < listBrand[i].productBo.Count; y++)
-                        {
-                            for (int cate = 0; cate < listCategory.Count; cate++)
-                            {
-                                for (int pro = 0; pro < listBrand[i].productBo.Count; pro++)
-                                {
-
-                                    if (listBrand[i].productBo[pro].ProductID == listMap[y].productID && listMap[y].categoryID == listCategory[cate].categoryID)
-                                    {
-
-                                        listCategory[cate].productBO = new List<ProductBO>(listBrand[i].productBo[pro]) ;
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            List<CategoryBO> listCategory = categoryDAL.getCateCreatePro();
             return listCategory;
-
-
         }
+        public int getMaxSTTCategory()
+        {
+            return categoryDAL.getMaxSTTCategory();
+        }
+        public string getCategoryIDBySTT(int a)
+        {
+            return categoryDAL.getCategoryIDBySTT(a);
+        }
+        public int newSttCategory(string a )
+        {
+            int id = Convert.ToInt32(a.Substring(2, a.Length - 2));
+            id++;
+            return id;
+        }
+        public async Task<bool> insertCategory(CategoryBO objcate)
+        {
+            return await categoryDAL.insertCategory(objcate);
+            
+        }
+        //public List<CategoryBO> getProductByCategory(string brandID)
+        //{
+        //    BrandBLL objBrand = new BrandBLL();
+        //    List<BrandBO> listBrand = objBrand.getBrandIDandParentID();
+
+        //    List<CategoryBO> listCategory = categoryDAL.getCategory();
+
+        //    ProductToCategoryBLL objMap = new ProductToCategoryBLL();
+        //    List<ProductToCategoryBO> listMap = objMap.getAllmappingProductCategory();
+
+
+        //    for (int i = 0; i < listBrand.Count; i++)
+        //    {
+        //        if (listBrand[i].brandID == brandID)
+        //        {
+        //            if (listBrand[i].productBo.Count != 0)
+        //            {
+        //                for (int y = 0; y < listBrand[i].productBo.Count; y++)
+        //                {
+        //                    for (int cate = 0; cate < listCategory.Count; cate++)
+        //                    {
+        //                        for (int pro = 0; pro < listBrand[i].productBo.Count; pro++)
+        //                        {
+
+        //                            if (listBrand[i].productBo[pro].ProductID == listMap[y].productID && listMap[y].categoryID == listCategory[cate].categoryID)
+        //                            {
+
+        //                                listCategory[cate].productBO = new List<ProductBO>(listBrand[i].productBo[pro]) ;
+
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return listCategory;
+
+
+        //}
     }
 }

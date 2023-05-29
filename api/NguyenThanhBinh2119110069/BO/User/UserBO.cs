@@ -11,7 +11,9 @@ namespace BO.User
         public int userID { get; set; }
         public string userName { get; set; }
         public string email { get; set; }
+        public string passwordSalt { get; set; }
         public string password { get; set; }
+        public string passwordHash { get; set; }
         public string lastName { get; set; }
         public string fristName { get; set; }
         public string avatar { get; set; }
@@ -22,6 +24,9 @@ namespace BO.User
         public int createdBy { get; set; }
         public DateTime updatedDate { get; set; }
         public DateTime updatedBy { get; set; }
+        public string phone { get; set; }
+        public string address { get; set; }
+        public DateTime dateOfBirth { get; set; }
 
     }
 }

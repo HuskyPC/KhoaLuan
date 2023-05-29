@@ -28,7 +28,6 @@ namespace DAL.User
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@userName", user.userName);
             com.Parameters.AddWithValue("@email", user.email);
-            com.Parameters.AddWithValue("@password", user.password);
             com.Parameters.AddWithValue("@lastName", user.lastName);
             com.Parameters.AddWithValue("@fristName", user.fristName);
             com.Parameters.AddWithValue("@status", 1);
@@ -84,7 +83,7 @@ namespace DAL.User
             SqlCommand com = new SqlCommand(procedure, con);
             com.CommandType = CommandType.StoredProcedure;
 
-            com.Parameters.AddWithValue("@email", user.email);
+            com.Parameters.AddWithValue("@userName", user.userName);
             com.Parameters.AddWithValue("@password", user.password);
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataTable dt = new DataTable();
@@ -110,8 +109,85 @@ namespace DAL.User
             return UserList;
 
         }
-    
+        public int getUserName(string user)
+        {
+            string procedure = "getUserName";
+            int id = 0;
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+            com.Parameters.AddWithValue("@x", user);
+           
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+              id = Convert.ToInt32(dt.Rows[i]["userID"].ToString());
+                
+                
+            }
+            return id;
+
+        }
+        public async Task<bool> insertPassword(UserBO user)
+        {
+            string procedure = "insertPassword";
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@password", user.passwordHash);
+            com.Parameters.AddWithValue("@userID", user.userID);
+            com.Parameters.AddWithValue("@paswordSalt", user.passwordSalt);
+            
+            await con.OpenAsync();
+            var result = com.ExecuteNonQuery();
+            await con.CloseAsync();
+
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public UserBO getInformationInCart(int userid)
+        {
+            string procedure = "getInformationInCart";
+           
+            SqlConnection con = DB.getConnection();
+            SqlCommand com = new SqlCommand(procedure, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@userid", userid);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);//do du lieu vao datatable
+            com.Dispose();//huy com
+            con.Close();
+
+            UserBO userDTO;
+             userDTO = new UserBO();//doc 1 dong khoi tao ProductDTO
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                //gan tung truong du lieu
+                userDTO.userID = Convert.ToInt32(dt.Rows[i]["userID"].ToString());
+                userDTO.lastName = Convert.ToString(dt.Rows[i]["lastName"].ToString());
+                userDTO.fristName = Convert.ToString(dt.Rows[i]["fristName"].ToString());
+                userDTO.urlImage = Convert.ToString(dt.Rows[i]["phone"].ToString());
+                userDTO.address= Convert.ToString(dt.Rows[i]["address"].ToString());
+            }
+
+            return userDTO;
+        }
+
         
+
+
     }
 
 }

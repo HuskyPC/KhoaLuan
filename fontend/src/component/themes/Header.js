@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../css/homeStyle.css";
 import { toast } from "react-toastify";
-import HeaderApi from "../api/HeaderAPI";
-
+import useGetLocalSec from "../hook/useGetLocalSec";
+import imgAccDefault from "../account/defaultAccountImg.png";
 const Header = () => {
-  let isUserLocal = JSON.parse(localStorage.getItem("user"));
-  let isUserSEC = JSON.parse(sessionStorage.getItem("user"));
-
-  const [UserID, setUser] = useState();
-  if (UserID === undefined) {
-    if (isUserLocal !== null) setUser(isUserLocal);
-    else if (isUserSEC !== null) setUser(isUserSEC);
-  }
-
-  const [cartCount, setCartCout] = useState(0);
+  const UserID = useGetLocalSec("user");
+  const countCart = useGetLocalSec("cart");
+  // const [cartCount, setCartCout] = useState(0);
 
   const [dropdown, setDropDown] = useState(false);
   const [dropdownUser, setDropDownUser] = useState(true);
@@ -27,10 +20,11 @@ const Header = () => {
     sessionStorage.removeItem("avatar");
     localStorage.removeItem("userName");
     sessionStorage.removeItem("userName");
+    localStorage.removeItem("cart");
+    sessionStorage.removeItem("cart");
 
     setDropDownUser(!dropdownUser);
-    setCartCout(0);
-    setUser();
+
     if (UserID !== undefined) {
       toast.success("Đăng xuất thành công", {
         className: "top-10",
@@ -52,18 +46,18 @@ const Header = () => {
   const handeleDropdownUser = () => {
     setDropDownUser(!dropdownUser);
   };
-  useEffect(() => {
-    (async () => {
-      if (UserID !== undefined) {
-        try {
-          const response = await HeaderApi.getCountCart(UserID);
-          setCartCout(response.data);
-        } catch (error) {
-          console.log(error.message);
-        }
-      } else setCartCout(0);
-    })();
-  }, [UserID, cartCount]);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (UserID !== undefined) {
+  //       try {
+  //         const response = await HeaderApi.getCountCart(UserID);
+  //         setCartCout(response.data);
+  //       } catch (error) {
+  //         console.log(error.message);
+  //       }
+  //     } else setCartCout(0);
+  //   })();
+  // }, [UserID, cartCount]);
 
   return (
     <div className="headered">
@@ -81,7 +75,7 @@ const Header = () => {
             />
           </Link>
           <Link to="/">
-            <span className="md:inline-block hidden uppercase">logo</span>
+            <span className="md:inline-block hidden uppercase">laptop TB</span>
           </Link>
         </div>
         {/* menu */}
@@ -106,31 +100,31 @@ const Header = () => {
         font-light rounded-br pb-2 first-letter:uppercase "
             >
               <Link to="/" className="py-2 px-3 uppercase">
-                Home
+                Trang chủ
               </Link>
               <Link to="/product/all" className="py-2 px-3 uppercase">
                 Sản phẩm
               </Link>
               <Link to="/cart" className="py-2 px-3 uppercase">
-                Cart
+                Giỏ hàng
               </Link>
               <Link to="/contact" className="py-2 px-3 uppercase">
-                Contact
+                Liên hệ
               </Link>
             </div>
           </div>
           <header className="menu hidden md:flex items-center justify-center text-base font-light ">
             <Link to="/" className="p-3 uppercase">
-              Home
+              Trang chủ
             </Link>
             <Link to="/product/all" className="p-3 uppercase">
               Sản phẩm
             </Link>
             <Link to="/cart" className="p-3 uppercase ">
-              Cart
+              Giỏ hàng
             </Link>
             <Link to="/contact" className="p-3 uppercase">
-              Contact
+              Liên hệ
             </Link>
           </header>
         </div>
@@ -143,9 +137,13 @@ const Header = () => {
 
           <Link className="p-3 relative" to="/cart">
             <i className="fa-solid fa-cart-shopping "></i>
-            <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
-              {/* {cartCount} */}
-            </span>
+            {countCart?.cart?.lenght > 1 ? (
+              <span className="text-xs absolute top-2 right-0 rounded-full bg-blue-500 w-[16px] h-[16px] text-center">
+                {countCart?.cart?.lenght}
+              </span>
+            ) : (
+              ""
+            )}
           </Link>
 
           <Link className="p-3" to="/favorite">
@@ -159,7 +157,7 @@ const Header = () => {
           >
             {UserID ? (
               <img
-                src="asset/img/account/defaultAccountImg.png"
+                src={imgAccDefault}
                 alt="hinh anh"
                 className=" w-10 rounded-full  "
               />
@@ -186,7 +184,7 @@ const Header = () => {
               {UserID !== undefined ? (
                 <>
                   <Link
-                    to="/"
+                    to="/user"
                     className="cursor-pointer hover:bg-white hover:text-black block px-4 py-2"
                     onClick={handeleDropdownUser}
                   >

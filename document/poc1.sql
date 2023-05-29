@@ -110,6 +110,15 @@ where status =1 and name= @x
 
 exec getSearchProductexact @x=N'Sản phẩm 1'
 
+
+--proc get all brand
+--drop proc getAllBrand
+create proc getAllBrand
+as
+select brandID, parentID, name, avatar, urlImage, slug
+from Brand
+where status=1
+
 --select * from Product 
 --where name like N'%Sản phẩm 5%' or FREETEXT(name,'"*sản phẩm*"');
 
@@ -145,8 +154,9 @@ CREATE FULLTEXT CATALOG searchNameProduct;
 -- drop proc postCreateUsser
 create proc postCreateUsser
 @userName nvarchar(50),
+
 @email nvarchar(200),
-@password nvarchar(100),
+
 @lastName nvarchar(50),
 @fristName nvarchar(100),
 @status int,
@@ -154,8 +164,8 @@ create proc postCreateUsser
 @createdDate datetime,
 @createdBy int
 as 
-INSERT INTO users( userName,email, password,lastName,fristName,status,access,createdDate,createdBy) 
-values(@userName, @email, @password, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
+INSERT INTO users( userName,email, lastName,fristName,status,access,createdDate,createdBy) 
+values(@userName, @email, @lastName, @fristName, @status, @access, @createdDate, @createdBy )
 
 SET DATEFORMAT DMY
 exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456', @lastName='last name', @fristName= 'frist name', @status=1,
@@ -168,22 +178,54 @@ exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456
  select userName from users
  where status= 1
 
- exec getAllUser 
+ exec getAllUserName 
  --delete  from users 
+
+ create proc getUserName
+ @x nvarchar(50)
+ as 
+ select userID
+ from users 
+ where status =1 and userName=@x
+
+ create proc insertPassword
+ @password nvarchar(max),
+ @userID int, 
+ @paswordSalt nvarchar(8)
+ as
+ insert into UserPassword(userID, password, passwordSalt) values(@userID, @password, @paswordSalt)
  
  --user login 
 
  --drop proc postLoginUser
- create proc postLoginUser
- @email nvarchar(200),
- @password nvarchar(100)
- as
- select us.userID,  us.lastName, us.fristName, us.avatar, us.access, us.urlImage
- from users us
- where us.status=1 and us.email=@email and us.password= @password
+ --create proc postLoginUser
+ --@userName nvarchar(20),
+ --@password nvarchar(100)
+ --as
+ --select us.userID,  us.lastName, us.fristName, us.avatar, us.access, us.urlImage
+ --from users us
+ --where us.status=1 and us.userName= @userName and us.password= @password
  
- exec postLoginUser @email='bin@gmail.com', @password='123456'
+ --exec postLoginUser @userName='bin', @password='123456'
 
+ --drop proc postLoginUser
+ create proc postLoginUser
+ @username varchar(20),
+ @password varchar(100)
+ as
+ begin 
+  DECLARE @passwordSalt varchar(8), @userID int 
+  begin select @userID = userID from users where userName = @username and status=1 end
+  begin select @passwordSalt = passwordSalt from UserPassword where userID= @userID end
+
+ select up.userID, us.lastName, us.fristName, us.avatar, us.access, us.urlImage
+ from UserPassword up, users us
+ where up.userID= us.userID and up.password =CONVERT(VARCHAR(max), HashBytes('MD5', @password+@passwordSalt), 2)
+ end 
+
+ --select  passwordSalt from UserPassword where userID=7
+ --select userID from users where userName = 'binh5'
+ exec postLoginUser @username='bin5', @password='123456'
 
  -- trang cart và truy vấn liên quan đến cart --------------------
  
@@ -192,12 +234,57 @@ exec postCreateUsser @userName='bin3', @email='bin@gmail.com', @password='123456
  create proc getCountCart
  @userID int
  as 
- select count(productID) as tong
+ select count(quantity) as tong
  from CART 
  where status= 1 and userID= @userID
 group by userid
 
-exec getCountCart @userID= 3
+exec getCountCart @userID= 12
+
+
+--proc get item product buy id user
+--drop proc getCountItemCartByUsertID
+create proc getCountItemCartByUsertID
+@userID int 
+as
+select  quantity from Cart where status=1and  userID= 12 
+
+exec getCountItemCartByUsertID 12
+
+--proc get item card by user id
+create proc getItemCardByUserID
+@userID int 
+as
+select cartID, productID, quantity from Cart where status=1 and userID= @userID
+
+exec getItemCardByUserID 12
+
+
+--proc update quantity in cart by product id and user id 
+--drop proc updateQuantityCart
+create proc updateQuantityCart
+@userId int,
+@productID varchar(6),
+@quantity int 
+as
+update Cart set quantity=@quantity where userID=@userId and productID= @productID
+
+exec updateQuantityCart @userId=12, @productID='sp7',@quantity=2
+
+
+--proc get quantity item cart by user id and product id 
+create proc getQuantityItemCartByUserProduct
+@userID int,
+@productID varchar(6)
+as 
+select quantity from cart where userID= @userID and productID =@productID
+
+
+--proc delete cart item by user id and product id
+create proc deleteCartitem 
+@cartID varchar(15)
+as
+delete from Cart where cartID=@cartID
 
 
 --proc get cart 
@@ -216,19 +303,30 @@ select cartID
 from cart 
 where stt =@stt
 
+exec getCartIDBySTT 14
 
+--proc get information userAccount 
+--drop proc getInformationInCart
+create proc getInformationInCart
+@userid int
+as
+select u.userID, u.fristName, u.lastName, ud.address, ud.phone from users u, userDetail ud 
+where u.userID= ud.userID and u.userID=@userid
+
+exec getInformationInCart 12
 
 --proc insert cart 
 --drop proc postInsertCart
 create proc postInsertCart 
 @productID varchar(10),
 @userID int, 
-@cartID varchar(15)
+@cartID varchar(15),
+@quantity int 
 as 
-insert into cart(cartID,productID, userID, status ) values(@cartID,@productID,@userID, 1)
+insert into cart(cartID,productID, userID, status, quantity ) values(@cartID,@productID,@userID, 1 ,@quantity)
 
  
-exec postInsertCart @productID= 'SP3', @userID='1', @cartID='CA9'
+exec postInsertCart @productID= 'SP3', @userID='4', @cartID='CA9', @quantity=2
 
 
 
@@ -292,4 +390,22 @@ where status=1 and ProductID= @productID
 
 exec getProductByID @productID='sp1'
 
+---------------- trnag product Detail 
 
+create proc getProductDetail
+@productID varchar(10)
+as 
+select ProductID, name, price, priceSale,avatar,urlImage,brandID,slug,shortDes,fullDes
+from product 
+where status=1 and ProductID=@productID
+
+---user 
+---proc update user 
+create proc updateUser
+@userID int,
+@lastName nvarchar(50),
+@fristName nvarchar(100),
+@avatar varchar(max)
+as
+update users set fristName =@fristName , lastName= @lastName, avatar= @avatar where userID=@userId 
+exec updateUser @fristName='TB', @lastName='Nguyen', @avatar= 'null',@userID=12

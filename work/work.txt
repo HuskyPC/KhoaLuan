@@ -1,0 +1,9 @@
+thêm sản phẩm vào giỏ hàng
+ quản lý sản phẩm 
+	thêm 
+	sửa 
+	xóa 
+quản lí danh mục
+trang thái đơn hàng 
+thanh toán thành công gửi mail xác nhận
+

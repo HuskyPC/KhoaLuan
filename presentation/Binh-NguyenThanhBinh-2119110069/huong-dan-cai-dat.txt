@@ -1,0 +1,25 @@
+1. Cài đặt database postgreSQL
+ b1. Cài đặt phần mềm pgAdmin	
+ b2. Vào pgAdmin kết nối localhost tạo database
+ b3. Giải nén file Database
+ b4. Chọn restore, chọn format là directory
+/*-----------------------------------------------------------*/
+2. Cài đặt Frontend ReactJs
+ b1. Giải nén file ReactJs
+ b2. Cấu hình .env.production.local tại  vd: https://localhost:44373/
+     Cấu hình tên Website tại .env.production.local
+ b3. Cài nodejs 17.x.x
+ b4. Bật cmd tại folder gốc
+ b5. Gõ npm i
+ b6. Gõ npm start
+/*-----------------------------------------------------------*/
+3. Cài đặt Backtend Asp.Net Core Api
+ b1. Giải nén file Asp
+ b2. Mở Project tại Visual Studio
+ b3. Mỡ Package Manager Console
+ b4. Gõ dotnet restore
+ b5. Cấu hình ./Application/Properties/launchSettings.json
+#        "ASPNETCORE_MAILER_PASSWORD": Mật khẩu ứng dụng của Email gửi
+#        "ASPNETCORE_MAILER_EMAIL": Tài khoản Properties
+#        "ASPNETCORE_CONNECTION_STR": chuỗi kết nối PostgreSql
+/*-------------------------------------------------------------*/

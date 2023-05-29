@@ -12,6 +12,8 @@ namespace BO.cart
         public string productID { get; set; }
         public int userID { get; set; }
         public int status { get; set; }
+        public int quantity { get; set; }
+       
 
     }
 }
